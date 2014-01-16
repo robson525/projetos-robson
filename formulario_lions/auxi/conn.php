@@ -2,9 +2,14 @@
 class Conecta{
 	
 // 	Informações para conexão
-	var $host = 'mysql111.prv.f1.k8.com.br';
+/*	var $host = 'mysql111.prv.f1.k8.com.br';
 	var $usuario = 'lionsdla6';
 	var $senha = 'Psherman42WallabyWaySydney';
+	var $banco = 'lionsdla6';
+	var $conn = '';*/
+	var $host = 'localhost';
+	var $usuario = 'root';
+	var $senha = '';
 	var $banco = 'lionsdla6';
 	var $conn = '';
 
