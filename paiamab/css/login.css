@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+#div_login {
+	margin:auto;
+	text-align:center;
+	width: 300px;
+	height: 180px;
+	background-image:  url(../imagens/login.png);
+	background-repeat: no-repeat;
+	background-size: 300px 180px;	
+	
+	border:#00F solid 1px;
+}
+
