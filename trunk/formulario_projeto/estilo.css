@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+#div_form {
+	width: 80%;
+	margin:auto;
+	margin-top: 20px;
+	
+	border: 1px solid #F00;	
+}
+
+#tab_cadastro td{ 
+	padding:15px;
+	vertical-align:top;
+}
+
+input{
+	font-family: Times, serif;	
+}
+
+select{
+	font-family: Times, serif;	
+}
+
+.col-1{
+	text-align:right;
+	font-weight:bold;	
+	color:#555555;
+	text-shadow:1px 1px 5px #666;
+}
+
+#tab_cadastro #enderec{
+	padding-bottom:0;	
+}
+
+#tab_cadastro #compl{
+	padding-top:0px;	
+}
+
+#tab_cadastro td span{ 
+	font-size:9px;
+}
+
+#botao{
+	cursor:pointer; 
+	text-transform:capitalize;	
+	padding:1px 10px 1px 10px;
+	margin-top:15px;
+	margin-left:80px;
+	
+}
