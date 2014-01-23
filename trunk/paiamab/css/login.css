@@ -2,6 +2,7 @@
 /* CSS Document */
 
 #div_login {
+	position:relative;
 	margin:auto;
 	text-align:center;
 	width: 300px;
@@ -9,7 +10,27 @@
 	background-image:  url(../imagens/login.png);
 	background-repeat: no-repeat;
 	background-size: 300px 180px;	
+	margin-top: 150px;
+	border:solid 1px #F00;
+}
+
+#tab_login{
+	position:relative;
+	margin-left: 70px;
+	margin-top: 50px;
+}
+
+#login_principal{
+	margin:auto;
+	text-align:center;
+	width: 80%px;
+	margin-top: 20px;
+	border:solid 1px #F00;
+	padding: 3px;
+}
+
+#tab_menu td {
+	padding: 3px;	
 	
-	border:#00F solid 1px;
 }
 
