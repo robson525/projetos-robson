@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <title>Documento sem título</title>
-<link type="text/css" href="estilo.css" rel="stylesheet" />
-<script type="text/javascript" src="scripts.js"></script>
-<script src="jquery.js" type="text/javascript"></script>
-<script src="jquery.mask.js" type="text/javascript"></script>
+<link type="text/css" href="css/estilo.css" rel="stylesheet" />
+<script type="text/javascript" src="js/scripts.js"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.mask.js" type="text/javascript"></script>
 
 <script type="text/javascript">$(document).ready(function(){ $("#cpf").mask("000.000.000-00");});</script>
 <script type="text/javascript">$(document).ready(function(){ $("#telefone").mask("(00) 0000-0000"); });</script>
@@ -16,11 +16,11 @@
 <body>
 
 <div id="div_form">
-<form id="form_cadastro" name="form_cadastro" action="" method="post" onsubmit="return validaForm();">
+<form id="form_cadastro" name="form_cadastro" action="salvar.php" method="post" onsubmit="return validaForm();">
 	<table id="tab_cadastro" align="center" width="700px" border="0">
     	<tr>
         	<td class="col-1">Nome: </td>
-            <td width="65%"><input id="nome" name="nome" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" required/> </td>
+            <td width="65%"><input id="nome" name="nome" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" maxlength="100" required/> </td>
         </tr>
         <tr>
         	<td class="col-1">CPF: </td>
@@ -28,7 +28,7 @@
         </tr>
         <tr>
         	<td class="col-1">Email: </td>
-            <td><input id="email" name="email" type="email" style="width:60%" onChange="minuscula(this)" onKeyUp="minuscula(this)" required/> </td>
+            <td><input id="email" name="email" type="email" style="width:60%" onChange="minuscula(this)" onKeyUp="minuscula(this)" maxlength="70" required/> </td>
         </tr>
         <tr>
         	<td class="col-1">Telefone: </td>
@@ -36,19 +36,19 @@
         </tr>
         <tr>
         	<td class="col-1">Data de Nascimento: </td>
-            <td><select id="dia" name="dia" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');"><?php echo monta_dia(); ?> </select> 
-            	<select id="mes" name="mes" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');"><?php echo monta_mes(); ?></select>
-                <select id="ano" name="ano" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');"><?php echo monta_ano(); ?></select> 
+            <td><select id="dia" name="dia" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');" required><?php echo monta_dia(); ?> </select> 
+            	<select id="mes" name="mes" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');" required><?php echo monta_mes(); ?></select>
+                <select id="ano" name="ano" onChange="tirarShadow('dia');tirarShadow('mes');tirarShadow('ano');" required><?php echo monta_ano(); ?></select> 
             </td>
         </tr>
         <tr>
         <td class="col-1" id="end">Endereço: </td>
-        <td id="enderec"><input id="endereco" name="endereco" type="text" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%" required/>
+        <td id="enderec"><input id="endereco" name="endereco" type="text" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%" maxlength="100" required/>
           <span>Endereço</span></td>
       </tr>
       <tr>
         <td></td>
-        <td id="compl"><input id="complemento" name="complemento" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%;"/>
+        <td id="compl"><input id="complemento" name="complemento" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%;" maxlength="100" />
           <span>Complemento</span></td>
       </tr>
       <tr>
@@ -70,7 +70,7 @@
       </tr>
       <tr id="qual_profissao" style="display:none">
         <td class="col-1">Qual ?</td>
-        <td><input id="outra_profissao" name="outra_profissao" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" /></td>
+        <td><input id="outra_profissao" name="outra_profissao" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" maxlength="50" /></td>
       </tr>
       <tr>
         <td class="col-1">Orgão: </td>
@@ -94,7 +94,7 @@
       </tr>
       <tr>
         <td></td>
-        <td><input id="botao" type="submit" value="Cadastrar" /></td>
+        <td><input id="botao" name="submit" type="submit" value="Cadastrar" /></td>
       </tr>
     </table>
 </form>
