@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Documento sem título</title>
-<link type="text/css" href="css/estilo.css" rel="stylesheet" />
+<link type="text/css" href="css/index.css" rel="stylesheet" />
 <script type="text/javascript" src="js/scripts.js"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/jquery.mask.js" type="text/javascript"></script>
@@ -76,7 +76,7 @@
         <td class="col-1">Orgão: </td>
         <td><select id="orgao" name="orgao" style="min-width:120px" required >
             <option value='' selected></option>
-            <option value='SECRETARIA DE EDUCAÇÃO- SEDUC'>SECRETARIA DE EDUCAÇÃO - SEDUC</option>
+            <option value='SECRETARIA DE EDUCAÇÃO - SEDUC'>SECRETARIA DE EDUCAÇÃO - SEDUC</option>
             <option value='SECRETARIA MUNICIPAL DE EDUCAÇÃO - SEMEC'>SECRETARIA MUNICIPAL DE EDUCAÇÃO - SEMEC</option>
             <option value='SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED'>SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED</option>
             <option value='RESERVA SOCIAL'>RESERVA SOCIAL</option>
