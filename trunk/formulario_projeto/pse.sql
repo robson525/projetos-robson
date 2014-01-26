@@ -45,16 +45,6 @@ CREATE TABLE IF NOT EXISTS `1_formulario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
---
--- Extraindo dados da tabela `1_formulario`
---
-
-INSERT INTO `1_formulario` (`id`, `nome`, `cpf`, `email`, `telefone`, `nascimento`, `endereco`, `complemento`, `cidade`, `profissao`, `outra_profissao`, `orgao`, `escola`) VALUES
-(8, 'ROBSON CLAUDIO VALENTE DA SILVA', '847.012.002-63', 'robson.cao@hotmail.com', '(91) 3249-4601', '1990-01-01', 'TV 25 DE JUNHO', 'Nº 525', 'BELÉM', 'PROFESSOR', '', 'SECRETARIA DE EDUCAÇÃO- SEDUC', 'ESCOLA1'),
-(9, 'ROBSON CLAUDIO VALENTE DA SILVA', '847.012.002-63', 'robson.cao@hotmail.com', '(91) 3249-4601', '1990-01-01', 'TV 25 DE JUNHO', 'Nº 525', 'BELÉM', 'PROFESSOR', '', 'SECRETARIA DE EDUCAÇÃO- SEDUC', 'ESCOLA1'),
-(10, 'ROMARIO ROBERT VALENTE DA SILVA', '847.012.002-63', 'romario@hotmail.com', '(91) 3249-4601', '1987-02-03', 'TV 25 DE JUNHO', 'Nº 525', 'BELÉM', 'GESTOR', '', 'SECRETARIA MUNICIPAL DE EDUCAÇÃO - SEMEC', 'ESCOLA2'),
-(11, 'RAYARA CLAUDIA VALENTE DA SILVA', '847.012.002-63', 'rayara@hotmail.com', '(91) 3249-4601', '1987-07-06', 'TV 25 DE JUNHO', 'Nº 525', 'BELÉM', 'OUTRO', 'OUTRO', 'SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED', 'ESCOLA3'),
-(12, 'ANA MARIA', '847.012.002-63', 'rayara@hotmail.com', '(91) 3249-4601', '1987-07-06', 'TV 25 DE JUNHO', 'Nº 525', 'BELÉM', 'OUTRO', 'OUTRO', 'SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED', 'ESCOLA3');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
