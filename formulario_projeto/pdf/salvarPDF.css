@@ -1,0 +1,24 @@
+
+table {
+	font-family: Times;
+}
+
+#cabecalho {
+	padding-top:10px;
+	font-size: 26px;
+	font-weight:bold;	
+}
+
+#tabelaPDF { 
+	width:100%; 
+	font-size: 13px;
+} 
+
+
+#maiuscula {
+	text-transform:uppercase;	
+}
+
+#maiuscula {
+	text-transform:uppercase;	
+}

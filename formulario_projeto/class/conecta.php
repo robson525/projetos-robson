@@ -10,7 +10,7 @@ class Conecta{
 	private $host = 'localhost';
 	private $usuario = 'root';
 	private $senha = '';
-	private $banco = 'pse';
+	private $banco = 'st_pse';
 	var $conn = '';
 
 	// Realizando conexão e selecionando o banco de dados

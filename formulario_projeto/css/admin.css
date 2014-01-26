@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	
+}
+
+header{
+	padding-top: 20px;
+	text-align:center;
+}
+
+#tab_botao td {
+	padding: 5px 10px 5px 10px;
+}
+
+.bot {
+	background-color:#CCC;	
+	text-transform:none;
+	cursor:pointer;
+}
+
+#tab_lista {
+	width: 99%;
+	text-align:center;	
+}
+
+#tab_lista td{
+	padding:3px;	
+	font-size:14px;	
+}
+
+#bot_filtro{
+	cursor:pointer;
+	
+}
+
+#div_pdf {
+	margin-top:20px;
+	width:30px; 
+	text-align:center;
+	cursor:pointer;
+	margin-left:96%;
+	
+		
+}
+#div_resultado {
+	/*border: 1px solid #F00;	*/
+}
