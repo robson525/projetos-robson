@@ -23,7 +23,7 @@
             </tr>
             <tr>
             	<td></td>
-                <td><input id="submit" name="submit" type="submit" value="Logar" /> </td>
+                <td><input id="submit" name="submit" type="submit" value="Logar" style="cursor:pointer; "/> </td>
             </tr>
         </table>
     </form>
