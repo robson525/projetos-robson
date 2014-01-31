@@ -8,6 +8,7 @@
 <script src="js/scripts.js" type="text/javascript"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
 
+
 </head>
 <body>
 
@@ -17,7 +18,13 @@
 	}
 	extract($_POST);
 	
-	//fazer tratamento de usuario
+	if(!$_POST["login"] || !$_POST["senha"]){
+		
+	}
+		
+	require_once('classes/class.usuario.php');
+	
+	
 	
 
 ?>
