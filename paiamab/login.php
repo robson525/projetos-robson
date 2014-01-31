@@ -5,7 +5,8 @@
 <title>Logado</title>
 
 <link href="css/login.css" rel="stylesheet" type="text/css"/>
-<script src="scripts.js" type="text/javascript"></script>
+<script src="js/scripts.js" type="text/javascript"></script>
+<script src="js/jquery.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -21,19 +22,56 @@
 
 ?>
 
-<div id="div_menu" class="content"> 
+<script type="text/javascript">
+$(document).ready( function() {
+	
+	$('#div_principal').load('formulario/fixaCadastral.php');
+	clickBotao('fixaCadastral');
+	
+	$('.td_menu').click(function(evt) {
+		
+		var id = $(this).attr('id'); // id tem que ser o mesmo nome do arquivo da pasta formulario
+		var href = "formulario/"+ id +".php";
+		
+		$.ajax({
+			
+			type:"POST",
+			url: href,
+			data:"url="+href,
+			
+			beforeSend: function(){
+				normalBotao();
+				clickBotao(id);
+			},
+			success:function(data){
+				$("#div_principal").html(data);
+			}
+		});
+		
+	});
+	
+	
+	
+});  
+
+</script>
+
+
+<div id="div_menu"> 
     <table id="tab_menu" border="0" align="center">
         <tr>
-            <td class="td_menu" onMouseOver="MouseOver('principal')" onMouseOut="MouseOut('principal')" onClick="Click('principal')" id="principal">Principal</td>
-            <td class="td_menu" onMouseOver="MouseOver('anexo1')" onMouseOut="MouseOut('anexo1')" onClick="Click('anexo1')" id="anexo1">Anexo 1</td>
-            <td class="td_menu" onMouseOver="MouseOver('anexo2')" onMouseOut="MouseOut('anexo2')" onClick="Click('anexo2')" id="anexo2">Anexo 2</td>
-            <td class="td_menu" onMouseOver="MouseOver('anexo3')" onMouseOut="MouseOut('anexo3')" onClick="Click('anexo3')" id="anexo3">Anexo 3</td>     
+            <td class="td_menu" id="fixaCadastral">Fixa Cadastral</td>
+            <td class="td_menu" id="anexo1">Anexo 1</td>
+            <td class="td_menu" id="anexo2">Anexo 2</td>
+            <td class="td_menu" id="anexo3">Anexo 3</td>     
         </tr>
     </table>
 </div>
 
-<div id="login_principal">
+
+<div id="div_principal">
 	
 </div>
+
 </body>
 </html>
