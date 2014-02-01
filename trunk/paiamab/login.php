@@ -13,9 +13,10 @@
 <body>
 
 <?php 
-	if(!isset($_POST["submit"])){
+	/*if(!isset($_SESSION['usuario'])){
 		echo "<meta charset='utf-8' http-equiv='refresh' content='0; url=index.php'>";
-	}
+	}*/
+	echo $_SESSION['login'];
 	extract($_POST);
 	
 	if(!$_POST["login"] || !$_POST["senha"]){

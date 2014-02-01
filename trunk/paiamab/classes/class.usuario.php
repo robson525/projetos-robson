@@ -26,20 +26,18 @@ class Usuario{
 		
 	public function validaUsuario($log, $sen){
 		
-		$sql = "SELECT * FROM $this->tabela WHERE login='$log' and senha='$sen'";
+		$sql = "SELECT * FROM $this->tabela WHERE login= '$log' and senha= '$sen'";
 		
 		$query = mysql_query($sql);
 				
 		//Verifica Registros
        $reg = mysql_fetch_assoc($query);
            	
-			$this->login = $reg["login"];
-            $this->senha = $reg["senha"];   
-			      
-        
+			$this->login = $reg["login"]; 
+            $this->senha = $reg["senha"]; 
 		
 		if($this->login == $log && $this->senha == $sen){
-			$this->ID	 = $reg["id"];
+			$this->ID	 = $reg["id_usuario"];
 			$this->nome  = $reg["nome"];
 			$this->ultima_sessao  = $reg["ultima_sessao"];
 			$this->admin = $reg["admin"];
