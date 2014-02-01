@@ -20,9 +20,9 @@ $(function($) {
 		// Enviando informações do formulário via AJAX
 		$(this).ajaxSubmit(function(resposta) {
 			// Se não retornado nenhum erro
-			if (resposta == false){
+			if (resposta.length <= 1){
 				// Redirecionando
-				 window.location = 'login.php';				
+				 window.location = 'http://localhost/google/paiamab/login.php';				
 			}else{
 				// Exibimos a mensagem de erro
 				$('#div_erro').html(resposta);
