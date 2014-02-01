@@ -26,7 +26,7 @@ class Usuario{
 		
 	public function validaUsuario($log, $sen){
 		
-		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha= '$sen'";
+		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha COLLATE utf8_bin = '$sen'";
 		
 		$query = mysql_query($sql);
 				
