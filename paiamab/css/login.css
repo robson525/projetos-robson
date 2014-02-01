@@ -40,6 +40,36 @@
 
 /* Pagina do Usuario logado */
 
+#div_usuario{
+	margin:auto;
+	text-align:center;
+	width: 80%px;
+	margin-top: 10px;
+	padding: 3px;
+	padding-left: 20px;
+	min-height: 50px;
+	background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+	background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+	background: -o-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+	background: -ms-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+	background: linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+	border: 1px solid #CCCCCE;
+	border-radius: 3px;
+	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px #eb2323;
+	margin-bottom: 15px;
+}
+
+#tab_usuario td{
+	padding: 0px 5px;
+}
+
+.td_usu{
+	text-align:right;
+}
+.td_usu_esc{
+	text-align:left;
+}
+
 
 #div_menu {
 	background: -webkit-linear-gradient(bottom, #E0E0E0, #eb2323 70%);
@@ -82,7 +112,7 @@
 	margin:auto;
 	text-align:center;
 	width: 80%px;
-	margin-top: 20px;
+	margin-top: 10px;
 	padding: 3px;
 	padding-top: 10px;
 	min-height: 300px;

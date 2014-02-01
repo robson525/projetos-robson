@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿<?php @session_start();?>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,18 +14,16 @@
 <body>
 
 <?php 
-	/*if(!isset($_SESSION['usuario'])){
-		echo "<meta charset='utf-8' http-equiv='refresh' content='0; url=index.php'>";
-	}*/
-	echo $_SESSION['login'];
-	extract($_POST);
-	
-	if(!$_POST["login"] || !$_POST["senha"]){
-		
+	if(!$_SESSION){
+		echo "Acesso Negado";
+		echo "<meta charset='utf-8' http-equiv='refresh' content='1; url=index.php'>";
+		exit();
 	}
-		
-	require_once('classes/class.usuario.php');
 	
+	require_once('classes/class.usuario.php');
+	$usuario = new Usuario();
+	
+	$usuario->set_usuario( $_SESSION['id_usuario'] );
 	
 	
 
@@ -33,8 +32,8 @@
 <script type="text/javascript">
 $(document).ready( function() {
 	
-	$('#div_principal').load('formulario/fixaCadastral.php');
-	clickBotao('fixaCadastral');
+	$('#div_principal').load('formulario/fichaCadastral.php');
+	clickBotao('fichaCadastral');
 	
 	$('.td_menu').click(function(evt) {
 		
@@ -64,11 +63,24 @@ $(document).ready( function() {
 
 </script>
 
+<div id="div_usuario">
+	<table id="tab_usuario" border="0">
+        <tr>
+            <td class="td_usu" >Usuário: </td>
+            <td class="td_usu_esc" ><h2><?php echo $usuario->get_nome();?></h2></td>
+        </tr>
+        <tr>
+            <td class="td_usu" >Ultimo Acesso: </td>
+            <td class="td_usu_esc" ><?php echo $usuario->get_ultima_sessao();?></td>
+        </tr>
+    </table>
+	
+</div>
 
 <div id="div_menu"> 
     <table id="tab_menu" border="0" align="center">
         <tr>
-            <td class="td_menu" id="fixaCadastral">Fixa Cadastral</td>
+            <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
             <td class="td_menu" id="anexo1">Anexo 1</td>
             <td class="td_menu" id="anexo2">Anexo 2</td>
             <td class="td_menu" id="anexo3">Anexo 3</td>

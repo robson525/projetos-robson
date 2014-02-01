@@ -26,25 +26,38 @@ class Usuario{
 		
 	public function validaUsuario($log, $sen){
 		
-		$sql = "SELECT * FROM $this->tabela WHERE login= '$log' and senha= '$sen'";
+		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha= '$sen'";
 		
 		$query = mysql_query($sql);
 				
 		//Verifica Registros
-       $reg = mysql_fetch_assoc($query);
-           	
-			$this->login = $reg["login"];
-            $this->senha = $reg["senha"]; 
+       $reg = mysql_fetch_assoc($query); 
 		
-		if($this->login == $log && $this->senha == $sen){
+		if(mysql_num_rows($query) == 1){
 			$this->ID	 = $reg["id_usuario"];
-			$this->nome  = $reg["nome"];
-			$this->ultima_sessao  = $reg["ultima_sessao"];
-			$this->admin = $reg["admin"];
 			return true;
 		}
 		else
 			return false; 
+		
+	}
+	
+	/* SETA AS INFORMAÇÕES DE USUÁRIO EM SUAS RESPECTIVAS VARIAVEIS */
+	public function set_usuario($id){
+		
+		$sql = "SELECT * FROM $this->tabela WHERE id_usuario= '$id'";
+		
+		$query = mysql_query($sql);
+		
+		if (mysql_num_rows($query) == 1){
+			$reg = mysql_fetch_assoc($query);
+			$this->login = $reg["login"];
+			$this->senha = $reg["senha"]; 
+			$this->ID	 = $reg["id_usuario"];
+			$this->nome  = $reg["nome"];
+			$this->ultima_sessao  = $reg["ultima_sessao"];
+			$this->admin = $reg["admin"];
+		}
 		
 	}
 	
