@@ -3,6 +3,18 @@
 
 /* Tela de Login */
 
+#div_erro {
+	position:relative;
+	margin:auto;
+	text-align:center;
+	width: 300px;
+	height: 25px;
+	margin-top: 130px;
+	color: red;
+	font-weight:bold;
+	text-shadow:0 3px 0 rgba(0, 0, 0, .3);
+}
+
 #div_login {
 	position:relative;
 	margin:auto;
@@ -12,13 +24,13 @@
 	background-image:  url(../imagens/login.png);
 	background-repeat: no-repeat;
 	background-size: 300px 180px;	
-	margin-top: 150px;
 	border:solid 1px #F00;
 	border-radius: 3px;
 	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px #eb2323;
 }
 
 #tab_login{
+	font-weight:bold;
 	position:relative;
 	margin-left: 70px;
 	margin-top: 50px;

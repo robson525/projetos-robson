@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿<?php session_start();?><!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -20,20 +20,10 @@ $(function($) {
 		// Enviando informações do formulário via AJAX
 		$(this).ajaxSubmit(function(resposta) {
 			// Se não retornado nenhum erro
-			if (!resposta){
+			if (resposta == false){
 				// Redirecionando
-				$.ajax({
-							
-							type:"POST",
-							url: "login.php",
-							data: "login="+$("#login").val()+"&senha="+$("#senha").val(),
-							
-							success:function(data){alert('Entrou');
-								document.forms['form_login'].submit;
-							}
-						});
-			   
-			}else{alert('Erro');
+				 window.location = 'login.php';				
+			}else{
 				// Exibimos a mensagem de erro
 				$('#div_erro').html(resposta);
 			}
@@ -51,8 +41,9 @@ $(function($) {
 
 <body>
 
-<div id="div_login">
 <div id="div_erro"> </div>
+<div id="div_login">
+
 	<form id="form_login" name="form_login" action="validaLogin.php" method="post">
     	<table id="tab_login" border="0">
         	<tr>
