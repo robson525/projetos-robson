@@ -66,12 +66,12 @@ $(document).ready( function() {
 <div id="div_usuario">
 	<table id="tab_usuario" border="0">
         <tr>
-            <td class="td_usu" >Usuário: </td>
-            <td class="td_usu_esc" ><h2><?php echo $usuario->get_nome();?></h2></td>
+            <td class="td_esq" >Usuário: </td>
+            <td class="td_dir" ><h2><?php echo $usuario->get_nome();?></h2></td>
         </tr>
         <tr>
-            <td class="td_usu" >Ultimo Acesso: </td>
-            <td class="td_usu_esc" ><?php echo $usuario->get_ultima_sessao();?></td>
+            <td class="td_esq" >Ultimo Acesso: </td>
+            <td class="td_dir" ><?php echo $usuario->get_ultima_sessao();?></td>
         </tr>
     </table>
 	
