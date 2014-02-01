@@ -44,7 +44,7 @@ $(function($) {
 <div id="div_erro"> </div>
 <div id="div_login">
 
-	<form id="form_login" name="form_login" action="validaLogin.php" method="post">
+	<form id="form_login" name="form_login" action="auxiliar/validaLogin.php" method="post">
     	<table id="tab_login" border="0">
         	<tr>
             	<td>Login: </td> 
