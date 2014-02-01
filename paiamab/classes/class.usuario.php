@@ -33,7 +33,7 @@ class Usuario{
 		//Verifica Registros
        $reg = mysql_fetch_assoc($query);
            	
-			$this->login = $reg["login"]; 
+			$this->login = $reg["login"];
             $this->senha = $reg["senha"]; 
 		
 		if($this->login == $log && $this->senha == $sen){

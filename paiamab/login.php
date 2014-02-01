@@ -71,7 +71,13 @@ $(document).ready( function() {
             <td class="td_menu" id="fixaCadastral">Fixa Cadastral</td>
             <td class="td_menu" id="anexo1">Anexo 1</td>
             <td class="td_menu" id="anexo2">Anexo 2</td>
-            <td class="td_menu" id="anexo3">Anexo 3</td>     
+            <td class="td_menu" id="anexo3">Anexo 3</td>
+            <td class="td_menu" id="anexo4">Anexo 4</td> 
+            <td class="td_menu" id="anexo5">Anexo 5</td> 
+            <td class="td_menu" id="anexo6">Anexo 6</td> 
+            <td class="td_menu" id="anexo7">Anexo 7</td> 
+            <td class="td_menu" id="anexo8">Anexo 8</td> 
+            <td class="td_menu" id="anexo9">Anexo 9</td>      
         </tr>
     </table>
 </div>
