@@ -174,7 +174,7 @@ $(function($) {
                                 <option value="4 Pessoas">4 Pessoas</option>
                                 <option value="5 Pessoas">5 Pessoas</option>
                                 <option value="mais">Mais</option></select> &ensp;&ensp;
-        	<span id="span_moram_casa">Quantas: <input id="moram_casas_mais" name="moram_casa_mais" type="text" maxlength="3"> </span> </td>
+        	<span id="span_moram_casa">Quantas: <input id="moram_casa_mais" name="moram_casa_mais" type="text" maxlength="3"> </span> </td>
         
         </tr>
         <tr>
