@@ -59,11 +59,13 @@ $(document).ready( function() {
 	
 	
 	
+	
 });  
 
 </script>
 
 <div id="div_usuario">
+	<div id="div_tab_usuario">
 	<table id="tab_usuario" border="0">
         <tr>
             <td class="td_esq" >Usuário: </td>
@@ -74,7 +76,10 @@ $(document).ready( function() {
             <td class="td_dir" ><?php echo $usuario->get_ultima_sessao();?></td>
         </tr>
     </table>
-	
+    </div>
+	<div id="bt_sair">
+    	<a href="sair.php"> Sair </a>
+    </div>
 </div>
 
 <div id="div_menu"> 

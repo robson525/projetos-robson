@@ -1,4 +1,11 @@
-﻿<?php session_start();?><!doctype html>
+﻿<?php @session_start();
+	
+	if($_SESSION){ 
+		header('Location: login.php');
+	}
+
+?>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -22,7 +29,7 @@ $(function($) {
 			// Se não retornado nenhum erro
 			if (resposta.length <= 1){
 				// Redirecionando
-				 window.location = 'http://localhost/google/paiamab/login.php';				
+				window.location = 'http://localhost/google/paiamab/login.php';				
 			}else{
 				// Exibimos a mensagem de erro
 				$('#div_erro').html(resposta);
@@ -44,7 +51,7 @@ $(function($) {
 <div id="div_erro"> </div>
 <div id="div_login">
 
-	<form id="form_login" name="form_login" action="auxiliar/validaLogin.php" method="post">
+	<form id="form_login" name="form_login" action="validacao/validaLogin.php" method="post">
     	<table id="tab_login" border="0">
         	<tr>
             	<td>Login: </td> 

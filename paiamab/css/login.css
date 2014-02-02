@@ -3,6 +3,21 @@
 
 /* Tela de Login */
 
+body{
+	font-family: Times, serif;
+	text-shadow:1px 1px 5px #666;
+}
+input{
+	font-family: Times, serif;
+	height: 20px;
+	font-weight:bold;	
+}
+select {
+	font-family: Times, serif;
+	padding: 3px;
+	font-weight:bold;	
+}
+
 #div_erro {
 	position:relative;
 	margin:auto;
@@ -38,16 +53,15 @@
 
 
 
-/* Pagina do Usuario logado */
+/* --------- Pagina do Usuario logado --------------- */
 
 #div_usuario{
 	margin:auto;
 	text-align:center;
-	width: 80%px;
 	margin-top: 10px;
 	padding: 3px;
 	padding-left: 20px;
-	min-height: 50px;
+	min-height: 100px;
 	background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
 	background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
 	background: -o-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
@@ -59,14 +73,33 @@
 	margin-bottom: 15px;
 }
 
+#div_tab_usuario{
+	position:absolute;
+	margin-left: 50px;
+}
+#bt_sair{
+	position:relative;
+	margin:40px 0px 10px 90%;
+	width: 70px;
+	height:25px;
+	cursor:pointer;
+}
+
+#bt_sair a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#eb2323;
+	
+}
+
 #tab_usuario td{
 	padding: 0px 5px;
 }
 
-.td_usu{
+.td_esq{
 	text-align:right;
 }
-.td_usu_esc{
+.td_dir{
 	text-align:left;
 }
 
@@ -105,13 +138,11 @@
 
 
 
-
+/* --------- Div Principal onde carrega os formularios --------------- */
 
 
 #div_principal {
 	margin:auto;
-	text-align:center;
-	width: 80%px;
 	margin-top: 10px;
 	padding: 3px;
 	padding-top: 10px;
@@ -124,7 +155,9 @@
 	border: 1px solid #CCCCCE;
 	border-radius: 3px;
 	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px #eb2323;
+	font-weight:bold;
 	margin-bottom: 20px;
+	
 }
 
 
