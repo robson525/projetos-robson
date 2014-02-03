@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
 
+body{
+font-family: Times, serif;		
+}
+
 #div_form {
 	width: 80%;
 	margin:auto;
