@@ -11,13 +11,13 @@ function minuscula(lstr){
 	lstr.value=str.toLowerCase(); //converte as strings e retorna ao campo
 }
 
-function mostrarQual(){
+function mostrarQual(muda, mostra){
 	
-	if (document.getElementById('profissao').value == "OUTRO"){
-		document.getElementById('qual_profissao').style.display = 'table-row';
+	if (document.getElementById(muda).value == "OUTRO"){
+		document.getElementById(mostra).style.display = 'table-row';
 	}
 	else{
-		document.getElementById('qual_profissao').style.display = 'none';
+		document.getElementById(mostra).style.display = 'none';
 	}
 }
 
