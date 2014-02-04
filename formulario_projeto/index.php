@@ -12,6 +12,7 @@
 <script type="text/javascript">$(document).ready(function(){ $("#telefone1").mask("(00) 0000-0000"); });</script>
 <script type="text/javascript">$(document).ready(function(){ $("#telefone2").mask("(00) 0000-0000"); });</script>
 <script type="text/javascript">$(document).ready(function(){ $("#cep").mask("00000-000"); });</script>
+<script type="text/javascript">$(document).ready(function(){ $("#inep").mask("00000000"); });</script>
 </head>
 
 <body>
@@ -37,8 +38,8 @@
         <td class="col-1">Sexo: </td>
         <td><select id="sexo" name="sexo" required>
             <option value=""></option>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
+            <option value="MASCULINO">MASCULINO</option>
+            <option value="FEMININO">FEMININO</option>
           </select></td>
       </tr>
       <tr>
@@ -55,11 +56,11 @@
       </tr>
       <tr>
         <td class="col-1">Nome do Pai: </td>
-        <td width="65%"><input id="nomepai" name="nomepai" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" maxlength="100" required/></td>
+        <td width="65%"><input id="pai" name="pai" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" maxlength="100" required/></td>
       </tr>
       <tr>
         <td class="col-1">Nome da Mãe: </td>
-        <td width="65%"><input id="nomemae" name="nomemae" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" maxlength="100" required/></td>
+        <td width="65%"><input id="mae" name="mae" type="text" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" maxlength="100" required/></td>
       </tr>
       <tr>
         <td class="col-1" id="end">Endereço: </td>
@@ -102,30 +103,30 @@
         <td class="col-1">Nivel de Escolaridade: </td>
         <td><select id="escolaridade" name="escolaridade" required>
             <option value=""></option>
-            <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
-            <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
-            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
-            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
-            <option value="Ensino Superio Incompleto">Ensino Superio Incompleto</option>
-            <option value="Ensino Superio Completo" selected>Ensino Superio Completo</option>
+            <option value="ENSINO FUNDAMENTAL INCOMPLETO">ENSINO FUNDAMENTAL INCOMPLETO</option>
+            <option value="ENSINO FUNDAMENTAL COMPLETO">ENSINO FUNDAMENTAL COMPLETO</option>
+            <option value="ENSINO MÉDIO INCOMPLETO">ENSINO MÉDIO INCOMPLETO</option>
+            <option value="ENSINO MÉDIO COMPLETO">ENSINO MÉDIO COMPLETO</option>
+            <option value="ENSINO SUPERIO INCOMPLETO">ENSINO SUPERIO INCOMPLETO</option>
+            <option value="ENSINO SUPERIO COMPLETO" selected>ENSINO SUPERIO COMPLETO</option>
           </select></td>
       </tr>
       <tr>
         <td class="col-1">Já participou de Atividade de extensão da Universidade Federal do Pará: </td>
-        <td><select id="participou" name="participou" required>
+        <td><select id="extensao" name="extensao" required>
             <option value=""></option>
-            <option value="Sim">Sim</option>
-            <option value="Não">Não</option>
+            <option value="SIM">SIM</option>
+            <option value="NÃO">NÃO</option>
           </select></td>
       </tr>
       <tr>
       	<td class="col-1">Código INEP da sua escola: </td>
-        <td><input id="inep" name="inep" type="text" maxlength="8" style="width:25%" /></td>
+        <td><input id="inep" name="inep" type="text" maxlength="8" style="width:25%" onKeyPress="tirarShadow('inep')" required /></td>
       </tr>
       <tr>
         <td class="col-1">Sua escola está vinculada a qual secretaria: </td>
-        <td><select id="orgao" name="orgao" style="min-width:120px" required >
-            <option value='' selected></option>
+        <td><select id="secretaria" name="secretaria" style="min-width:120px" required >
+            <option value=''></option>
             <option value='SECRETARIA DE EDUCAÇÃO - SEDUC'>SECRETARIA DE EDUCAÇÃO - SEDUC</option>
             <option value='SECRETARIA MUNICIPAL DE EDUCAÇÃO - SEMEC'>SECRETARIA MUNICIPAL DE EDUCAÇÃO - SEMEC</option>
             <option value='SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED'>SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED</option>
@@ -136,49 +137,49 @@
         <td class="col-1">Em caso de Reserva Social em que área você atua: </td>
         <td><select id="reserva" name="reserva" >
             <option value=""></option>
-            <option value="Assistência Social">Assistência Social</option>
-            <option value="Saúde">Saúde</option>
-            <option value="Segurança Pública">Segurança Pública</option>
+            <option value="ASSISTÊNCIA SOCIAL">ASSISTÊNCIA SOCIAL</option>
+            <option value="SAÚDE">SAÚDE</option>
+            <option value="SEGURANÇA PÚBLICA">SEGURANÇA PÚBLICA</option>
             </select></td>
       </tr>
       <tr>
         <td class="col-1">Nível de ensino em que você atua na escola participante do curso: </td>
         <td><select id="nivel_ensino" name="nivel_ensino" required>
             <option value=""></option>
-            <option value="Educação Infantil">Educação Infantil</option>
-            <option value="Ensino Fundamental - Anos Iniciais">Ensino Fundamental - Anos Iniciais</option>
-            <option value="Ensino Fundamental - Anos Finais">Ensino Fundamental - Anos Finais</option>
-            <option value="Ensino Médio">Ensino Médio</option>
+            <option value="EDUCAÇÃO INFANTIL">EDUCAÇÃO INFANTIL</option>
+            <option value="ENSINO FUNDAMENTAL - ANOS INICIAIS">ENSINO FUNDAMENTAL - ANOS INICIAIS</option>
+            <option value="ENSINO FUNDAMENTAL - ANOS FINAIS">ENSINO FUNDAMENTAL - ANOS FINAIS</option>
+            <option value="ENSINO MÉDIO">ENSINO MÉDIO</option>
           </select></td>
       </tr>
       <tr>
         <td class="col-1">Função que exerce na escola participante do curso: </td>
         <td><select id="funcao" name="funcao" onChange="mostrarQual('funcao', 'qual_funcao')" style="min-width:120px" required >
-            <option value='' selected></option>
-            <option value='Docente do quadro permanente'>Docente do quadro permanente</option>
-            <option value='Docente com contrato temporário'>Docente com contrato temporário</option>
-            <option value='Coordenador(a)'>Coordenador(a)</option>
-            <option value='Orientador(a)'>Orientador(a)</option>
-            <option value='Diretor(a)'>Diretor(a)</option>
-            <option value='Integrante do quadro dirigente.'>Integrante do quadro dirigente.</option>
-            <option value='Funcionário técnico-administrativo'>Funcionário técnico-administrativo</option>
-            <option value='Integrante da equipe técnica '>Integrante da equipe técnica </option>
-            <option value='OUTRO'>Outro</option>
+            <option value=''></option>
+            <option value='DOCENTE DO QUADRO PERMANENTE'>DOCENTE DO QUADRO PERMANENTE</option>
+            <option value='DOCENTE COM CONTRATO TEMPORÁRIO'>DOCENTE COM CONTRATO TEMPORÁRIO</option>
+            <option value='COORDENADOR(A)'>COORDENADOR(A)</option>
+            <option value='ORIENTADOR(A)'>ORIENTADOR(A)</option>
+            <option value='DIRETOR(A)'>DIRETOR(A)</option>
+            <option value='INTEGRANTE DO QUADRO DIRIGENTE.'>INTEGRANTE DO QUADRO DIRIGENTE.</option>
+            <option value='FUNCIONÁRIO TÉCNICO-ADMINISTRATIVO'>FUNCIONÁRIO TÉCNICO-ADMINISTRATIVO</option>
+            <option value='INTEGRANTE DA EQUIPE TÉCNICA '>INTEGRANTE DA EQUIPE TÉCNICA </option>
+            <option value='OUTRO'>OUTRO</option>
           </select></td>
       </tr>
       <tr id="qual_funcao" style="display:none">
         <td class="col-1">Qual ?</td>
-        <td><input id="outra_funcao" name="outra_funcao" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" /></td>
+        <td><input id="outra_funcao" name="outra_funcao" type="text" maxlength="50" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" /></td>
       </tr>
       <tr>
         <td class="col-1">De qual(is) programa(s) a seguir a sua escola participa: </td>
-        <td><input name="programas[]" type="checkbox" value="Programa Saúde na Escola - PSE">Programa Saúde na Escola - PSE<br>
-            <input name="programas[]" type="checkbox" value="Projeto Saúde e Prevenção nas Escolas - SPE">Projeto Saúde e Prevenção nas Escolas - SPE<br>
-            <input name="programas[0]" type="checkbox" value="Programa Mais Educação">Programa Mais Educação<br>
-            <input name="programas[1]" type="checkbox" value="Programa Educação Integral">Programa Educação Integral<br>
-            <input name="programas[2]" type="checkbox" value="Programa Escola Aberta">Programa Escola Aberta<br>
-            <input name="programas[3]" type="checkbox" value="Programa TV Escola">Programa TV Escola<br>
-            <input name="programas[4]" type="checkbox" value="PDE - Escola">PDE - Escola<br>
+        <td><input name="programa[]" type="checkbox" value="Programa Saúde na Escola - PSE">Programa Saúde na Escola - PSE<br>
+            <input name="programa[]" type="checkbox" value="Projeto Saúde e Prevenção nas Escolas - SPE">Projeto Saúde e Prevenção nas Escolas - SPE<br>
+            <input name="programa[]" type="checkbox" value="Programa Mais Educação">Programa Mais Educação<br>
+            <input name="programa[]" type="checkbox" value="Programa Educação Integral">Programa Educação Integral<br>
+            <input name="programa[]" type="checkbox" value="Programa Escola Aberta">Programa Escola Aberta<br>
+            <input name="programa[]" type="checkbox" value="Programa TV Escola">Programa TV Escola<br>
+            <input name="programa[]" type="checkbox" value="PDE - Escola">PDE - Escola<br>
           </select></td>
       </tr>
       
@@ -224,7 +225,7 @@ function monta_mes() {
 function monta_ano() {
 	
 	$option = "<option value=''>Ano</option>";
-	for($i = 1990; $i >= 1950; $i--) {			
+	for($i = 1999; $i >= 1950; $i--) {			
 		$option .= "\t<option value=\"". sprintf("%02d", $i) ."\">".sprintf("%02d", $i)."</option>\n";	
 	} 	
 	return $option;	
