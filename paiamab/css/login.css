@@ -55,7 +55,14 @@ select {
 
 /* --------- Pagina do Usuario logado --------------- */
 
-#div_usuario{
+.td_esq{
+	text-align:right;
+}
+.td_dir{
+	text-align:left;
+}
+
+.div_padrao{
 	margin:auto;
 	text-align:center;
 	margin-top: 10px;
@@ -70,38 +77,64 @@ select {
 	border: 1px solid #CCCCCE;
 	border-radius: 3px;
 	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px #eb2323;
-	margin-bottom: 15px;
+	margin-bottom: 15px;	
 }
+
 
 #div_tab_usuario{
 	position:absolute;
 	margin-left: 50px;
 }
-#bt_sair{
+#tab_usuario td{
+	padding: 0px 5px;
+}
+
+
+#div_bt_sair{
 	position:relative;
-	margin:40px 0px 10px 90%;
+	margin:20px 0px 10px 90%;
 	width: 70px;
 	height:25px;
 	cursor:pointer;
 }
-
-#bt_sair a{
+#div_bt_sair a{
 	text-decoration:none;
 	font-weight:bold;
 	color:#eb2323;
 	
 }
 
-#tab_usuario td{
-	padding: 0px 5px;
+
+#div_bt_buscar {
+	position:relative;
+	margin:20px 0px 10px 87%;
+	width: 150px;
+	height:25px;
+	cursor:pointer;
+}
+#div_bt_buscar a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#eb2323;
+	
+}
+#div_buscar{
+	display:none;	
+}
+#tab_buscar .td_esq {
+	font-weight:bold;
+}
+#tab_buscar h2 {
+	padding: 0px 50px;
+}
+#tab_buscar #botao {
+	padding: 0px 30px;
+}
+#tab_buscar #input_busca {
+	cursor:pointer;
 }
 
-.td_esq{
-	text-align:right;
-}
-.td_dir{
-	text-align:left;
-}
+
 
 
 #div_menu {
@@ -142,19 +175,6 @@ select {
 
 
 #div_principal {
-	margin:auto;
-	margin-top: 10px;
-	padding: 3px;
-	padding-top: 10px;
-	min-height: 300px;
-	background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
-	background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
-	background: -o-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
-	background: -ms-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
-	background: linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
-	border: 1px solid #CCCCCE;
-	border-radius: 3px;
-	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px #eb2323;
 	font-weight:bold;
 	margin-bottom: 20px;
 	

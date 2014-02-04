@@ -4,15 +4,11 @@
 <head>
 <meta charset="utf-8">
 <title>Logado</title>
-
 <link href="css/login.css" rel="stylesheet" type="text/css"/>
 <script src="js/scripts.js" type="text/javascript"></script>
 <script src="js/jquery.js" type="text/javascript"></script>
-
-
 </head>
 <body>
-
 <?php 
 	if(!$_SESSION){
 		echo "Acesso Negado";
@@ -28,12 +24,43 @@
 	
 
 ?>
-
 <script type="text/javascript">
 $(document).ready( function() {
 	
 	$('#div_principal').load('formulario/fichaCadastral.php');
 	clickBotao('fichaCadastral');
+	
+	$('#frmBuscar').submit(function() {
+
+		$('div.mensagem-erro').html('');
+		
+		$(this).ajaxSubmit(function(resposta) {
+			
+			if (resposta == false){
+				$.ajax({
+					type:"POST",
+					url: "listar.php",
+					data: "login="+$("#login").val()+"&nome="+$("#nome").val()+"&cpf="+$("#cpf").val(),
+					
+					success:function(data){
+						$("#div_listar").html(data);
+					},
+					
+					complete:function(){
+						var Snome = $("#nome").val();
+						var Scpf = $("#cpf").val();
+						var Slogin = $("#login").val();
+					}
+					
+				});
+			   
+			}else{
+				$('div.mensagem-erro').html(resposta);
+			}
+		});
+		// Retornando false para que o formulário não envie as informações da forma convencional
+		return false;
+   	});
 	
 	$('.td_menu').click(function(evt) {
 		
@@ -63,46 +90,62 @@ $(document).ready( function() {
 });  
 
 </script>
-
-<div id="div_usuario">
-	<div id="div_tab_usuario">
-	<table id="tab_usuario" border="0">
-        <tr>
-            <td class="td_esq" >Usuário: </td>
-            <td class="td_dir" ><h2><?php echo $usuario->get_nome();?></h2></td>
-        </tr>
-        <tr>
-            <td class="td_esq" >Ultimo Acesso: </td>
-            <td class="td_dir" ><?php echo $usuario->get_ultima_sessao();?></td>
-        </tr>
+<div id="div_usuario"  class="div_padrao">
+  <div id="div_tab_usuario">
+    <table id="tab_usuario" border="0">
+      <tr>
+        <td class="td_esq" >Usuário: </td>
+        <td class="td_dir" ><h2><?php echo $usuario->get_nome();?></h2></td>
+      </tr>
+      <tr>
+        <td class="td_esq" >Ultimo Acesso: </td>
+        <td class="td_dir" ><?php echo $usuario->get_ultima_sessao();?></td>
+      </tr>
     </table>
-    </div>
-	<div id="bt_sair">
-    	<a href="sair.php"> Sair </a>
-    </div>
+  </div>
+  <div id="div_bt_sair"> <a href="sair.php"> Sair </a> </div>
+  <div id="div_bt_buscar"> <a onClick="botBuscar()"> Burcar Prontuario </a> </div>
 </div>
 
-<div id="div_menu"> 
-    <table id="tab_menu" border="0" align="center">
-        <tr>
-            <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
-            <td class="td_menu" id="anexo1">Anexo 1</td>
-            <td class="td_menu" id="anexo2">Anexo 2</td>
-            <td class="td_menu" id="anexo3">Anexo 3</td>
-            <td class="td_menu" id="anexo4">Anexo 4</td> 
-            <td class="td_menu" id="anexo5">Anexo 5</td> 
-            <td class="td_menu" id="anexo6">Anexo 6</td> 
-            <td class="td_menu" id="anexo7">Anexo 7</td> 
-            <td class="td_menu" id="anexo8">Anexo 8</td> 
-            <td class="td_menu" id="anexo9">Anexo 9</td>      
-        </tr>
+
+<div id="div_buscar" class="div_padrao">
+  <form id="formBuscar"  action="buscar.php" method="POST">
+    <table id="tab_buscar" border="0" align="center">
+      <tr>
+        <td rowspan="3"><h2>Buscar</h2></td>
+        <td class="td_esq" >Nome: </td>
+        <td class="td_dir" width="250px"><input id="buscar_nome" name="buscar_nome" type="text" style="width:100%"/></td>
+        <td rowspan="3" id="botao"><input id="input_busca" name="input_busca" type="submit" value="Buscar" /></td>
+      </tr>
+      <tr>
+        <td class="td_esq" >RG: </td>
+        <td class="td_dir" ><input id="buscar_rg" name="buscar_rg" type="text" /></td>
+      </tr>
+      <tr>
+        <td class="td_esq" >CPF: </td>
+        <td class="td_dir" ><input id="buscar_cpf" name="buscar_cpf" type="text"  /></td>
+      </tr>
     </table>
+  </form>
 </div>
 
 
-<div id="div_principal">
-	
+<div id="div_menu">
+  <table id="tab_menu" border="0" align="center">
+    <tr>
+      <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
+      <td class="td_menu" id="anexo1">Anexo 1</td>
+      <td class="td_menu" id="anexo2">Anexo 2</td>
+      <td class="td_menu" id="anexo3">Anexo 3</td>
+      <td class="td_menu" id="anexo4">Anexo 4</td>
+      <td class="td_menu" id="anexo5">Anexo 5</td>
+      <td class="td_menu" id="anexo6">Anexo 6</td>
+      <td class="td_menu" id="anexo7">Anexo 7</td>
+      <td class="td_menu" id="anexo8">Anexo 8</td>
+      <td class="td_menu" id="anexo9">Anexo 9</td>
+    </tr>
+  </table>
 </div>
-
+<div id="div_principal" class="div_padrao"> </div>
 </body>
 </html>
