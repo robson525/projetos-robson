@@ -29,7 +29,7 @@ $(function($) {
 			// Se não retornado nenhum erro
 			if (resposta.length <= 1){
 				// Redirecionando
-				window.location = 'http://localhost/google/paiamab/login.php';				
+				window.location = 'login.php';				
 			}else{
 				// Exibimos a mensagem de erro
 				$('#div_erro').html(resposta);
