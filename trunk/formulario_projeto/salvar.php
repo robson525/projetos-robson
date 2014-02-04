@@ -1,19 +1,25 @@
-﻿<?php 
+<?php 
 if(!isset($_POST['submit'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
 }
 
 include "class/conecta.php";
 
-$conex = new Conecta();
-
-	
+	$conex = new Conecta();
 	extract($_POST);
+	
 	$nascimento = "{$ano}-{$mes}-{$dia}";
 	
-	$sql = "INSERT INTO 1_formulario (nome, cpf, email, telefone, nascimento, endereco, complemento, cidade, profissao, outra_profissao, orgao, escola)
-			VALUES ('$nome', '$cpf', '$email', '$telefone', '$nascimento', '$endereco', '$complemento', '$cidade', '$profissao', '$outra_profissao', '$orgao', '$escola')";
-			
+	$programas = '';
+	if(isset($programa)){
+		for($i=0; $i<count($_POST['programa']); $i++){
+			$programas .= $programa[$i].'<br>';
+		}
+	}
+
+	$sql = "INSERT INTO 1_formulario (nome, rg, cpf, sexo, email, nascimento, pai, mae, endereco, complemento, cep, cidade, telefone1, telefone2, escolaridade, extensao, inep, secretaria, reserva, nivel_ensino, funcao, outra_funcao, programas)
+	VALUES ('$nome', '$rg', '$cpf', '$sexo', '$email', '$nascimento', '$pai', '$mae', '$endereco', '$complemento', '$cep', '$cidade', '$telefone1', '$telefone2', '$escolaridade', '$extensao', '$inep', '$secretaria', '$reserva', '$nivel_ensino', '$funcao', '$outra_funcao', '$programas')";		
+	
 	$query = mysql_query($sql);
 	
 	if(mysql_error($conex->conn)){

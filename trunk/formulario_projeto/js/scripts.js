@@ -44,6 +44,14 @@ function validaForm(){
 		alert("Favor preencher a Data de Nasciemento Corretamente.");
 		return false;
 	}
+	
+	if (document.getElementById('inep').value.length < 8) {
+ 		document.getElementById('inep').focus();
+		document.getElementById('inep').style.boxShadow = "0.1px 0.1px 3px red";
+		
+		alert("Favor fornecer um Código INEP válido.");
+		return false;
+	}	
 }
 
 function tirarShadow(id){
