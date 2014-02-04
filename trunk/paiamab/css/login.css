@@ -133,6 +133,9 @@ select {
 #tab_buscar #input_busca {
 	cursor:pointer;
 }
+#div_listar{
+	display:none;	
+}
 
 
 
