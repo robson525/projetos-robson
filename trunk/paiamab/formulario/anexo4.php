@@ -40,7 +40,7 @@
                 <option value="sim">Sim</option>
                 <option value="não">Não</option>
                 </select>
-                </select><span id="tab1_p2.1">Reação: 
+                </select><span id="tab1_p2.1">Característica: 
                 <input id="tab1_p2.1" name="tab1_p2.1" type="text" maxlength="20"> </span> </td>
        </tr>
        
@@ -53,7 +53,7 @@
                 <option value="não">Não</option>
                 </select>
                  &ensp;&ensp;
-        	<span id="tab1_p3.1"> Qual:  </span> <input id="tab1_p3.2" name="tab1_p3.2" type="text" maxlength="20"></td>
+        	<span id="tab1_p3.1"> Qual o parentesco:  </span> <input id="tab1_p3.2" name="tab1_p3.2" type="text" maxlength="20"></td>
        </tr>
        
        <tr>
@@ -74,22 +74,19 @@
                 <option value=""></option>
                 <option value="sim">Sim</option>
                 <option value="não">Não</option>
-                </select>&ensp;&ensp;
-        	<span id="tab1_p5.1">Local: <input id="tab1_p5.1" name="tab1_p5.1" type="text" maxlength="20"> </span> </td>
+                </select>&ensp;
+        	<span id="tab1_p5.1">Local: <input id="tab1_p5.1" name="tab1_p5.1" type="text" maxlength="20"> </span>
+             </td>
        </tr>
        
        <tr>
           <td>6 - Em caso de feridas (coça, tem pus, dói, quanto tempo, usa algum remédio para tratar)?</td>
           <td>                
-        	<span id="tab1_p6">&ensp;Reação:<input id="tab1_p6" name="tab1_p6" type="text" maxlength="20"> </span>
+        	<span id="tab1_p6">Característica:<input id="tab1_p6" name="tab1_p6" type="text" maxlength="20"> </span>
             &ensp;&ensp;
-        	<span id="tab1_p6.1">Tempo:<input id="tab1_p6.1" name="tab1_p6.1" type="text" maxlength="20"> </span>
+        	<span  id="tab1_p6.1">Tempo:<input id="tab1_p6.1" name="tab1_p6.1" type="text" maxlength="20"> </span>
             &ensp;&ensp;
-        	<span id="tab1_p6.2">Remédio:<select id="tab1_p6.2" name="tab1_p6.2">
-                <option value=""></option>
-                <option value="sim">Sim</option>
-                <option value="não">Não</option>
-                </select>&ensp;&ensp; </td> </td> </td>
+        	<span id="tab1_p6.2">Remédio:<input id="tab1_p6.2" name="tab1_p6.2" type="text" maxlength="20"> </span>
        </tr>
        
        <tr>
@@ -100,17 +97,14 @@
                 <option value="sim">Sim</option>
                 <option value="não">Não</option>
                 </select> &ensp;&ensp;
-                <span>Quantos dias na semana:</span>
+                <span>Quantas vezes ao dia:</span>
                 <select id="tab1_p7.1" name="tab1_p7.1">
                 <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                </select>
+                <option value="mais de 3">mais de 3</option>
+                </select> 
        </tr>
        
        <tr>
@@ -121,7 +115,8 @@
                 <option value="sabao">Sabão</option>
                 <option value="sabonete">Sabonete</option>
                 <option value="outros produtos">Outros Produtos</option>
-                </select>
+                </select>&ensp;&ensp;
+        	<span id="tab1_p8.1">Nome de outro produto:<input id="tab1_p8.1" name="tab1_p8.1" type="text" maxlength="20"> </span>
                 
                 
        </tr>
@@ -141,7 +136,8 @@
                 <option value="Sabão">Sabão</option>
                 <option value="Sabonete">Sabonete</option>
                 <option value="Outros Produtos">Outros Produtos</option>                
-                </select>
+                </select>&ensp;&ensp;
+        	<span id="tab1_p9.1">Nome de outro produto:<input id="tab1_p9.1" name="tab1_p9.1" type="text" maxlength="20"> </span>
        </tr>
        
         <tr>
@@ -151,7 +147,10 @@
                 <option value=""></option>
                 <option value="sim">Sim</option>
                 <option value="não">Não</option>
-                </select>
+                </select>&ensp;&ensp;        	
+            <span id="tab1_p10.1">Qual a frequência:<input id="tab1_p10.1" name="tab1_p10.1" type="text" maxlength="20"> </span>            
+            
+            
        </tr>
        
        <tr>
@@ -173,7 +172,8 @@
                 <option value=""></option>
                 <option value="sim">Sim</option>
                 <option value="não">Não</option>
-                </select>
+                </select>&ensp;&ensp;
+                <span id="tab1_p12.1">Com quem:<input id="tab1_p12.1" name="tab1_p12.1" type="text" maxlength="20"> </span>
        </tr>
             
    </table>            
