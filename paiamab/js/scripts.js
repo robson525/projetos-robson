@@ -23,13 +23,16 @@ function botBuscar(){
 	var display = document.getElementById('div_buscar').style.display;
 	if (display == '' || display == 'none'){
 		document.getElementById('div_buscar').style.display = 'block';
+		document.getElementById('div_listar').style.display = 'block';
 		document.getElementById('div_menu').style.display = 'none';
-		$("#div_principal").html('');
+		document.getElementById('div_principal').style.display = 'none';
+		
 	}
 	else{
 		document.getElementById('div_buscar').style.display = 'none';
+		document.getElementById('div_listar').style.display = 'none';
 		document.getElementById('div_menu').style.display = 'block';
-		$('#div_principal').load('formulario/fichaCadastral.php');
+		document.getElementById('div_principal').style.display = 'block';
 	}
 	
 }
