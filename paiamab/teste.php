@@ -1,7 +1,14 @@
 ﻿<?php 
-$fruit = array('a' => 'apple', 'b' => 'banana', 'c' => 'cranberry'); 
-reset($fruit); 
-while (list($key, $val) = each($fruit)) {  
-      echo "$key => $val\n";  
-}
+
+	$nome = NULL;
+	$n_controle = 'robson';
+
+		if($nome != '' && $nome != NULL && ($n_controle == '' || $n_controle ==NULL) ){
+			echo 1;
+		}
+		else if(($nome == '' || $nome == NULL) && $n_controle != '' && $n_controle != NULL ){
+			echo 2;
+		}
+		else 
+			echo 3;
 ?>
