@@ -121,6 +121,9 @@ select {
 #div_buscar{
 	display:none;	
 }
+#tab_buscar {
+	padding-top:10px;
+}
 #tab_buscar .td_esq {
 	font-weight:bold;
 }

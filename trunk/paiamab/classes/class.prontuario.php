@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 require_once('class.conecta.php');
 
 class Prontuario {
@@ -59,6 +59,26 @@ class Prontuario {
 		
 
 	}
+	
+	/* BUSCAR NOME = (nome, ''); BUSCAR NCONTROLE = ('', ncontrole); BUSCAR OS DOIS = (nome, ncontrole)
+	Só para formulario Ficha Cadastral*/
+	public function buscarFicha($nome, $n_controle){
+		if($nome != '' && $nome != NULL && ($n_controle == '' || $n_controle ==NULL) ){
+			$sql = 	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%';";
+		}
+		else if(($nome == '' || $nome == NULL) && $n_controle != '' && $n_controle != NULL ){
+			$sql = 	"SELECT * FROM $this->tabela WHERE n_controle = '$n_controle';";
+		}
+		else
+			$sql = 	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%' OR n_controle = '$n_controle';";
+			
+		$query = mysql_query($sql);
+		if (mysql_num_rows($query)  < 1)
+			return false;
+		else
+			return $query;
+	}
+
 	
 /* ------------------------ Fim do Tratamento da  Ficha Cadastral ------------------------ */	
 /* --------------------------------------------------------------------------------------- */

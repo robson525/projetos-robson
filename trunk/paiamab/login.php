@@ -21,7 +21,9 @@
 	
 	$usuario->set_usuario( $_SESSION['id_usuario'] );
 	
-	
+	if(isset($_SESSION['id_ficha']) && $_SESSION['id_ficha']){
+		echo "ID FICHA = ".$_SESSION['id_ficha'];
+	}
 
 ?>
 <script type="text/javascript">
@@ -30,33 +32,11 @@ $(document).ready( function() {
 	$('#div_principal').load('formulario/fichaCadastral.php');
 	clickBotao('fichaCadastral');
 	
-	$('#frmBuscar').submit(function() {
+	$('#formBuscar').submit(function() {
 
-		$('div.mensagem-erro').html('');
-		
 		$(this).ajaxSubmit(function(resposta) {
-			
-			if (resposta == false){
-				$.ajax({
-					type:"POST",
-					url: "listar.php",
-					data: "login="+$("#login").val()+"&nome="+$("#nome").val()+"&cpf="+$("#cpf").val(),
+			$("#div_listar").html(resposta);
 					
-					success:function(data){
-						$("#div_listar").html(data);
-					},
-					
-					complete:function(){
-						var Snome = $("#nome").val();
-						var Scpf = $("#cpf").val();
-						var Slogin = $("#login").val();
-					}
-					
-				});
-			   
-			}else{
-				$('div.mensagem-erro').html(resposta);
-			}
 		});
 		// Retornando false para que o formulário não envie as informações da forma convencional
 		return false;
@@ -104,7 +84,7 @@ $(document).ready( function() {
     </table>
   </div>
   <div id="div_bt_sair"> <a href="sair.php"> Sair </a> </div>
-  <div id="div_bt_buscar"> <a onClick="botBuscar()"> Burcar Prontuario </a> </div>
+  <div id="div_bt_buscar"> <a onClick="botBuscar()"> Buscar Prontuario </a> </div>
 </div>
 
 
@@ -113,17 +93,13 @@ $(document).ready( function() {
     <table id="tab_buscar" border="0" align="center">
       <tr>
         <td rowspan="3"><h2>Buscar</h2></td>
-        <td class="td_esq" >Nome: </td>
-        <td class="td_dir" width="250px"><input id="buscar_nome" name="buscar_nome" type="text" style="width:100%"/></td>
+        <td class="td_esq" >Nº de Controle: </td>
+        <td class="td_dir" ><input id="buscar_ncontrole" name="buscar_ncontrole" type="text" /></td>
         <td rowspan="3" id="botao"><input id="input_busca" name="input_busca" type="submit" value="Buscar" /></td>
       </tr>
       <tr>
-        <td class="td_esq" >RG: </td>
-        <td class="td_dir" ><input id="buscar_rg" name="buscar_rg" type="text" /></td>
-      </tr>
-      <tr>
-        <td class="td_esq" >CPF: </td>
-        <td class="td_dir" ><input id="buscar_cpf" name="buscar_cpf" type="text"  /></td>
+        <td class="td_esq" >Nome: </td>
+        <td class="td_dir" width="250px"><input id="buscar_nome" name="buscar_nome" type="text" style="width:100%"/></td>
       </tr>
     </table>
   </form>

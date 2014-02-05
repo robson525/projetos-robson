@@ -1,6 +1,8 @@
 ﻿<?php @session_start();
 	
 	if($_SESSION){ 
+		if(isset($_GET['buscar']) && $_GET['buscar'])
+			$_SESSION['id_ficha'] = $_GET['buscar'];
 		header('Location: login.php');
 	}
 
