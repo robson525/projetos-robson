@@ -4,10 +4,10 @@ class Conecta{
 // 	Informações para conexão
 
 	private $host = 'localhost';
-//	private $usuario = 'root';
-	private $usuario = 'pseufpa';
-//	private $senha = '';
-	private $senha = 'vdBVKPCq';
+	private $usuario = 'root';
+//	private $usuario = 'pseufpa';
+	private $senha = '';
+//	private $senha = 'vdBVKPCq';
 	private $banco = 'st_pse';
 	var $conn = '';
 
