@@ -31,7 +31,13 @@ include "class/conecta.php";
 		echo mysql_error($conex->conn);
 	}
 	else{
-		include "sucesso.html";	
+	?>		
+	<div id="div_sucesso">
+    <script type="text/javascript"> document.getElementById("div_sucesso").focus();</script>
+    <?php 
+	include "sucesso.html"; ?>	
+    </div>
+    <?php
 	}
 	
 	
