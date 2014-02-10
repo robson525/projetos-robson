@@ -10,15 +10,20 @@ include "class/conecta.php";
 	
 	$nascimento = "{$ano}-{$mes}-{$dia}";
 	
+	if ($complemento == NULL) { $complemento = ""; }
+	if ($telefone2 == NULL) { $telefone2 = ""; }
+	if ($reserva == NULL) { $reserva = ""; }
+	if ($outra_funcao == NULL) { $outra_funcao = ""; }
+	
 	$programas = '';
 	if(isset($programa)){
 		for($i=0; $i<count($_POST['programa']); $i++){
 			$programas .= $programa[$i].'<br>';
 		}
 	}
-
-	$sql = "INSERT INTO 1_formulario (nome, rg, cpf, sexo, email, nascimento, pai, mae, endereco, complemento, cep, cidade, telefone1, telefone2, escolaridade, extensao, inep, secretaria, reserva, nivel_ensino, funcao, outra_funcao, programas)
-	VALUES ('$nome', '$rg', '$cpf', '$sexo', '$email', '$nascimento', '$pai', '$mae', '$endereco', '$complemento', '$cep', '$cidade', '$telefone1', '$telefone2', '$escolaridade', '$extensao', '$inep', '$secretaria', '$reserva', '$nivel_ensino', '$funcao', '$outra_funcao', '$programas')";		
+	
+	$sql = "INSERT INTO 1_formulario (nome, rg, orgao, cpf, sexo, nascimento, pai, mae, endereco, complemento, cep, cidade, email, telefone1, telefone2, escolaridade, extensao, inep, secretaria, reserva, nivel_ensino, funcao, outra_funcao, programa)
+	VALUES ('$nome', '$rg', '$orgao', '$cpf', '$email', '$nascimento', '$pai', '$mae', '$endereco', '$complemento', '$cep', '$cidade', '$email', '$telefone1', '$telefone2', '$escolaridade', '$extensao', '$inep', '$secretaria', '$reserva', '$nivel_ensino', '$funcao', '$outra_funcao', '$programas')";		
 	
 	$query = mysql_query($sql);
 	
