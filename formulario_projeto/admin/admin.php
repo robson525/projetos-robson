@@ -1,14 +1,17 @@
-﻿<?php
-
+﻿<?php @session_start();
+if(!isset($_SESSION['id_admin'])){
+	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
+	
+}
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Administração</title>
-<?php include "class/conecta.php";?>
-<link type="text/css" href="css/admin.css" rel="stylesheet" />
-<script type='text/javascript' src='js/jquery.js'></script>
+<?php include "../class/conecta.php";?>
+<link type="text/css" href="../css/admin.css" rel="stylesheet" />
+<script type='text/javascript' src='../js/jquery.js'></script>
 <script type="text/javascript">
 
 
@@ -96,7 +99,7 @@ $('#div_pdf').click(function(evt){
 </div>
 
 <!--Tabela com Resultados -->
-<div id="div_resultado"> 
+<div id="div_resultado" style="overflow: auto; width: 500px;"> 
 
 </div>
 
