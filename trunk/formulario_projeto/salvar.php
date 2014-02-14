@@ -1,9 +1,10 @@
 <?php 
 if(!isset($_POST['submit'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
+	exit();
 }
 
-include "class/conecta.php";
+include "class/conecta.php"; 
 
 	$conex = new Conecta();
 	extract($_POST);
@@ -23,7 +24,7 @@ include "class/conecta.php";
 	}
 	
 	$sql = "INSERT INTO 1_formulario (nome, rg, orgao, cpf, sexo, nascimento, pai, mae, endereco, complemento, cep, cidade, email, telefone1, telefone2, escolaridade, extensao, inep, secretaria, reserva, nivel_ensino, funcao, outra_funcao, programa)
-	VALUES ('$nome', '$rg', '$orgao', '$cpf', '$sexo', '$nascimento', '$pai', '$mae', '$endereco', '$complemento', '$cep', '$cidade', '$email', '$telefone1', '$telefone2', '$escolaridade', '$extensao', '$inep', '$secretaria', '$reserva', '$nivel_ensino', '$funcao', '$outra_funcao', '$programas')";		
+	VALUES ('$nome', '$rg', '$orgao', '$cpf', '$email', '$nascimento', '$pai', '$mae', '$endereco', '$complemento', '$cep', '$cidade', '$email', '$telefone1', '$telefone2', '$escolaridade', '$extensao', '$inep', '$secretaria', '$reserva', '$nivel_ensino', '$funcao', '$outra_funcao', '$programas')";		
 	
 	$query = mysql_query($sql);
 	
