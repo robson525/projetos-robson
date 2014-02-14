@@ -10,14 +10,14 @@
 	
 	$nascimento = "{$ano}-{$mes}-{$dia}";
 	
-	if($matricula == NULL){ $matricula = 'NULL'; }	
-	if($dia==NULL && $mes==NULL && $ano==NULL){ $nascimento = 'NULL';} 
-	if($endereco == NULL){ $endereco = 'NULL'; }
-	if($complemento == NULL){ $complemento = 'NULL'; }	
-	if($cargo_clube == NULL){ $cargo_clube = 'NULL'; }
-	if($outro_cargo_clube == NULL){ $outro_cargo_clube = 'NULL'; }
-	if($cargo_distrito == NULL){ $cargo_distrito = 'NULL'; }
-	if($outro_cargo_distrtito == NULL){ $outro_cargo_distrtito = 'NULL'; }
+	if($matricula == NULL){ $matricula = ''; }	
+	if($dia==NULL && $mes==NULL && $ano==NULL){ $nascimento = '';} 
+	if($endereco == NULL){ $endereco = ''; }
+	if($complemento == NULL){ $complemento = ''; }	
+	if($cargo_clube == NULL){ $cargo_clube = ''; }
+	if($outro_cargo_clube == NULL){ $outro_cargo_clube = ''; }
+	if($cargo_distrito == NULL){ $cargo_distrito = ''; }
+	if($outro_cargo_distrtito == NULL){ $outro_cargo_distrtito = ''; }
 	
 
 	$sql = "INSERT INTO xv_convencao (nome, matricula, cpf, email, nascimento, endereco, complemento, estado, cidade, clube, delegado, cargo_clube, qual_cc, cargo_distrito, qual_cd, cl_mj, prefixo, camisa ) VALUES ('$nome', '$matricula', '$cpf', '$email', '$nascimento', '$endereco', '$complemento', '$estado', '$cidade', '$clube', '$delegado', '$cargo_clube', '$outro_cargo_clube', '$cargo_distrito', '$outro_cargo_distrtito', '$cl_mj', '$prefixo', '$camisa' )";
