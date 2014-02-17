@@ -21,8 +21,8 @@ header{
 }
 
 #tab_lista {
-	width: 99%;
 	text-align:center;	
+	width:2450px;
 }
 
 #tab_lista td{
@@ -34,7 +34,7 @@ header{
 	cursor:pointer;
 	
 }
-
+/*
 #div_pdf {
 	margin-top:20px;
 	width:30px; 
@@ -44,8 +44,11 @@ header{
 	
 		
 }
+*/
 #div_resultado {
-	overflow: scroll;
-	/*border: 1px solid #F00;	*/
+	margin:auto;
+	overflow: auto ;
+	height: 500px;
+	/*width:2450px;  */
+	border: 1px solid #063;
 }
-

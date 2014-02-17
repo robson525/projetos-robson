@@ -8,19 +8,24 @@
 
 $tabela = "
 
-<table id='tab_lista'  border='1' align='center'>
+<table id='tab_lista'  border='1'>
+  <thead>
   <tr>
   	<th scope='col'style='padding:5px;'>&nbsp;</th>
     <th scope='col'style='width:300px;'>Nome</th>
-	<th scope='col'style='width:300px;'>RG/CPF</th>
-    <th scope='col'style='width:300px;'>Nascimento</th>
+	<th scope='col'style='width:150px;'>RG/CPF</th>
+    <th scope='col'style='width:100px;'>Nascimento</th>
     <th scope='col'style='width:300px;'>Endereço</th>
-	<th scope='col'style='width:300px;'>Email</th>
-	<th scope='col'style='width:300px;'>Telefone</th>
-	<th scope='col'style='width:300px;'>INEP</th>
+	<th scope='col'style='width:200px;'>Email</th>
+	<th scope='col'style='width:100px;'>Telefone</th>
+	<th scope='col'style='width:150px;'>Atividade de Extensão da UFPA</th>
+	<th scope='col'style='width:100px;'>INEP</th>
+	<th scope='col'style='width:300px;'>Secretária da Escola</th>
 	<th scope='col'style='width:300px;'>Função</th>
 	<th scope='col'style='width:300px;'>Programas</th>
   </tr>
+  </thead>
+  <tbody>
 " ;
   
 
@@ -35,22 +40,22 @@ if (!empty($_POST["ordem"])){
 	
 }
 
-if (!empty($_POST["orgao"]) && !empty($_POST["profs"])){
+if (!empty($_POST["secretaria"]) && !empty($_POST["inep"])){
 	$orgao = $_POST["orgao"];
-	$profs = $_POST["profs"];
-	$filtro = "WHERE orgao = '$orgao' AND profissao = '$profs'";
+	$profs = $_POST["inep"];
+	$filtro = "WHERE orgao = '$orgao' AND inep = '$inep'";
 }
 else {
 	//Filtrar Orgão
-	if (!empty($_POST["orgao"])){
-		$orgao = $_POST["orgao"];
-		$filtro = "WHERE orgao = '$orgao'";
+	if (!empty($_POST["secretaria"])){
+		$secretaria = $_POST["secretaria"];
+		$filtro = "WHERE secretaria = '$secretaria'";
 	}
 	
 	//Filtrar Profissão
-	else if (!empty($_POST["profs"])){
-		$profs = $_POST["profs"];
-		$filtro = "WHERE profissao = '$profs'";
+	else if (!empty($_POST["inep"])){
+		$inep = $_POST["inep"];
+		$filtro = "WHERE inep = '$inep'";
 	}
 }
 	
@@ -83,7 +88,7 @@ else {
 		$secretaria	= $l["secretaria"];
 		$reserva	= $l["reserva"];
 		$nivel_ensino	= $l["nivel_ensino"];
-		$funcao		= $l["funcao"];
+		$funcao		= $l["funcao"];   
 		$outra_funcao	= $l["outra_funcao"];
 		$programa	= $l["programa"];
 		
@@ -96,8 +101,12 @@ else {
 			<td>$endereco<br>$complemento<br>$cidade - $cep</td>
 			<td>$email</td>
 			<td>$telefone1 <br>$telefone2</td>
+			<td>$extensao</td>
 			<td>$inep</td>
-			<td>$funcao</td>
+			<td>$secretaria";
+			if($secretaria == "RESERVA SOCIAL") $result .= "<br>ÁREA: $reserva";
+		$result .= "</td>
+			<td>$funcao <br> $outra_funcao </td>
 			<td>$programa</td>
 		</tr>\n";
 		
@@ -109,6 +118,7 @@ else {
 	echo $tabela . $result;
 	
 ?>
+</tbody>
 </table>
 
 
