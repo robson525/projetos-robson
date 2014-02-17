@@ -1,7 +1,12 @@
 <?php @session_start();
+if(isset($_GET['sair']) && $_GET['sair']){
+	session_unset();
+	session_destroy();
+}
+
 if(!isset($_SESSION['id_admin'])){
 	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
-	
+	exit();
 }
 ?>
 <!doctype html>
@@ -43,8 +48,10 @@ $('#bot_filtro').click(function(evt){
 </head>
 <body>
 <header>
+<div id="div_sair"> <a href="?sair=1">Sair</a> </div>
   <h1>Resultado das Inscrições</h1>
 </header>
+
 <div id="div_botao">
   <table class="tb_filtro" border="0" align="center" cellspacing="10">
     <tr>
