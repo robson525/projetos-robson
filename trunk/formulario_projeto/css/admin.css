@@ -6,8 +6,19 @@ body {
 }
 
 header{
-	padding-top: 20px;
 	text-align:center;
+}
+
+#div_sair{
+	width:50px;
+	position:absolute;
+	margin: 5px 80%;
+	box-shadow: 1px 1px 1px rgb(0,51,0);
+}
+#div_sair a{
+	color:rgb(0,102,51);
+	text-decoration:none;
+	text-shadow: 1px 1px 1px rgb(0,51,0);
 }
 
 #tab_botao td {
@@ -48,7 +59,7 @@ header{
 #div_resultado {
 	margin:auto;
 	overflow: auto ;
-	height: 500px;
+	max-height: 500px;
 	/*width:2450px;  */
 	border: 1px solid #063;
 }
