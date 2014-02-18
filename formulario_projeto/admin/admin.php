@@ -22,7 +22,7 @@ if(!isset($_SESSION['id_admin'])){
 // Quando carregado a página
 $(function($) {
 
-$('#div_resultado').load('listar.php');
+$('#div_resultado').load('listar.php?padrao=1');
 
 $('#bot_filtro').click(function(evt){
 	var ordem = document.getElementById('filtro_ordem').value;
@@ -76,7 +76,7 @@ $('#bot_filtro').click(function(evt){
     </tr>
     <tr>
       <td> Filtrar Código INEP</td>
-      <td><input id="filtro_inep" name="filtro_inep" /></td>
+      <td><input id="filtro_inep" name="filtro_inep" maxlength="8" /></td>
     </tr>
     <tr>
       <td colspan="2" align="center"><input id="bot_filtro" type="button" value="Filtrar" /></td>

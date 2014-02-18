@@ -120,10 +120,6 @@
           </select></td>
       </tr>
       <tr>
-      	<td class="col-1">Código INEP da sua escola: </td>
-        <td><input id="inep" name="inep" type="text" maxlength="8" style="width:25%" onKeyPress="tirarShadow('inep')" required /></td>
-      </tr>
-      <tr>
         <td class="col-1">Sua escola está vinculada a qual secretaria: </td>
         <td><select id="secretaria" name="secretaria" style="min-width:120px" required >
             <option value=''></option>
@@ -132,6 +128,11 @@
             <option value='SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED'>SECRETARIA DE EDUCAÇÃO DE ANANINDEUA - SEMED</option>
             <option value='RESERVA SOCIAL'>NÃO SE APLICA - RESERVA SOCIAL</option>
           </select></td>
+      </tr>
+      <tr>
+      	<td class="col-1">Código INEP da sua escola: </td>
+        <td><input id="inep" name="inep" type="text" maxlength="8" style="width:25%" onKeyPress="tirarShadow('inep')" required />
+        	<span>&thinsp; &thinsp; &thinsp; &thinsp; Caso não seja vinculado a uma escola insira o código 00000000</span></td>
       </tr>
       <tr>
         <td class="col-1">Em caso de Reserva Social em que área você atua: </td>

@@ -60,6 +60,7 @@ header{
 	margin:auto;
 	overflow: auto ;
 	max-height: 500px;
+	min-height:150px;
 	/*width:2450px;  */
 	border: 1px solid #063;
 }
