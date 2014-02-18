@@ -1,4 +1,10 @@
-﻿<!doctype html>
+﻿<?php @session_start();
+if(!isset($_POST['ordem']) && !isset($_GET['padrao'])){
+	echo "<meta http-equiv='refresh' content='0; url=admin.php'>";	
+	exit();
+}
+?>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -41,9 +47,9 @@ if (!empty($_POST["ordem"])){
 }
 
 if (!empty($_POST["secretaria"]) && !empty($_POST["inep"])){
-	$orgao = $_POST["orgao"];
-	$profs = $_POST["inep"];
-	$filtro = "WHERE orgao = '$orgao' AND inep = '$inep'";
+	$secretaria = $_POST["secretaria"];
+	$inep = $_POST["inep"];
+	$filtro = "WHERE secretaria = '$secretaria' AND inep = '$inep'";
 }
 else {
 	//Filtrar Orgão
