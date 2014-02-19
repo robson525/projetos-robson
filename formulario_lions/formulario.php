@@ -39,27 +39,7 @@
 	$('#estado').val(function() {});
 	
 	
-	$('#matricula').change(function() {		
-		$.post('auxi/verificar.php',{matricula: $(this).val() }, 
-
-		function(resposta){
-			if(resposta != false){
-				alert(resposta);
-				//$('#cidade').html(resposta);
-			}
-		});
-	});
 	
-	$('#cpf').change(function() {		
-		$.post('auxi/verificar.php',{cpf: $(this).val() }, 
-
-		function(resposta){
-			if(resposta != false){
-				alert(resposta);
-				//$('#cidade').html(resposta);
-			}
-		});
-	});
 
  });  
 
@@ -76,13 +56,13 @@
       </tr>
       <tr>
         <td class="col-1">Número de Matricula</td>
-        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" />
+        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" onChange="matEcpf('matricula')" />
           <br>
           <span>Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span></td>
       </tr>
       <tr>
         <td class="col-1">CPF</td>
-        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" required/>
+        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" onChange="matEcpf('cpf')" required/>
           <br>
           <span class="ocultar" id="span_cpf">Di</span></td>
       </tr>
