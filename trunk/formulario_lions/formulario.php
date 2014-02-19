@@ -36,8 +36,30 @@
 		});
 
 	})
-
 	$('#estado').val(function() {});
+	
+	
+	$('#matricula').change(function() {		
+		$.post('auxi/verificar.php',{matricula: $(this).val() }, 
+
+		function(resposta){
+			if(resposta != false){
+				alert(resposta);
+				//$('#cidade').html(resposta);
+			}
+		});
+	});
+	
+	$('#cpf').change(function() {		
+		$.post('auxi/verificar.php',{cpf: $(this).val() }, 
+
+		function(resposta){
+			if(resposta != false){
+				alert(resposta);
+				//$('#cidade').html(resposta);
+			}
+		});
+	});
 
  });  
 
