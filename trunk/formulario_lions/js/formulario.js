@@ -132,9 +132,7 @@ function tirarShadow(id){
 
 }
 
-function matEcpf(campo){
-	location.href = "formulario.php?campo="+campo;
-}
+
 
 
 

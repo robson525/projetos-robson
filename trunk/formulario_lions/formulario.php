@@ -1,8 +1,8 @@
-﻿<!doctype html>
+<?php header('Content-Type: text/html; charset=utf-8'); ?>
+<!doctype html>
 
 <html>
 <head>
-<meta charset="utf-8">
 <title>Inscrição da Convenção</title>
 <link href="css/formulario.css" rel="stylesheet" type="text/css"/>
 <script src="js/formulario.js" type="text/javascript"></script>
@@ -35,18 +35,49 @@
 
 		});
 
-	})
+	});
 	$('#estado').val(function() {});
 	
 	
+	$('#matricula').change(function() {
+		$.post('auxi/verificar.php',{matricula: $(this).val() }, 
+		function(resposta){
+			if(resposta != false){
+				document.getElementById('id').value = resposta;
+				document.getElementById('form_oculta').submit();
+			}
+		});
+
+	});
 	
 
  });  
 
 </script>
+<meta charset="utf-8">
 </head>
 
 <body>
+<div id="div_oculta" style="display:none">
+	<form id="form_oculta" name="form_oculta" action="" method="post" >
+    	<input id="id" type="text" name="id" value="">
+    </form>
+</div>
+<?php
+	if(isset($_POST['id']) && $_POST['id']){
+		include_once("auxi/conn.php"); new Conecta();
+	 	if(is_numeric($_POST['id'])) echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";else echo "nnnnnnnnnnnnnnnnnnnnn";
+		$sql = "SELECT * FROM xv_convencao WHERE id = {$_POST['id']}";
+		$query = mysql_query($sql) or die("Error in query: $sql. ".mysql_error());
+		if(mysql_num_rows($query) > 0){
+			$campo = mysql_fetch_array($query);
+			echo "EANAKJAJ = " . $sql;
+		}
+		else echo $sql;
+		echo "<br>".$id;
+	}
+?>
+
 <div id="div_formulario">
   <form id="formulario" name="formulario" action="auxi/salvar.php" method="POST" onsubmit="return validaForm();">
     <table id="tabela" align="center" border="0" width="100%" >
@@ -56,13 +87,13 @@
       </tr>
       <tr>
         <td class="col-1">Número de Matricula</td>
-        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" onChange="matEcpf('matricula')" />
+        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" />
           <br>
           <span>Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span></td>
       </tr>
       <tr>
         <td class="col-1">CPF</td>
-        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" onChange="matEcpf('cpf')" required/>
+        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" required/>
           <br>
           <span class="ocultar" id="span_cpf">Di</span></td>
       </tr>
