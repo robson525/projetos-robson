@@ -2,13 +2,13 @@
 include_once("../auxi/conn.php");
 
 	if(isset($_POST['matricula']) && $_POST['matricula'] && strlen($_POST['matricula'])==10){
-		echo "matricula";
+		$id = verifica($_POST['matricula']);
+		echo $id; 
 	}
 	else
 	if(isset($_POST['cpf']) && $_POST['cpf'] && strlen($_POST['cpf'])==14){
-		$con = new Conecta();
-		$cpf = $_POST['cpf'];
-		cpf();
+		$id = verifica($_POST['cpf']);
+		echo $id;
 	}
 	else{
 		echo false;	
@@ -16,13 +16,17 @@ include_once("../auxi/conn.php");
 	
 //***************************************************************************	
 	
-	function atualiza($campo){ 
+	function verifica($campo){ 
+		
 		$con = new Conecta(); 
 		$sql = "SELECT * FROM xv_convencao WHERE matricula = '$campo';";
-		$query = mysql_query($sql) or die("Error in query: $query. ".mysql_error());
-		$campo = mysql_fetch_array($query);
-		
-		echo "document.getElementById('nome').value = ".$campo['nome']; 
+		$query = mysql_query($sql) or die("Error in query: $sql. ".mysql_error());
+		if(mysql_num_rows($query) > 0){
+			$campo = mysql_fetch_array($query);
+			return $campo['id'];
+		}
+		else
+			return false;
 	}
 	
 
