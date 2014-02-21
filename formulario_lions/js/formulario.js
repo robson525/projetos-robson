@@ -135,6 +135,15 @@ function tirarShadow(id){
 
 
 
+function Selecionar(selecionar , itemSelecionar){
+	var estado = document.getElementById(selecionar);
+	for ( i =0; i < estado.length; i++){
+		if(selecionar == "cidade") alert(estado[i].value);
+		if (estado[i].value == itemSelecionar){
+			estado[i].selected = true;
+		}
+	} 
+}
 
 
 

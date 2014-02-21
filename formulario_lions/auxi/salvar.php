@@ -10,7 +10,6 @@
 	
 	$nascimento = "{$ano}-{$mes}-{$dia}";
 	
-	if($matricula == NULL){ $matricula = ''; }	
 	if($dia==NULL && $mes==NULL && $ano==NULL){ $nascimento = '';} 
 	if($endereco == NULL){ $endereco = ''; }
 	if($complemento == NULL){ $complemento = ''; }	
