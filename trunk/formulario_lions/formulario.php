@@ -1,8 +1,7 @@
 <?php header('Content-Type: text/html; charset=utf-8'); ?>
 <!doctype html>
 
-<html>
-<head>
+<html><head>
 <title>Inscrição da Convenção</title>
 <link href="css/formulario.css" rel="stylesheet" type="text/css"/>
 <script src="js/formulario.js" type="text/javascript"></script>
@@ -15,30 +14,43 @@
 <script type="text/javascript">$(document).ready(function(){ $("#matricula").mask("0000000000"); });</script>
 <script type="text/javascript">
 
- $(document).ready( function() {
+function Estado(cidade, clube){
+		$(document).ready(function() {
 
-	$('#estado').change(function() {
-
-		$.post('auxi/cidades.php',{estado: $(this).val() }, 
+		$.post('auxi/cidades.php',{estado: $('#estado').val() }, 
 
 		function(resposta){
 
 			$('#cidade').html(resposta);
-
+			$(document).ready(function() { Selecionar('cidade', "<?php if(isset($usuario) && $usuario)echo $campo['cidade'];?>") });
 		});
 
-		$.post('auxi/clubes.php',{estado: $(this).val() }, 
+		$.post('auxi/clubes.php',{estado: $('#estado').val() }, 
 
 		function(resposta){
 
 			$('#clube').html(resposta);
+			$(document).ready(function() { Selecionar('clube', "<?php if(isset($usuario) && $usuario)echo $campo['clube'];?>") });
 
 		});
 
 	});
-	$('#estado').val(function() {});
 	
+	if(cidade && clube){
+		$(document).ready(function() { 
+			
+			//$(document).ready(function() { Selecionar('clube', "<?php //if(isset($usuario) && $usuario)echo $campo['clube'];?>") });
 	
+	 });
+		
+	}
+	
+			
+}
+ 
+ 
+ $(document).ready( function() {
+		
 	$('#matricula').change(function() {
 		$.post('auxi/verificar.php',{matricula: $(this).val() }, 
 		function(resposta){
@@ -49,57 +61,62 @@
 		});
 
 	});
-	
 
  });  
+ 
+
+ 
 
 </script>
 <meta charset="utf-8">
 </head>
 
 <body>
-<div id="div_oculta" style="display:none">
-	<form id="form_oculta" name="form_oculta" action="" method="post" >
-    	<input id="id" type="text" name="id" value="">
-    </form>
-</div>
+
 <?php
+	$usuario = false;
 	if(isset($_POST['id']) && $_POST['id']){
+		
 		include_once("auxi/conn.php"); new Conecta();
-	 	if(is_numeric($_POST['id'])) echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";else echo "nnnnnnnnnnnnnnnnnnnnn";
-		$sql = "SELECT * FROM xv_convencao WHERE id = {$_POST['id']}";
+		
+		$id =  preg_replace("/[^0-9\s]/", "", $_POST['id']);
+	 	$sql = "SELECT * FROM xv_convencao WHERE id = $id";
 		$query = mysql_query($sql) or die("Error in query: $sql. ".mysql_error());
+		
 		if(mysql_num_rows($query) > 0){
 			$campo = mysql_fetch_array($query);
-			echo "EANAKJAJ = " . $sql;
+			$usuario = true;
 		}
-		else echo $sql;
-		echo "<br>".$id;
 	}
 ?>
+
+<div id="div_oculta" style="display:none">
+	<form id="form_oculta" name="form_oculta" action="" method="post" >
+    	<input id="id" type="text" name="id" value="" onClick="Estado('<?php if($usuario)echo $campo['cidade'];?>', '<?php if($usuario)echo $campo['clube'];?>')">
+    </form>
+</div>
 
 <div id="div_formulario">
   <form id="formulario" name="formulario" action="auxi/salvar.php" method="POST" onsubmit="return validaForm();">
     <table id="tabela" align="center" border="0" width="100%" >
       <tr>
         <td width="30%" class="col-1">Nome Completo</td>
-        <td width="70%"><input id="nome" name="nome" type="text" maxlength="100" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" required /></td>
+        <td width="70%"><input id="nome" name="nome" type="text" maxlength="100" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" value="<?php if($usuario)echo $campo['nome'];?>" required /></td>
       </tr>
       <tr>
         <td class="col-1">Número de Matricula</td>
-        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" />
+        <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" value="<?php if($usuario)echo $campo['matricula'];?>" required />
           <br>
           <span>Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span></td>
       </tr>
       <tr>
         <td class="col-1">CPF</td>
-        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" required/>
-          <br>
-          <span class="ocultar" id="span_cpf">Di</span></td>
+        <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" value="<?php if($usuario)echo $campo['cpf'];?>" required/>
+         </td>
       </tr>
       <tr>
         <td class="col-1">E-mail</td>
-        <td><input id="email" name="email" type="email" maxlength="50" style="width:50%;" onKeyUp="minuscula(this)" required/></td>
+        <td><input id="email" name="email" type="email" maxlength="50" style="width:50%;" onKeyUp="minuscula(this)" value="<?php if($usuario)echo $campo['email'];?>" required/></td>
       </tr>
       <tr>
         <td class="col-1">Data de Nascimento</td>
@@ -115,34 +132,35 @@
       </tr>
       <tr>
         <td class="col-1" id="end">Endereço</td>
-        <td id="enderec"><input id="endereco" name="endereco" type="text" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%"/>
+        <td id="enderec"><input id="endereco" name="endereco" type="text" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%" value="<?php if($usuario)echo $campo['endereco'];?>"/>
           <span>Endereço</span></td>
       </tr>
       <tr>
         <td></td>
-        <td id="compl"><input id="complemento" name="complemento" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%;"/>
+        <td id="compl"><input id="complemento" name="complemento" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%;" value="<?php if($usuario)echo $campo['complemento'];?>"/>
           <span>Complemento</span></td>
       </tr>
       <tr>
         <td class="col-1">Estado</td>
-        <td><select id="estado" name="estado" required>
+        <td><select id="estado" name="estado" onChange="Estado(false, false);" required>
             <option value=""></option>
             <option value="AMAPÁ">AMAPÁ</option>
-            <option value="MARANHÃO">MARANHÃO</option>
-            <option value="PARÁ">PARÁ</option>
+            <option value="MARANHÃO" >MARANHÃO</option>
+            <option value="PARÁ" >PARÁ</option>
             <option value="PIAUÍ">PIAUÍ</option>
           </select></td>
+          <?php if($usuario){ ?> <script>  Selecionar('estado', "<?php echo $campo['estado'];?>") </script> <?php }?>
       </tr>
       <tr>
         <td class="col-1">Cidade</td>
         <td><select id="cidade" name="cidade" size="1" style="min-width:100px" required >
-            <option id="padrao" value="" selected></option>
+        	<option id="padrao" value="" >SELECIONE UM ESTADO</option>    
           </select></td>
       </tr>
       <tr>
         <td class="col-1">Clube</td>
         <td><select id="clube" name="clube" style="min-width:100px" required>
-            <option value=""></option>
+            <option value="">SELECIONE UM ESTADO</option>
           </select></td>
       </tr>
       <tr>
@@ -152,6 +170,7 @@
             <option value="SIM">SIM</option>
             <option value="NÃO">NÃO</option>
           </select>
+           <?php if($usuario){ ?> <script>  Selecionar('delegado', "<?php echo $campo['delegado'];?>") </script> <?php }?>
           <br>
           <span id="span_delegado">Ao Delegado é obrigatório a apresentação da carta de credenciamento e copia das cartas internacional e distrital dos dois semestres anteriores para votação no dia do evento.</span></td>
       </tr>
@@ -165,10 +184,11 @@
             <option value="LEO">LEO</option>
             <option value="OUTRO">OUTRO</option>
           </select></td>
+           <?php if($usuario){ ?> <script>  Selecionar('cargo_clube', "<?php echo $campo['cargo_clube'];?>") </script> <?php }?>
       </tr>
       <tr class="ocultar" id="qual_clube">
         <td class="col-1">Qual ?</td>
-        <td><input id="outro_cargo_clube" name="outro_cargo_clube" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" /></td>
+        <td><input id="outro_cargo_clube" name="outro_cargo_clube" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" value="<?php if($usuario)echo $campo['qual_cc'];?>"/></td>
       </tr>
       <tr>
         <td class="col-1">Cargo no Distrito</td>
@@ -194,10 +214,11 @@
             <option value="VICE PRESIDENTE">VICE PRESIDENTE</option>
             <option value="OUTRO">OUTRO</option>
           </select></td>
+           <?php if($usuario){ ?> <script>  Selecionar('cargo_distrito', "<?php echo $campo['cargo_distrito'];?>") </script> <?php }?>
       </tr>
       <tr class="ocultar" id="qual_distrito" >
         <td class="col-1">Qual ?</td>
-        <td><input id="outro_cargo_distrtito" name="outro_cargo_distrtito" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" /></td>
+        <td><input id="outro_cargo_distrtito" name="outro_cargo_distrtito" type="text" maxlength="30" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:40%" value="<?php if($usuario)echo $campo['qual_cd'];?>"/></td>
       </tr>
       <tr>
         <td class="col-1">CL Melvin Jones ?</td>
@@ -206,6 +227,7 @@
             <option value="SIM">SIM</option>
             <option value="NÃO">NÃO</option>
           </select></td>
+           <?php if($usuario){ ?> <script>  Selecionar('cl_mj', "<?php echo $campo['cl_mj'];?>") </script> <?php }?>
       </tr>
       <tr>
         <td class="col-1">Prefixo</td>
@@ -217,6 +239,7 @@
             <option value="CCLEO">CCLEO</option>
             <option value="Convidado">Convidado</option>
           </select></td>
+           <?php if($usuario){ ?> <script>  Selecionar('prefixo', "<?php echo $campo['prefixo'];?>") </script> <?php }?>
       </tr>
       <tr>
         <td class="col-1">Tamanho Camisa</td>
@@ -227,7 +250,9 @@
             <option value="G">G</option>
             <option value="GG">GG</option>
           </select></td>
+           <?php if($usuario){ ?> <script>  Selecionar('camisa', "<?php echo $campo['camisa'];?>") </script> <?php }?>
       </tr>
+      <?php if($usuario){ ?> <script>  mostrarQual();  document.getElementById("id").click();</script> <?php }?>
       <tr>
         <td></td>
         <td><input id="botao" type="submit" value="Enviar" /></td>
