@@ -3,7 +3,7 @@ extract ($_POST);
 
 if($estado == "PARÁ"){
 $resposta = "
-	<option class='para' value='' selected></option>
+	<option class='para' value='' ></option>
 	<option class='para' value='ABAETETUBA'>ABAETETUBA</option>
 	<option class='para' value='ALTAMIRA'>ALTAMIRA</option>
 	<option class='para' value='BELÉM'>BELÉM</option>
@@ -31,7 +31,7 @@ $resposta = "
 
 if($estado == "MARANHÃO"){
 $resposta = "
-	<option class='maranhao' value='' selected></option>
+	<option class='maranhao' value='' ></option>
 	<option class='maranhao' value='CAXIAS'>CAXIAS</option>
 	<option class='maranhao' value='CODÓ'>CODÓ</option>
 	<option class='maranhao' value='SANTA INÊS'>SANTA INÊS</option>
@@ -42,18 +42,18 @@ $resposta = "
 
 if($estado == "PIAUÍ"){
 $resposta = "	
-	<option class='piaui' value='' selected></option>
+	<option class='piaui' value='' ></option>
 	<option class='piaui' value='CAMPO MAIOR'>CAMPO MAIOR</option>
 	<option class='piaui' value='FLORIANO'>FLORIANO</option>
 	<option class='piaui' value='LUÍS CORREIA'>LUÍS CORREIA</option>
 	<option class='piaui' value='PARNAIBA'>PARNAIBA</option>
 	<option class='piaui' value='PICOS'>PICOS</option>
-	<option class='piaui' value='TERESINA '>TERESINA</option> ";
+	<option class='piaui' value='TERESINA'>TERESINA</option> ";
 }
 
 if($estado == "AMAPÁ"){
 $resposta = "	
-	<option class='amapa' value='' selected></option>
+	<option class='amapa' value='' ></option>
 	<option class='amapa' value='MACAPÁ'>MACAPÁ</option> ";
 }
 
