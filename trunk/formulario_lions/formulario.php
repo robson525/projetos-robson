@@ -44,10 +44,6 @@ function Estado(cidade, clube){
 
  $(document).ready( function() {
 	
-	$('#botao').click(function() {
-		alert(validaForm());
-	});
-	
 	
 	//********************** VERIFICA SE MATRICULA JÁ EXISTE ************************************
 	$('#matricula').change(function() {
@@ -129,7 +125,7 @@ function Estado(cidade, clube){
 </div>
 
 <div id="div_formulario">
-  <form id="formulario" name="formulario" action="auxi/salvar.php" method="POST">
+  <form id="formulario" name="formulario" action="auxi/salvar.php" method="POST" onSubmit="return validaForm();">
     <table id="tabela" align="center" border="0" width="100%" >
       <tr>
         <td width="30%" class="col-1">Nome Completo <span class="span_obg">*</span></td>
