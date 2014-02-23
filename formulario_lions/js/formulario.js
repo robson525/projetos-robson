@@ -79,7 +79,8 @@ function validaForm(){
 		}
 		document.getElementById('cpf').disabled = false;
 	}
-	return retorno;
+	if (retorno == false)
+		return false;
 }
 
 //*****************************
