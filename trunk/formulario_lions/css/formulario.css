@@ -29,6 +29,10 @@ select{
 	color:#555555;
 	text-shadow:1px 1px 5px #666;
 }
+.span_obg{
+	color:#F03;
+	font-size:12px;
+}
 
 #tabela #enderec{
 	padding-bottom:0;	
@@ -38,13 +42,19 @@ select{
 	padding-top:0px;	
 }
 
-#tabela td span{ 
+.span_pequeno{ 
 	font-size:9px;
 }
 
-#tabela #span_delegado{
+#span_delegado{
 	font-size:12px;
 	display:none;
+}
+
+#cadastrado{
+	color:#F00;
+	text-shadow: 1px 1px 1px #666666;
+	display:none;		
 }
 
 .ocultar {
