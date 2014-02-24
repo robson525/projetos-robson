@@ -6,10 +6,6 @@ if(isset($_GET['sair']) && $_GET['sair']){
 	exit();
 }
 
-if(!isset($_SESSION['id_admin'])){
-	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
-	exit();
-}
 ?>
 <!doctype html>
 <html>
