@@ -1,10 +1,10 @@
 ﻿<?php 
+	if(!$_POST){
+		echo "Acesso Negado";
+		exit();
+	}
 	include "conn.php";
 	$conecta = new Conecta();
-	
-	if(!$_POST){
-		header('Location: http://www.lionsdla6.com.br');
-	}
 		
 	extract ($_POST);
 	
@@ -25,6 +25,10 @@
 	elseif($botao == "Atualizar"){
 		$sql = "UPDATE xv_convencao SET nome='$nome', matricula='$matricula', email='$email', nascimento='$nascimento', endereco='$endereco', complemento='$complemento', estado='$estado', cidade='$cidade', clube='$clube', delegado='$delegado', cargo_clube='$cargo_clube', qual_cc= '$outro_cargo_clube', cargo_distrito='$cargo_distrito', qual_cd='$outro_cargo_distrtito', cl_mj='$cl_mj', prefixo='$prefixo', camisa='$camisa'
 				WHERE cpf = '$cpf';";
+	}
+	else {
+		echo "Acesso Negadooo";
+		exit();
 	}
 	
 	$query = mysql_query($sql);

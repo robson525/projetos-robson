@@ -22,7 +22,15 @@ $(function($) {
 			// Se não retornado nenhum erro
 			if (resposta.length <= 1){
 				// Redirecionando
-				window.location = 'admin.php';				
+				$.ajax({			
+					type:"GET",
+					url: "admin.php",
+					data: "login=true",
+					
+					success:function(data){
+						$("body").html(data);
+					}
+				});			
 			}else{
 				// Exibimos a mensagem de erro
 				$('#div_erro').html(resposta);

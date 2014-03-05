@@ -61,7 +61,7 @@ select{
 	display:none;
 }
 
-#botao{
+.botao{
 	cursor:pointer; 
 	text-transform:capitalize;	
 	padding:1px 10px 1px 10px;

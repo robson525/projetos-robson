@@ -39,6 +39,16 @@ function Delegado(){
 	}
 }
 
+//*************** Exibe Mensagem de Atualização da Inscrição ******************
+ function testeMatCpf(){
+	if (matTeste == true && cpfTeste == true){
+		document.getElementById('cadastrado').style.display = 'table-row';
+	}
+	else{
+		document.getElementById('cadastrado').style.display = 'none';
+	}
+}
+
 //**************************************************************************
 
 function validaForm(){
@@ -79,8 +89,11 @@ function validaForm(){
 		}
 		document.getElementById('cpf').disabled = false;
 	}
+	
 	if (retorno == false)
 		return false;
+	else
+		return true;
 }
 
 //*****************************
