@@ -3,22 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 10-Jan-2014 às 15:37
+-- Data de Criação: 05-Mar-2014 às 02:56
 -- Versão do servidor: 5.6.12-log
 -- versão do PHP: 5.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
 -- Base de Dados: `lionsdla6`
 --
+CREATE DATABASE IF NOT EXISTS `lionsdla6` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `lionsdla6`;
 
 -- --------------------------------------------------------
 
@@ -26,10 +22,11 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `xv_convencao`
 --
 
+DROP TABLE IF EXISTS `xv_convencao`;
 CREATE TABLE IF NOT EXISTS `xv_convencao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `matricula` int(11) DEFAULT NULL,
+  `matricula` varchar(11) NOT NULL,
   `cpf` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `nascimento` date NOT NULL,
@@ -48,8 +45,11 @@ CREATE TABLE IF NOT EXISTS `xv_convencao` (
   `camisa` varchar(5) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+--
+-- Extraindo dados da tabela `xv_convencao`
+--
+
+INSERT INTO `xv_convencao` (`id`, `nome`, `matricula`, `cpf`, `email`, `nascimento`, `endereco`, `complemento`, `estado`, `cidade`, `clube`, `delegado`, `cargo_clube`, `qual_cc`, `cargo_distrito`, `qual_cd`, `cl_mj`, `prefixo`, `camisa`) VALUES
+(2, 'ROBSON CLAUDIO VALENTE DA SILVA', '0000000000', '847.012.002-63', 'robson.cao@hotmail.com', '1990-05-06', 'TV 25 DE JUNHO', '525', 'PARÁ', 'BELÉM', 'LIONS CLUBE DE BELÉM BATISTA CAMPOS', 'SIM', 'OUTRO', 'OUTRO CARGO', 'OUTRO', 'OUTRO CARGO', 'SIM', 'Cal', 'P');

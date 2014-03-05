@@ -1,7 +1,5 @@
-<?php @session_start();
-if(isset($_GET['sair']) && $_GET['sair']){
-	session_unset();
-	session_destroy();
+<?php
+if((isset($_GET['sair']) && $_GET['sair']) || !isset($_GET['login']) ){
 	echo "<meta http-equiv='refresh' content='0; url=index.php'>";	
 	exit();
 }

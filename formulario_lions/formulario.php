@@ -85,14 +85,7 @@ function Estado(cidade, clube){
 
 
 });  
- function testeMatCpf(){
-	if (matTeste == true && cpfTeste == true){
-		document.getElementById('cadastrado').style.display = 'table-row';
-	}
-	else{
-		document.getElementById('cadastrado').style.display = 'none';
-	}
-}
+
  
 
 </script>
@@ -292,7 +285,7 @@ function Estado(cidade, clube){
       </tr>
       <tr>
         <td></td>
-        <td><input id="botao" type="button" name="botao" value="<?php if($usuario) echo "Atualizar";else echo"Enviar"; ?>" /></td>
+        <td><input id="botao" type="submit" name="botao" value="<?php if($usuario) echo "Atualizar";else echo"Enviar"; ?>" /></td>
       </tr>
     </table>
   </form>
@@ -305,85 +298,41 @@ function monta_dia() {
 	$option = "<option value=''>Dia</option>";
 
 	for($i = 1; $i <= 31; $i++) {			
-
 		$option .= "\t<option value=\"". sprintf("%02d", $i) ."\">".sprintf("%02d", $i)."</option>\n";	
-
 	} 	
-
 	return $option;	
-
 }
-
-
 
 function monta_mes() {
 
 	$option  = "<option value=''>Mês</option>";
-
 	$option .= "<option value='01'>Janeiro</option>";
-
 	$option .= "<option value='02'>Fevereiro</option>";
-
 	$option .= "<option value='03'>Março</option>";	
-
 	$option .= "<option value='04'>Abril</option>";	
-
 	$option .= "<option value='05'>Maio</option>";	
-
 	$option .= "<option value='06'>Junho</option>";	
-
 	$option .= "<option value='07'>Julho</option>";	
-
 	$option .= "<option value='08'>Agosto</option>";	
-
 	$option .= "<option value='09'>Setembro</option>";	
-
 	$option .= "<option value='10'>Outubro</option>";	
-
 	$option .= "<option value='11'>Novembro</option>";	
-
 	$option .= "<option value='12'>Dezembro</option>";	
-
-
 
 	return $option;	
 
-
-
 }
 
-
-
-
-
-
-
 function monta_ano() {
-
-
 
 	$option = "<option value=''>Ano</option>";
 
 	for($i = 2010; $i >= 1950; $i--) {			
-
 		$option .= "\t<option value=\"". sprintf("%02d", $i) ."\">".sprintf("%02d", $i)."</option>\n";	
-
 	} 	
 
-
-
 	return $option;	
-
 }
-
-
-
-function montaCidade(){
-
-	echo "<script>alert('OI')</script>";
-
-}
-
 
 
 ?>

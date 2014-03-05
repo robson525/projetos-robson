@@ -1,4 +1,4 @@
-﻿<?php @session_start();
+﻿<?php 
 if(!isset($_POST['ordem']) && !isset($_GET['padrao'])){
 	echo "<meta http-equiv='refresh' content='0; url=admin.php'>";	
 	exit();
