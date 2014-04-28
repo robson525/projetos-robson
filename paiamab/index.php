@@ -1,75 +1,49 @@
-﻿<?php @session_start();
-	
-	if($_SESSION){ 
-		if(isset($_GET['buscar']) && $_GET['buscar'])
-			$_SESSION['id_ficha'] = $_GET['buscar'];
-		header('Location: login.php');
-	}
-
+﻿<?php session_name('paiamab');
+	  session_start();	
+	  
+	  if(isset($_SESSION['data_sessao'])){
+		  $dia_s =  date('d', strtotime($_SESSION['data_sessao']));
+		  $mes_s =  date('m', strtotime($_SESSION['data_sessao']));
+		  $ano_s =  date('Y', strtotime($_SESSION['data_sessao']));
+		  $dia = date('d'); $mes = date('m'); $ano = date('Y');
+		  
+		  if(($ano - $ano_s != 0)||($mes - $mes_s != 0)||($dia - $dia_s != 0)  ){
+			  header('Location: sair.php');
+		  }
+		  
+	  }
 ?>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Tela de Login</title>
-<link href="css/login.css" rel="stylesheet" type="text/css"/>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/jquery.form.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-// Quando carregado a página
-$(function($) {
-	
-	// Tratamento de Login de Usuario
-	$('#form_login').submit(function() {
-
-		// Limpando mensagem de erro
-		$('#div_erro').html('');
-
-		// Enviando informações do formulário via AJAX
-		$(this).ajaxSubmit(function(resposta) {
-			// Se não retornado nenhum erro
-			if (resposta.length <= 1){
-				// Redirecionando
-				window.location = 'login.php';				
-			}else{
-				// Exibimos a mensagem de erro
-				$('#div_erro').html(resposta);
-			}
-		});
-		// Retornando false para que o formulário não envie as informações da forma convencional
-		return false;
-	}); // Final Tratamento do Formulario
-	
-	
-});
-</script>
-
+    <link href="css/login.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery.form.js" type="text/javascript"></script>
 </head>
 
-
 <body>
+<?php
+	
+	if(isset($_SESSION['id_usuario'])){
+		include ('principal.php');	
+	}
+	
+	else{
+		include ('login.php');	
+	}
+		
 
-<div id="div_erro"> </div>
-<div id="div_login">
 
-	<form id="form_login" name="form_login" action="validacao/validaLogin.php" method="post">
-    	<table id="tab_login" border="0">
-        	<tr>
-            	<td>Login: </td> 
-                <td><input id="login" name="login" type="text" /></td>
-            </tr>
-            <tr>
-            	<td>Senha: </td>
-                <td><input id="senha" name="senha" type="password" /> </td>
-            </tr>
-            <tr>
-            	<td></td>
-                <td><input id="submit" name="submit" type="submit" value="Logar" style="cursor:pointer; "/> </td>
-            </tr>
-        </table>
-    </form>
-</div>
-
+/*
+	if($_SESSION){ 
+		if(isset($_GET['buscar']) && $_GET['buscar'])
+			$_SESSION['id_ficha'] = $_GET['buscar'];
+		header('Location: login.php');
+	}
+	
+*/
+?>
 </body>
 </html>
