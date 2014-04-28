@@ -26,7 +26,7 @@ class Usuario{
 		
 	public function validaUsuario($log, $sen){
 		
-		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha COLLATE utf8_bin = '$sen'";
+		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha COLLATE utf8_bin = '".md5($sen)."'";
 		
 		$query = mysql_query($sql);
 				
@@ -70,7 +70,12 @@ class Usuario{
 			return false;		
 	}
 	
-	
+/* */
+	public function set_ultima_sessao($date){
+		$sql = "UPDATE $this->tabela SET ultima_sessao = '$date' WHERE id_usuario = '$this->ID';";
+		$query = mysql_query($sql) or die(mysql_error($this->conecta).'<br>'.$sql);
+		echo $sql;
+	}
 	
 
 /* ----- GETs ----- */
