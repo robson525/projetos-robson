@@ -5,8 +5,9 @@
 		  $dia_s =  date('d', strtotime($_SESSION['data_sessao']));
 		  $mes_s =  date('m', strtotime($_SESSION['data_sessao']));
 		  $ano_s =  date('Y', strtotime($_SESSION['data_sessao']));
+		  // data atual
 		  $dia = date('d'); $mes = date('m'); $ano = date('Y');
-		  
+		  // Caso a data do ultimo acesso seja diferente do dia atual, ele destroi a sessão;
 		  if(($ano - $ano_s != 0)||($mes - $mes_s != 0)||($dia - $dia_s != 0)  ){
 			  header('Location: sair.php');
 		  }
@@ -25,11 +26,11 @@
 
 <body>
 <?php
-	
+
 	if(isset($_SESSION['id_usuario'])){
-		include ('principal.php');	
+		include ('principal.php');		
 	}
-	
+		
 	else{
 		include ('login.php');	
 	}

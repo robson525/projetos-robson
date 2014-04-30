@@ -135,9 +135,10 @@ select {
 }
 #tab_buscar #input_busca {
 	cursor:pointer;
+	height:25px;
 }
 #div_listar{
-	display:none;	
+	
 }
 
 
@@ -182,6 +183,7 @@ select {
 
 #div_principal {
 	font-weight:bold;
+	padding-bottom:10px;
 	margin-bottom: 20px;
 	
 }
