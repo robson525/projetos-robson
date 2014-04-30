@@ -64,19 +64,33 @@ class Prontuario {
 	Só para formulario Ficha Cadastral*/
 	public function buscarFicha($nome, $n_controle){
 		if($nome != '' && $nome != NULL && ($n_controle == '' || $n_controle ==NULL) ){
-			$sql = 	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%';";
+			$sql1 = 	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%';";
+			$sql2 = 	"SELECT * FROM $this->tabela WHERE nome LIKE '%".$nome."%' AND nome NOT LIKE '$nome%';";
+			$query[0] = mysql_query($sql1);
+			$query[1] = mysql_query($sql2);
+			if ( mysql_num_rows($query[0])  < 1 &&  mysql_num_rows($query[1])  < 1)
+				return false;
 		}
 		else if(($nome == '' || $nome == NULL) && $n_controle != '' && $n_controle != NULL ){
-			$sql = 	"SELECT * FROM $this->tabela WHERE n_controle = '$n_controle';";
+			$sql1 = 	"SELECT * FROM $this->tabela WHERE n_controle = '$n_controle';";
+			$query[0] = mysql_query($sql1);
+			if ( mysql_num_rows($query[0])  < 1)
+				return false;
 		}
-		else
-			$sql = 	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%' OR n_controle = '$n_controle';";
-			
-		$query = mysql_query($sql);
-		if (mysql_num_rows($query)  < 1)
-			return false;
-		else
-			return $query;
+		else{
+			$sql1 = "SELECT * FROM $this->tabela WHERE n_controle = '$n_controle'";
+			$sql2 =	"SELECT * FROM $this->tabela WHERE nome LIKE '$nome%' AND n_controle != '$n_controle';;";
+			$sql3 = "SELECT * FROM $this->tabela WHERE nome LIKE '%".$nome."%'AND nome NOT LIKE '$nome%' AND n_controle != '$n_controle';";
+			$query[0] = mysql_query($sql1);
+			$query[1] = mysql_query($sql2);
+			$query[2] = mysql_query($sql3);
+			if ( mysql_num_rows($query[0])  < 1 &&  mysql_num_rows($query[1])  < 1 &&  mysql_num_rows($query[2])  < 1)
+				return false;
+		}
+		
+		$erro = mysql_error();
+		if(!empty($erro)) die("Erro: Query de Busca.".$erro);
+		return $query;
 	}
 
 	

@@ -1,6 +1,6 @@
 <?php 
 		//Verifica se os Dados de busca Estão Preenchidos
-		if(!$_POST || !$_POST["buscar_nome"]){
+		if(!isset($_SESSION['id_usuario'])){
 			echo "Acesso Negado";
 			echo "<meta charset='utf-8' http-equiv='refresh' content='1; url=index.php'>";
 			exit();
@@ -17,37 +17,31 @@
 		
 		if ($query == false){
 			echo "Nenhum Resultado Encontrado";
-			exit(); // PARA A AEXECUÇÃO DO ARQUIVO
 		}
-		
-?>
+		else{
+		?>
+			<center><h2>Resultado</h2></center>
+            <table id="tab_result_busca" align="center" border="1" width="75%">
+                <tr>
+                    <td width="20%">Nº de Controle: </td>
+                    <td>Nome: </td>
+                    <td width="20%">&nbsp;</td>
+                </tr>
+            <?php 
+                foreach($query as $query){
+					while ($busca = mysql_fetch_array($query)){ 	$id = $busca['id_ficha'];		?>
+						<tr>
+							<td><?php echo $busca['n_controle'] ?></td>
+							<td><?php echo $busca['nome'] ?></td>
+							<td><a href="index.php?buscar=<?php echo $id; ?>">Selecionar</a> </td>
+						</tr>
+			<?php 	}
+				}
+                ?></table>
+                
+            <?php die();
+       }?>
 
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-	
-
-</head>
-<body>
-	<center><h2>Resultado</h2></center>
-	<table id="tab_result_busca" align="center" border="1" width="75%">
-		<tr>
-        	<td width="20%">Nº de Controle: </td>
-            <td>Nome: </td>
-            <td width="20%">&nbsp;</td>
-        </tr>
-	<?php 
-		while ($busca = mysql_fetch_array($query)){ 	$id = $busca['id_ficha'];		?>
-			<tr>
-            	<td><?php echo $busca['n_controle'] ?></td>
-            	<td><?php echo $busca['nome'] ?></td>
-                <td><a href="index.php?buscar=<?php echo $id; ?>">Selecionar</a> </td>
-            </tr>
-<?php	}
-	?></table>
-</body>
-</html>
 
 
 

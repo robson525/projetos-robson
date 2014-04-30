@@ -5,7 +5,6 @@
 		exit();
 	}
 	$_SESSION['data_sessao'] = date('Y-m-d H:i:s');
-	echo $_SESSION['data_sessao'];
 	require_once('classes/class.usuario.php');
 	$usuario = new Usuario();
 	
@@ -13,6 +12,10 @@
 	
 	if(isset($_SESSION['id_ficha']) && $_SESSION['id_ficha']){
 		echo "ID FICHA = ".$_SESSION['id_ficha'];
+	}
+	
+	if((isset($_POST["buscar_ncontrole"]) && $_POST["buscar_ncontrole"]) || (isset($_POST["buscar_nome"]) && $_POST["buscar_nome"])){
+		$busca = true;
 	}
 
 ?>
@@ -77,7 +80,7 @@ $(document).ready( function() {
       </tr>
       <tr>
         <td class="td_esq" >Ultimo Acesso: </td>
-        <td class="td_dir" ><?php echo $usuario->get_ultima_sessao();?></td>
+        <td class="td_dir" ><?php echo date('d/m/Y', strtotime($usuario->get_ultima_sessao()))." às ".date('H:i:s', strtotime($usuario->get_ultima_sessao()));?></td>
       </tr>
     </table>
   </div>
@@ -86,26 +89,34 @@ $(document).ready( function() {
 </div>
 
 
-<div id="div_buscar" class="div_padrao">
-  <form id="formBuscar"  action="buscar.php" method="POST">
+<div id="div_buscar" class="div_padrao" style="display:<?php echo (isset($busca)&&$busca==true)?"block":"none"?>">
+  <form id="formBuscar"  action="index.php" method="POST">
     <table id="tab_buscar" border="0" align="center">
       <tr>
         <td rowspan="3"><h2>Buscar</h2></td>
         <td class="td_esq" >Nº de Controle: </td>
-        <td class="td_dir" ><input id="buscar_ncontrole" name="buscar_ncontrole" type="text" /></td>
-        <td rowspan="3" id="botao"><input id="input_busca" name="input_busca" type="submit" value="Buscar" /></td>
+        <td class="td_dir" ><input id="buscar_ncontrole" name="buscar_ncontrole" type="text" value="<?php echo (isset($_POST["buscar_ncontrole"])&&$_POST["buscar_ncontrole"]==true)?$_POST["buscar_ncontrole"]:""?>" /></td>
+      </tr>
+      <tr>
+      	<td colspan="2">OU</td>
+        <td id="botao"><input id="input_busca" name="input_busca" type="submit" value="Buscar" /></td>
       </tr>
       <tr>
         <td class="td_esq" >Nome: </td>
-        <td class="td_dir" width="250px"><input id="buscar_nome" name="buscar_nome" type="text" style="width:100%"/></td>
+        <td class="td_dir" width="250px"><input id="buscar_nome" name="buscar_nome" type="text" value="<?php echo (isset($_POST["buscar_nome"])&&$_POST["buscar_nome"]==true)?$_POST["buscar_nome"]:""?>" style="width:100%"/></td>
       </tr>
     </table>
+    <br>
   </form>
+    <div id="div_listar" >
+        <?php
+            if(isset($busca)&&$busca==true)
+                include "buscar.php";
+        ?>
+    </div>
 </div>
 
-<div id="div_listar" class="div_padrao">
 
-</div>
 
 
 <div id="div_menu">
