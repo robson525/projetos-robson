@@ -21,13 +21,16 @@ class Prontuario {
 /*  TRATAMENTO DO FORMULARIO Ficha cadastral    */
 
 	/* Seta Valores do Vetor $ficha para o $formulari o*/
-	public function addFicha($ficha){
+	public function addFicha($ficha, $id_usuario){
 		
 		reset($ficha); 
 		while (list($key, $val) = each($ficha)) {  
 			$this->formulario[$key] = $ficha[$key];
 		}
+		$this->formulario['id_usuario'] = $id_usuario;
+		return $this->insertFicha();
 	}
+	
 	/* Insere a Ficha Cadastral no banco de dados 
 	- Retorna False se a Query funcionar */
 	public function insertFicha(){
@@ -54,7 +57,7 @@ class Prontuario {
 		if(!$query)
 			return mysql_error();
 		else
-			return false;
+			return true;
 		
 		
 
@@ -97,11 +100,6 @@ class Prontuario {
 /* ------------------------ Fim do Tratamento da  Ficha Cadastral ------------------------ */	
 /* --------------------------------------------------------------------------------------- */
 
-	
-	public function setIdUsuario($id){
-		$this->formulario['id_usuario'] = $id;
-	}
-	
 	
 	public function getFormulario(){
 		return $this->formulario;	

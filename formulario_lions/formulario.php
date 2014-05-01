@@ -327,7 +327,7 @@ function monta_ano() {
 
 	$option = "<option value=''>Ano</option>";
 
-	for($i = 2010; $i >= 1950; $i--) {			
+	for($i = 2013; $i >= 1900; $i--) {			
 		$option .= "\t<option value=\"". sprintf("%02d", $i) ."\">".sprintf("%02d", $i)."</option>\n";	
 	} 	
 

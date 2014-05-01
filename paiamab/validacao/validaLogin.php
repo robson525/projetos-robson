@@ -1,6 +1,6 @@
 ﻿<?php session_name('paiamab');
 	  session_start();	
-	if(!$_POST || !$_POST["login"] || !$_POST["senha"]){
+	if(!$_POST || (!$_POST["login"] && !$_POST["senha"])){
 		echo "Acesso Negado";
 		echo "<meta charset='utf-8' http-equiv='refresh' content='1; url=index.php'>";
 		exit();

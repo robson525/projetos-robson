@@ -9,6 +9,7 @@
 	// verifica se foi enviado um arquivo 
 	if(!isset($_FILES['arquivo']['name']) && $_FILES["arquivo"]["error"] != 0){
 		echo "Erro ao enviar arquivo. Por favor, tente novamente.";
+		exit();
 	}
 
     $nome = $_FILES['arquivo']['name'];
@@ -50,16 +51,17 @@
 	$conecta = new Conecta();
 	extract($_POST);
 	
-	$sql = "SELECT * FROM xv_convencao WHERE matricula = '$matricula' AND cpf = '$cpf';";
-	$query = mysql_query($sql) or die("SQL: ". $sql ."<br>Erro na Query : ".mysql_error());
-	
+	$query = $conecta->pagamento_verifica($matricula, $cpf);
+	if(!$query){
+		 echo "Matricula ou CPF Invalido.<br/>";
+		 exit();
+	}
 	if(mysql_num_rows($query) == 0){
 		echo "Matricula ou CPF ainda não estão cadastrados.<br />";
 		exit();
 	}
 	
-	$sql = "UPDATE xv_convencao SET comprovante = '$novoNome' WHERE matricula = '$matricula' AND cpf = '$cpf';";
-	$query = mysql_query($sql) or die("SQL: ". $sql ."<br>Erro na Query : ".mysql_error());
+	$conecta->pagamento_comprovante($novoNome, $matricula, $cpf);
 	
 	// tenta mover o arquivo para o destino
 	if( @move_uploaded_file( $arquivo_tmp, $destino  ) == false){

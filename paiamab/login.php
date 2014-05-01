@@ -43,7 +43,7 @@ $(function($) {
             </tr>
             <tr>
             	<td></td>
-                <td><input id="submit" name="submit" type="submit" value="Logar" style="cursor:pointer; "/> </td>
+                <td><input id="submit" name="submit" class="bot_submit" type="submit" value="Logar"/> </td>
             </tr>
         </table>
     </form>

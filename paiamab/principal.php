@@ -19,6 +19,7 @@
 	}
 
 ?>
+<link href="css/formularios.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 $(document).ready( function() {
 	
@@ -55,14 +56,14 @@ $(document).ready( function() {
 	function botBuscar(){
 		display = document.getElementById('div_buscar').style.display;
 		if(display == "" || display == "none"){
-			document.getElementById('div_buscar').style.display = "block";
+			$('#div_buscar').show('slow');
 			if(busca == true)
-				document.getElementById('div_formularios').style.display = "none";
+				$('#div_formularios').hide('fast');
 		}
 		else{
-			document.getElementById('div_buscar').style.display = "none";
+			$('#div_buscar').hide('slow');
 			if(busca == true)
-				document.getElementById('div_formularios').style.display = "block";
+				$('#div_formularios').show('fast');
 			
 		}
 	}
@@ -92,7 +93,7 @@ $(document).ready( function() {
 </div>
 
 
-<div id="div_buscar" class="div_padrao" style="display:<?php echo (isset($busca)&&$busca==true)?"block":"none"?>">
+<div id="div_buscar" class="div_padrao" style="display:<?php echo (isset($busca) && $busca==true)?"block":"none"?>">
   <form id="formBuscar"  action="index.php" method="POST">
     <table id="tab_buscar" border="0" align="center">
       <tr>
@@ -102,7 +103,7 @@ $(document).ready( function() {
       </tr>
       <tr>
       	<td colspan="2">OU</td>
-        <td id="botao"><input id="input_busca" name="input_busca" type="submit" value="Buscar" /></td>
+        <td id="botao"><input id="input_busca" name="input_busca" class="bot_submit" type="submit" value="Buscar" /></td>
       </tr>
       <tr>
         <td class="td_esq" >Nome: </td>
@@ -125,16 +126,16 @@ $(document).ready( function() {
     <div id="div_menu">
       <table id="tab_menu" border="0" align="center">
         <tr>
-          <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
-          <td class="td_menu" id="anexo1">Anexo 1</td>
-          <td class="td_menu" id="anexo2">Anexo 2</td>
-          <td class="td_menu" id="anexo3">Anexo 3</td>
-          <td class="td_menu" id="anexo4">Anexo 4</td>
-          <td class="td_menu" id="anexo5">Anexo 5</td>
-          <td class="td_menu" id="anexo6">Anexo 6</td>
-          <td class="td_menu" id="anexo7">Anexo 7</td>
-          <td class="td_menu" id="anexo8">Anexo 8</td>
-          <td class="td_menu" id="anexo9">Anexo 9</td>
+          <td class="td_menu" id="fichaCadastral" onMouseOver="MouseOver('fichaCadastral');" onMouseOut="MouseOut('fichaCadastral');">Fixa Cadastral</td>
+          <td class="td_menu" id="anexo1" onMouseOver="MouseOver('anexo1');" onMouseOut="MouseOut('anexo1');">Anexo 1</td>
+          <td class="td_menu" id="anexo2" onMouseOver="MouseOver('anexo2');" onMouseOut="MouseOut('anexo2');">Anexo 2</td>
+          <td class="td_menu" id="anexo3" onMouseOver="MouseOver('anexo3');" onMouseOut="MouseOut('anexo3');">Anexo 3</td>
+          <td class="td_menu" id="anexo4" onMouseOver="MouseOver('anexo4');" onMouseOut="MouseOut('anexo4');">Anexo 4</td>
+          <td class="td_menu" id="anexo5" onMouseOver="MouseOver('anexo5');" onMouseOut="MouseOut('anexo5');">Anexo 5</td>
+          <td class="td_menu" id="anexo6" onMouseOver="MouseOver('anexo6');" onMouseOut="MouseOut('anexo6');">Anexo 6</td>
+          <td class="td_menu" id="anexo7" onMouseOver="MouseOver('anexo7');" onMouseOut="MouseOut('anexo7');">Anexo 7</td>
+          <td class="td_menu" id="anexo8" onMouseOver="MouseOver('anexo8');" onMouseOut="MouseOut('anexo8');">Anexo 8</td>
+          <td class="td_menu" id="anexo9" onMouseOver="MouseOver('anexo9');" onMouseOut="MouseOut('anexo9');">Anexo 9</td>
         </tr>
       </table>
     </div>

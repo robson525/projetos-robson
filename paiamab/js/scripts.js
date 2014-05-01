@@ -1,10 +1,13 @@
 // JavaScript Document
 
-function MouseOver(id){
-	
-	document.getElementById(id).style = "border: none;box-shadow:none;";
-}
+/* ---------------- FUNÇÕES DO MENU ---------------- */
 
+function MouseOver(id){
+	document.getElementById(id).style.border = "none";
+}
+function MouseOut(id){
+	document.getElementById(id).style.border = "1px solid #CCCCCE";
+}
 function normalBotao (){
 	
 	 var td = document.getElementsByClassName('td_menu');
@@ -16,9 +19,10 @@ function normalBotao (){
 	 }
 
 }
-
 function clickBotao (id){
 	document.getElementById(id).style.borderRadius = "5px";
 	document.getElementById(id).style.boxShadow = "inset 0 0 7px rgba(0, 0, 0, .2)";
 	document.getElementById(id).style.color = "#575758";
 }
+/* --------------------------------------------------------------------------------------- */
+
