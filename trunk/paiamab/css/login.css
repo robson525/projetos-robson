@@ -18,6 +18,11 @@ select {
 	font-weight:bold;	
 }
 
+.bot_submit{
+	cursor:pointer;
+	height:25px;
+}
+
 #div_erro {
 	position:relative;
 	margin:auto;
@@ -80,7 +85,6 @@ select {
 	margin-bottom: 15px;	
 }
 
-
 #div_tab_usuario{
 	position:absolute;
 	margin-left: 50px;
@@ -133,10 +137,7 @@ select {
 #tab_buscar #botao {
 	padding: 0px 30px;
 }
-#tab_buscar #input_busca {
-	cursor:pointer;
-	height:25px;
-}
+
 #div_listar{
 	
 }
@@ -188,4 +189,8 @@ select {
 	
 }
 
+#div_principal .bot_submit{
+	height:40px;
+	width: 70px;
+}
 

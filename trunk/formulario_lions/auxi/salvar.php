@@ -19,8 +19,8 @@
 	if($outro_cargo_distrtito == NULL){ $outro_cargo_distrtito = ''; }
 	
 	if($botao == "Enviar"){
-		$sql = "INSERT INTO xv_convencao (nome, matricula, cpf, email, nascimento, endereco, complemento, estado, cidade, clube, delegado, cargo_clube, qual_cc, cargo_distrito, qual_cd, cl_mj, prefixo, camisa ) 
-				VALUES ('$nome', '$matricula', '$cpf', '$email', '$nascimento', '$endereco', '$complemento', '$estado', '$cidade', '$clube', '$delegado', '$cargo_clube', '$outro_cargo_clube', '$cargo_distrito', '$outro_cargo_distrtito', '$cl_mj', '$prefixo', '$camisa' );";
+		$sql = "INSERT INTO xv_convencao (nome, matricula, cpf, email, nascimento, endereco, complemento, estado, cidade, clube, delegado, cargo_clube, qual_cc, cargo_distrito, qual_cd, cl_mj, prefixo, camisa , data) 
+				VALUES ('$nome', '$matricula', '$cpf', '$email', '$nascimento', '$endereco', '$complemento', '$estado', '$cidade', '$clube', '$delegado', '$cargo_clube', '$outro_cargo_clube', '$cargo_distrito', '$outro_cargo_distrtito', '$cl_mj', '$prefixo', '$camisa' '".date('y-m-d H:m:s')."' );";
 	}
 	elseif($botao == "Atualizar"){
 		$sql = "UPDATE xv_convencao SET nome='$nome', matricula='$matricula', email='$email', nascimento='$nascimento', endereco='$endereco', complemento='$complemento', estado='$estado', cidade='$cidade', clube='$clube', delegado='$delegado', cargo_clube='$cargo_clube', qual_cc= '$outro_cargo_clube', cargo_distrito='$cargo_distrito', qual_cd='$outro_cargo_distrtito', cl_mj='$cl_mj', prefixo='$prefixo', camisa='$camisa'
@@ -33,12 +33,11 @@
 	
 	$query = mysql_query($sql);
 	
-	
 	if(mysql_error($conecta->conn)){
-		echo mysql_error($conecta->conn)."<br>SQL = ".$sql;
+		echo "Ocorreu um Erro ao realizar Cadastro.<br>Por Favor, tente Novamente.";//mysql_error($conecta->conn)."<br>SQL = ".$sql;
 	}
 	else{
-		include "sucesso.html";	
+		include "email.php";
 	}
 	$conecta->desconecta();
 	

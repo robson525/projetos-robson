@@ -12,21 +12,19 @@ select {
 
 #submit{
 	padding: 5px 10px;	
-	width:auto;
-	height:auto;
-	cursor:pointer; 
-	margin-left:50%;
-	background: -webkit-linear-gradient(bottom, #eb2323, #F9F9F9 70%);
-	background: -moz-linear-gradient(bottom, #eb2323, #F9F9F9 70%);
-	background: -o-linear-gradient(bottom, #eb2323, #F9F9F9 70%);
-	background: -ms-linear-gradient(bottom, #eb2323, #F9F9F9 70%);
-	background: linear-gradient(bottom, #eb2323, #F9F9F9 70%);
+	background: -webkit-linear-gradient(bottom, #EC5959 #F9F9F9 70%);
+	background: -moz-linear-gradient(bottom, #EC5959, #F9F9F9 70%);
+	background: -o-linear-gradient(bottom, #EC5959, #F9F9F9 70%);
+	background: -ms-linear-gradient(bottom, #EC5959, #F9F9F9 70%);
+	background: linear-gradient(bottom, #EC5959, #F9F9F9 70%);
 	box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px rgba(0, 0, 0, 0.2);	
+	border: 1px solid #CCCCCE;
 }
 
 #tab_ficha td{
 	padding: 10px;
 }
+
 
 
 

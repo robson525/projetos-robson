@@ -1,12 +1,4 @@
-﻿<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<link href="css/formularios.css" rel="stylesheet" type="text/css"/>
-<title>Ficha Cadastral</title>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/jquery.form.js" type="text/javascript"></script>
-<script type="text/javascript">
+﻿<script type="text/javascript">
 
 // Quando carregado a página
 $(function($) {
@@ -32,12 +24,18 @@ $(function($) {
 		return false;
 	}); // Final Tratamento do Formulario
 	
+	$('#c_q_mora').change(function() {
+		if($(this).val() == 'outros')
+			$('#span_cq_mora').show('slow');
+		else
+			$('#span_cq_mora').hide('slow');
+		
+	});
+	
 	
 });
 </script>
-</head>
 
-<body>
 <center>
 <h2>Ficha Cadastral</h2>
 </center>
@@ -126,7 +124,7 @@ $(function($) {
                                 <option value="Amigos">Amigos</option>
                                 <option value="Empregados Domesticos">Empregados Domesticos</option>
                                 <option value="outros">Outros</option> </select> &ensp;&ensp;
-        	<span id="span_cq_mora">Quem: <input id="c_q_mora_outro" name="c_q_mora_outro" type="text" maxlength="50"> </span></td>
+        	<span id="span_cq_mora" hidden>Quem: <input id="c_q_mora_outro" name="c_q_mora_outro" type="text" maxlength="50"> </span></td>
         
         </tr>
         <tr>
@@ -178,7 +176,7 @@ $(function($) {
         
         </tr>
         <tr>
-        	<td class="td_esq">Qual o seu nivl de Escolaridade:  </td>
+        	<td class="td_esq">Qual o seu nível de Escolaridade:  </td>
             <td class="td_dir"> <select id="escolaridade" name="escolaridade">
             					<option value=""></option>
             					<option value="Não Alfabetizado(a)">Não Alfabetizado(a)</option>
@@ -229,8 +227,8 @@ $(function($) {
         </tr>
        	
         <tr>
-        	<td> </td>
-            <td><input id="submit" name="submit" type="submit" value="Salvar"  </td>
+        	<td></td>
+            <td style="padding-top:10px;"><input id="submit" name="submit" class="bot_submit" type="submit" value="Salvar" onMouseOver="MouseOver('submit');" onMouseOut="MouseOut('submit');"> </td>
         </tr>
         
     
@@ -239,5 +237,3 @@ $(function($) {
 </form>
 
 </div>
-</body>
-</html>
