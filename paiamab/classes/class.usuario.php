@@ -74,7 +74,6 @@ class Usuario{
 	public function set_ultima_sessao($date){
 		$sql = "UPDATE $this->tabela SET ultima_sessao = '$date' WHERE id_usuario = '$this->ID';";
 		$query = mysql_query($sql) or die("Erro: set_ultima_sessao");
-		echo $sql;
 	}
 	
 
