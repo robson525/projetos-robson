@@ -1,14 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.10.1
--- http://www.phpmyadmin.net
--- 
--- Servidor: localhost
--- Tempo de Geração: Fev 01, 2014 as 11:07 AM
--- Versão do Servidor: 5.0.45
--- Versão do PHP: 5.2.5
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 -- 
 -- Banco de Dados: `araruna_paiamab`
 -- 
@@ -22,7 +11,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE `1_form_usuario` (
   `id_usuario` int(11) NOT NULL auto_increment,
   `login` varchar(20) NOT NULL,
-  `senha` varchar(20) NOT NULL,
+  `senha` varchar(32) NOT NULL,
   `nome` varchar(70) NOT NULL,
   `ultima_sessao` timestamp NULL default NULL,
   `admin` binary(1) NOT NULL default '0',

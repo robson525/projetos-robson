@@ -21,7 +21,7 @@
 		else{
 		?>
 			<center><h2>Resultado</h2></center>
-            <table id="tab_result_busca" align="center" border="1" width="75%">
+            <table id="tab_result_busca" align="center" border="1" width="75%" style="margin-bottom:20px">
                 <tr>
                     <td width="20%">Nº de Controle: </td>
                     <td>Nome: </td>
@@ -29,17 +29,17 @@
                 </tr>
             <?php 
                 foreach($query as $query){
-					while ($busca = mysql_fetch_array($query)){ 	$id = $busca['id_ficha'];		?>
+					while ($array = mysql_fetch_array($query)){ 	$id = $array['id_ficha'];		?>
 						<tr>
-							<td><?php echo $busca['n_controle'] ?></td>
-							<td><?php echo $busca['nome'] ?></td>
+							<td><?php echo $array['n_controle'] ?></td>
+							<td><?php echo $array['nome'] ?></td>
 							<td><a href="index.php?buscar=<?php echo $id; ?>">Selecionar</a> </td>
 						</tr>
 			<?php 	}
 				}
                 ?></table>
                 
-            <?php die();
+            <?php 
        }?>
 
 

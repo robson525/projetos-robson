@@ -25,16 +25,6 @@ $(document).ready( function() {
 	$('#div_principal').load('formulario/fichaCadastral.php');
 	clickBotao('fichaCadastral');
 	
-	$('#formBuscar').submit(function() {
-
-		$(this).ajaxSubmit(function(resposta) {
-			$("#div_listar").html(resposta);
-					
-		});
-		// Retornando false para que o formulário não envie as informações da forma convencional
-		return false;
-   	});
-	
 	$('.td_menu').click(function(evt) {
 		
 		var id = $(this).attr('id'); // id tem que ser o mesmo nome do arquivo da pasta formulario
@@ -61,12 +51,20 @@ $(document).ready( function() {
 	
 	
 });  
+	var busca = <?php echo isset($busca)&&$busca?"true":"false"; ?>;
 	function botBuscar(){
 		display = document.getElementById('div_buscar').style.display;
-		if(display == "" || display == "none")
+		if(display == "" || display == "none"){
 			document.getElementById('div_buscar').style.display = "block";
-		else
+			if(busca == true)
+				document.getElementById('div_formularios').style.display = "none";
+		}
+		else{
 			document.getElementById('div_buscar').style.display = "none";
+			if(busca == true)
+				document.getElementById('div_formularios').style.display = "block";
+			
+		}
 	}
 </script>
 
@@ -80,7 +78,12 @@ $(document).ready( function() {
       </tr>
       <tr>
         <td class="td_esq" >Ultimo Acesso: </td>
-        <td class="td_dir" ><?php echo date('d/m/Y', strtotime($usuario->get_ultima_sessao()))." às ".date('H:i:s', strtotime($usuario->get_ultima_sessao()));?></td>
+        <td class="td_dir" ><?php 	if($usuario->get_ultima_sessao()=="")
+										echo "Primeira Sessão";
+									else
+										echo date('d/m/Y', strtotime($usuario->get_ultima_sessao()))
+											 ." às ".date('H:i:s', strtotime($usuario->get_ultima_sessao()));
+							?></td>
       </tr>
     </table>
   </div>
@@ -117,22 +120,25 @@ $(document).ready( function() {
 </div>
 
 
-
-
-<div id="div_menu">
-  <table id="tab_menu" border="0" align="center">
-    <tr>
-      <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
-      <td class="td_menu" id="anexo1">Anexo 1</td>
-      <td class="td_menu" id="anexo2">Anexo 2</td>
-      <td class="td_menu" id="anexo3">Anexo 3</td>
-      <td class="td_menu" id="anexo4">Anexo 4</td>
-      <td class="td_menu" id="anexo5">Anexo 5</td>
-      <td class="td_menu" id="anexo6">Anexo 6</td>
-      <td class="td_menu" id="anexo7">Anexo 7</td>
-      <td class="td_menu" id="anexo8">Anexo 8</td>
-      <td class="td_menu" id="anexo9">Anexo 9</td>
-    </tr>
-  </table>
+<div id="div_formularios" style="display:<?php echo (isset($busca) && $busca==true)?"none":"block"?>">
+    
+    <div id="div_menu">
+      <table id="tab_menu" border="0" align="center">
+        <tr>
+          <td class="td_menu" id="fichaCadastral">Fixa Cadastral</td>
+          <td class="td_menu" id="anexo1">Anexo 1</td>
+          <td class="td_menu" id="anexo2">Anexo 2</td>
+          <td class="td_menu" id="anexo3">Anexo 3</td>
+          <td class="td_menu" id="anexo4">Anexo 4</td>
+          <td class="td_menu" id="anexo5">Anexo 5</td>
+          <td class="td_menu" id="anexo6">Anexo 6</td>
+          <td class="td_menu" id="anexo7">Anexo 7</td>
+          <td class="td_menu" id="anexo8">Anexo 8</td>
+          <td class="td_menu" id="anexo9">Anexo 9</td>
+        </tr>
+      </table>
+    </div>
+    
+    <div id="div_principal" class="div_padrao"> </div>
+   
 </div>
-<div id="div_principal" class="div_padrao"> </div>

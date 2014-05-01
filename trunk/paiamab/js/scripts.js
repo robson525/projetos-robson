@@ -9,30 +9,16 @@ function normalBotao (){
 	
 	 var td = document.getElementsByClassName('td_menu');
 	 
-	 for (var i=0; i<td.length; i++)	 
-	 	td[i].style = "border: 1px solid #CCCCCE;box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px rgba(0, 0, 0, 0.2);";
-	
+	 for (var i=0; i<td.length; i++){	 
+	 	td[i].style.borderRadius = "3px";
+		td[i].style.boxShadow = "0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px rgba(0, 0, 0, 0.2)";
+		td[i].style.color = "#000000";
+	 }
+
 }
 
 function clickBotao (id){
-	document.getElementById(id).style = "box-shadow: inset 0 0 7px rgba(0, 0, 0, .2); top: 4px;";
-	
-}
-
-function botBuscar(){ 
-	var display = document.getElementById('div_buscar').style.display;
-	if (display == '' || display == 'none'){
-		document.getElementById('div_buscar').style.display = 'block';
-		document.getElementById('div_listar').style.display = 'block';
-		document.getElementById('div_menu').style.display = 'none';
-		document.getElementById('div_principal').style.display = 'none';
-		
-	}
-	else{
-		document.getElementById('div_buscar').style.display = 'none';
-		document.getElementById('div_listar').style.display = 'none';
-		document.getElementById('div_menu').style.display = 'block';
-		document.getElementById('div_principal').style.display = 'block';
-	}
-	
+	document.getElementById(id).style.borderRadius = "5px";
+	document.getElementById(id).style.boxShadow = "inset 0 0 7px rgba(0, 0, 0, .2)";
+	document.getElementById(id).style.color = "#575758";
 }
