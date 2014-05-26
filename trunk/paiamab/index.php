@@ -25,7 +25,7 @@
     <script src="js/scripts.js" type="text/javascript"></script>
 </head>
 
-<body>
+<body onload="atualizaContador()">
 <?php
 
 	if(isset($_SESSION['id_usuario'])){

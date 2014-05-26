@@ -88,6 +88,7 @@ $(document).ready( function() {
       </tr>
     </table>
   </div>
+  <div id="div_contador"> </div>
   <div id="div_bt_sair"> <a href="sair.php"> Sair </a> </div>
   <div id="div_bt_buscar"> <a onClick="botBuscar()"> Buscar Prontuario </a> </div>
 </div>

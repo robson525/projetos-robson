@@ -26,3 +26,44 @@ function clickBotao (id){
 }
 /* --------------------------------------------------------------------------------------- */
 
+
+
+
+
+/* ----------------------------------------------------------------------------------------- */
+
+// Função do Contador de Logout
+	var inicio = new Date();
+	var YY = inicio.getFullYear();
+	var MM = inicio.getMonth()+1;
+	var DD = inicio.getDate();
+	var HH = inicio.getHours() + 3;
+	var MI = inicio.getMinutes();
+	var SS = inicio.getSeconds();
+
+	function atualizaContador() {
+		var hoje = new Date();
+		var futuro = new Date(YY,MM-1,DD,HH,MI,SS);
+		
+		var ss = parseInt((futuro - hoje) / 1000);
+		var mm = parseInt(ss / 60);
+		var hh = parseInt(mm / 60);
+		var dd = parseInt(hh / 24);
+		
+		ss = ss - (mm * 60);
+		mm = mm - (hh * 60);
+		hh = hh - (dd * 24);
+		
+		var faltam = 'Sua sessão expira em ';
+		faltam += (dd && dd > 1) ?dd+'dias, ' : (dd==1 ? '1 dia, ' : '');
+		faltam += (hh && hh > 0) ? hh+' hs, ' : '';
+		faltam += (toString(mm).length) ? mm+' min e ' : '';
+		faltam += ss+' seg';
+		
+		if (dd+hh+mm+ss > 0) {
+			document.getElementById('div_contador').innerHTML = faltam;
+			setTimeout(atualizaContador,1000);
+		} else {
+			location.href = "sair.php";
+		}
+	}
