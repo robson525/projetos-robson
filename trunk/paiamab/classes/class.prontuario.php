@@ -56,8 +56,10 @@ class Prontuario {
 		//return $sql;
 		if(!$query)
 			return mysql_error();
-		else
+		else{
+			$this->conecta->testa_backup();
 			return true;
+		}
 		
 		
 

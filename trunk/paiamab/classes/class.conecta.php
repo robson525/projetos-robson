@@ -33,7 +33,73 @@ class Conecta{
 		mysql_close($this->conn);
 		
 	}
-
+	
+	function testa_backup(){
+		$query = mysql_query("SELECT * FROM 1_backup ORDER BY id DESC LIMIT 1"); // pega o ultimo ID
+		if (mysql_num_rows($query) < 1)
+			mysql_query("INSERT INTO 1_backup (contador) VALUES (0);");
+		else{
+			$backup = mysql_fetch_object($query);
+			if($backup->contador < 10){
+				mysql_query("UPDATE 1_backup SET contador = ".$backup->contador++." WHERE id =".$backup->id);
+			}
+			else{
+				$arquivo = backup_db();
+				mysql_query("UPDATE 1_backup SET arquivo = ".$arquivo." WHERE id =".$backup->id);
+				mysql_query("INSERT INTO 1_backup (contador) VALUES (0);");
+			}
+		}
+	}
+	
+	function backup_db(){
+		/* Store All Table name in an Array */
+		$allTables = array();
+		$allTables[0] = "1_form_usuario";
+		$allTables[1] = "1_ficha";
+		
+		$return ="";
+		
+		foreach($allTables as $table){ echo $table."<br>";
+			$result = mysql_query('SELECT * FROM '.$table);
+			$num_fields = mysql_num_fields($result);
+			
+			$return .= 'DROP TABLE IF EXISTS '.$table.';';
+			$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+			$return.= "\n\n".$row2[1].";\n\n";
+			
+			for ($i = 0; $i < $num_fields; $i++) {
+				while($row = mysql_fetch_row($result)){
+				   $return.= 'INSERT INTO '.$table.' VALUES(';
+					 for($j=0; $j<$num_fields; $j++){
+					   $row[$j] = addslashes($row[$j]);
+					   $row[$j] = str_replace("\n","\\n",$row[$j]);
+					   if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } 
+					   else { $return.= '""'; }
+					   if ($j<($num_fields-1)) { $return.= ','; }
+					 }
+				   $return.= ");\n";
+				}
+			}
+			$return.="\n\n";
+			echo $return."<br><br>";
+		}
+		
+		// Create Backup Folder
+		$folder = '_db_backup_/';
+		if (!is_dir($folder))
+		mkdir($folder, 0777, true);
+		chmod($folder, 0777);
+		
+		$date = date('Y-m-d-H-i-s', time()); 
+		$filename = $folder."db-backup-".$date; 
+		
+		$handle = fopen($filename.'.sql','w+');
+		fwrite($handle,$return);
+		fclose($handle);
+		
+		return $date;
+	}
+		
 }
 
 ?>
