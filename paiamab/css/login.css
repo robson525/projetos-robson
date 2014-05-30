@@ -116,6 +116,19 @@ select {
 	
 }
 
+#div_bt_novo {
+	position:absolute;
+	margin:10px 0px 0px 70%;
+	width: 150px;
+	height:25px;
+	cursor:pointer;
+}
+#div_bt_novo a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#eb2323;
+	
+}
 
 #div_bt_buscar {
 	position:relative;
@@ -200,5 +213,14 @@ select {
 #div_principal .bot_submit{
 	height:40px;
 	width: 70px;
+}
+
+#div_erro_validacao {
+	margin:auto;
+	text-align:center;
+	color: red;
+	font-weight:bold;
+	text-shadow:0 3px 0 rgba(0, 0, 0, .3);
+	
 }
 

@@ -10,46 +10,53 @@
 	
 	$usuario->set_usuario( $_SESSION['id_usuario'] );
 	
-	if(isset($_SESSION['id_ficha']) && $_SESSION['id_ficha']){
-		echo "ID FICHA = ".$_SESSION['id_ficha'];
-	}
-	
 	if((isset($_POST["buscar_ncontrole"]) && $_POST["buscar_ncontrole"]) || (isset($_POST["buscar_nome"]) && $_POST["buscar_nome"])){
 		$busca = true;
 	}
+	
+	if(isset($_GET['form']) && $_GET['form']){
+		$form = $_GET['form'];	
+	}else{
+		$form = 0;
+	}
+	
+	if(isset($_GET['buscar']) && $_GET['buscar']){
+		$buscar = $_GET['buscar'];	
+		$_SESSION['id_ficha'] = $buscar;
+	}else{
+		$buscar = false;
+	}
+	
+	if(isset($_GET['novo']) && $_GET['novo']){
+		unset($_SESSION['fichaCadas']);
+	}
+	
 
 ?>
 <link href="css/formularios.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 $(document).ready( function() {
-	
-	$('#div_principal').load('formulario/fichaCadastral.php');
-	clickBotao('fichaCadastral');
+	var form = parseInt('<?php echo $form;?>');
+	switch(form){
+		case 1: clickBotao('anexo1'); break;
+		case 2: clickBotao('anexo2'); break;
+		case 3: clickBotao('anexo3'); break;
+		case 4: clickBotao('anexo4'); break;
+		case 5: clickBotao('anexo5'); break;
+		case 6: clickBotao('anexo6'); break;
+		case 7: clickBotao('anexo7'); break;
+		case 8: clickBotao('anexo8'); break;
+		case 9: clickBotao('anexo9'); break;
+		default: clickBotao('fichaCadastral');break;	
+	}
 	
 	$('.td_menu').click(function(evt) {
 		
 		var id = $(this).attr('id'); // id tem que ser o mesmo nome do arquivo da pasta formulario
 		var href = "formulario/"+ id +".php";
-		
-		$.ajax({
-			
-			type:"POST",
-			url: href,
-			data:"url="+href,
-			
-			beforeSend: function(){
-				normalBotao();
-				clickBotao(id);
-			},
-			success:function(data){
-				$("#div_principal").html(data);
-			}
-		});
-		
+		location.href = "index.php?form="+id.charAt(id.length-1);
+				
 	});
-	
-	
-	
 	
 });  
 	var busca = <?php echo isset($busca)&&$busca?"true":"false"; ?>;
@@ -90,6 +97,7 @@ $(document).ready( function() {
   </div>
   <div id="div_contador"> </div>
   <div id="div_bt_sair"> <a href="sair.php"> Sair </a> </div>
+  <div id="div_bt_novo"> <a href="index.php?novo=1"> Novo Prontuario </a> </div>
   <div id="div_bt_buscar"> <a onClick="botBuscar()"> Buscar Prontuario </a> </div>
 </div>
 
@@ -141,6 +149,22 @@ $(document).ready( function() {
       </table>
     </div>
     
-    <div id="div_principal" class="div_padrao"> </div>
+    <div id="div_principal" class="div_padrao"> 
+    	<?php
+        	switch($form){
+				case 1: include "formulario/anexo1.php"; break;
+				case 2: include "formulario/anexo2.php"; break;
+				case 3: include "formulario/anexo3.php"; break;
+				case 4: include "formulario/anexo4.php"; break;
+				case 5: include "formulario/anexo5.php"; break;
+				case 6: include "formulario/anexo6.php"; break;
+				case 7: include "formulario/anexo7.php"; break;
+				case 8: include "formulario/anexo8.php"; break;
+				case 9: include "formulario/anexo9.php"; break;
+				default: include "formulario/fichaCadastral.php"; break;	
+				
+			}
+		?>
+    </div>
    
 </div>

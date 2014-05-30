@@ -22,20 +22,21 @@ class Prontuario {
 
 	/* Seta Valores do Vetor $ficha para o $formulari o*/
 	public function addFicha($ficha, $id_usuario){
-		
 		reset($ficha); 
 		while (list($key, $val) = each($ficha)) {  
 			$this->formulario[$key] = $ficha[$key];
 		}
 		$this->formulario['id_usuario'] = $id_usuario;
+		unset($this->formulario["submit"]);
+		
 		return $this->insertFicha();
 	}
 	
 	/* Insere a Ficha Cadastral no banco de dados 
 	- Retorna False se a Query funcionar */
 	public function insertFicha(){
-		$sql = "INSERT INTO $this->tabela (n_controle, nome, idade, sexo, n_sus, n_prontuario, rg, cpf, cuidador, endereco, telefone, pai, mae, c_q_mora, c_q_mora_outro, q_filhos, q_filhos_mais, atualmente, residencia, moram_casa, moram_casa_mais, escolaridade, renda, programa, violencia, qual_violencia, entrevistador, data, id_usuario) 
-				VALUES (";
+		$sql = "INSERT INTO $this->tabela (";
+		$values = "VALUES (";
 		
 		reset($this->formulario);
 		while (list($key, $val) = each($this->formulario)) { 
@@ -44,18 +45,23 @@ class Prontuario {
 		}
 		reset($this->formulario);
 		while (list($key, $val) = each($this->formulario)) { 
-			$sql .=  "'".$val."'";
+			$sql .= $key;
+			$values .=  "'".$val."'";
 			
-			if($key != 'id_usuario')
+			if($key != 'id_usuario'){
 				$sql .=", ";
-			else
-				$sql .="); ";
-			
+				$values .=", ";
+			}
+			else{
+				$sql .=") ";
+				$values .="); ";
+			}	
 		}
+		$sql .= $values;
 		$query = mysql_query($sql);
 		//return $sql;
 		if(!$query)
-			return mysql_error();
+			return mysql_error()."<br>".$sql;
 		else{
 			$this->conecta->testa_backup();
 			return true;
