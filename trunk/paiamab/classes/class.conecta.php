@@ -56,12 +56,12 @@ class Conecta{
 		/* Store All Table name in an Array */
 		$allTables = array();
 		$allTables[0] = "1_form_usuario";
-		$allTables[1] = "1_ficha";
-		$allTables[2] = "1_backup";
+		$allTables[1] = "1_backup";
+		$allTables[2] = "1_ficha";
 		
 		$return ="";
 		
-		foreach($allTables as $table){ echo $table."<br>";
+		foreach($allTables as $table){
 			$result = mysql_query('SELECT * FROM '.$table);
 			$num_fields = mysql_num_fields($result);
 			
@@ -83,10 +83,10 @@ class Conecta{
 				}
 			}
 			$return.="\n\n";
-			echo $return."<br><br>";
+			$return."<br><br>";
 		}
 		
-		// Create Backup Folder
+		// PASTA ONDE O ARQUIVO VAI SER SALVO
 		$folder = '_db_backup_/';
 		if (!is_dir($folder))
 		mkdir($folder, 0777, true);

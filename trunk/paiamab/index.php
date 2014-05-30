@@ -22,6 +22,7 @@
     <link href="css/login.css" rel="stylesheet" type="text/css"/>
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/jquery.form.js" type="text/javascript"></script>
+    <script src="js/jquery.mask.js" type="text/javascript"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
 </head>
 
