@@ -35,7 +35,13 @@ CREATE TABLE IF NOT EXISTS `1_ficha` (
   `id_usuario` int(11) NOT NULL,
   PRIMARY KEY (`id_ficha`),
   KEY `id_ficha` (`id_ficha`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Limitadores para a tabela `1_ficha`
+--
+ALTER TABLE `1_ficha`
+  ADD CONSTRAINT `pk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `1_form_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Extraindo dados da tabela `1_ficha`

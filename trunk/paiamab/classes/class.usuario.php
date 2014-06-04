@@ -18,7 +18,7 @@ class Usuario{
 	
 	public function __construct() {
 		$this->conecta = new Conecta();
-		$this->tabela = "1_form_usuario";				
+		$this->tabela = "1_usuario";				
 	}
 	
 	
@@ -26,7 +26,7 @@ class Usuario{
 		
 	public function validaUsuario($log, $sen){
 		
-		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' and senha COLLATE utf8_bin = '".md5($sen)."'";
+		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$log' AND senha COLLATE utf8_bin = '".md5($sen)."' AND ativo = 1;";
 		
 		$query = mysql_query($sql);
 				
