@@ -25,5 +25,5 @@ CREATE TABLE IF NOT EXISTS `1_usuario` (
 -- Extraindo dados da tabela `1_form_usuario`
 -- 
 
-INSERT INTO `1_form_usuario` (`id_usuario`, `login`, `senha`, `nome`, `ultima_sessao`, `admin`) VALUES 
-(1, 'robson', '123456', 'Robson Claudio', NULL, 0x31);
+INSERT INTO `1_usuario` (`id_usuario`, `login`, `senha`, `nome`, `ultima_sessao`, `admin`) VALUES 
+(1, 'robson', 'e10adc3949ba59abbe56e057f20f883e', 'Robson Claudio', NULL, 1);

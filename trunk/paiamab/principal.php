@@ -58,6 +58,30 @@ $(document).ready( function() {
 				
 	});
 	
+	$('#cadastro_usuario').submit(function() {
+
+		$('#div_mensagem').html('');
+		$(this).ajaxSubmit(function(resposta) {
+			if(resposta == false){
+				$('#div_mensagem').html("Usuário Cadastrado com Sucesso.");
+				$('#div_mensagem').css( "color","green");
+				$('#cad_nome').val("");
+				$('#cad_login').val("");
+				$('#cad_senha').val("");
+			}
+			else{
+				$('#div_mensagem').html(resposta);
+				$('#div_mensagem').css( "color","red");
+			}
+			
+		});
+		// Retornando false para que o formulário não envie as informações da forma convencional
+		return false;
+	});
+	
+	
+	
+	
 });  
 	var busca = <?php echo isset($busca)&&$busca?"true":"false"; ?>;
 	function botBuscar(){
@@ -74,6 +98,21 @@ $(document).ready( function() {
 			
 		}
 	}
+	
+	var admin = <?php echo $usuario->admin()?"true":"false"; ?>;
+	function botCadastrar(){
+		if(admin == false)
+			return false;
+			
+		display = document.getElementById('div_cadastro_usuario').style.display;
+		if(display == "" || display == "none"){
+			$('#div_cadastro_usuario').show('slow');
+		}
+		else{
+			$('#div_cadastro_usuario').hide('slow');
+		}
+	}
+	
 </script>
 
 
@@ -95,18 +134,55 @@ $(document).ready( function() {
       </tr>
     </table>
   </div>
-  <div id="div_contador"> </div>
-  <div id="div_bt_sair"> <a href="sair.php"> Sair </a> </div>
-  <div id="div_bt_novo"> <a href="index.php?novo=1"> Novo Prontuario </a> </div>
-  <div id="div_bt_buscar"> <a onClick="botBuscar()"> Buscar Prontuario </a> </div>
+  <div id="div_tab_botoes">
+      <table id="tab_botoes" border="0">
+        <tr>
+          <td colspan="2"><div id="div_contador"> </div></td>
+          <td><a id="a_sair" href="sair.php" onMouseOut="MouseOver('a_sair')" onMouseOver="MouseOut('a_sair')"> Sair </a></td>
+        </tr>
+        <tr>
+          <td><a id="a_usuario" onClick="botCadastrar();" onMouseOut="MouseOver('a_usuario')" onMouseOver="MouseOut('a_usuario')" <?php echo $usuario->admin()?"":"hidden"?>> Cadastrar Usuario </a></td>
+          <td><a id="a_novo" href="index.php?novo=1" onMouseOut="MouseOver('a_novo')" onMouseOver="MouseOut('a_novo')"> Novo Prontuario </a> </td>
+          <td><a id="a_busca" onClick="botBuscar()" onMouseOut="MouseOver('a_busca')" onMouseOver="MouseOut('a_busca')"> Buscar Prontuario </a> </td>
+        </tr>
+      </table>
+  </div>
 </div>
 
 
+
+<div id="div_cadastro_usuario" class="div_padrao" hidden>
+<center><h2>Cadastrar Usuário</h2></center>
+	<div id="div_mensagem"> </div>
+	<form id="cadastro_usuario" action="validacao/validaLogin.php" method="post">
+    	<table id="tab_castro_usuario" border="0" align="center" style="margin-bottom:20px; width: 500px";>
+        	<tr>
+            	<td class="td_esq">Nome:</td>
+            	<td class="td_dir" width="50%"><input id="cad_nome" name="nome" type="text" maxlength="70" style="width:97%" required></td>
+                <td rowspan="3" width="20%"><input id="bot" class="bot_submit" type="submit" value=" Cadastrar "></td>
+            </tr>
+            <tr>
+                <td class="td_esq">Login:</td>
+                <td class="td_dir"><input id="cad_login" name="login" type="text" maxlength="20" required></td>
+          	</tr>
+            <tr>
+                <td class="td_esq">Senha:</td>
+                <td class="td_dir"><input id="cad_senha" name="senha" type="password" maxlength="30" required></td>
+          	</tr>
+            <tr><td><input type="text" name="tipo" value="cadastro" hidden></td></tr>
+            
+        </table>
+    </form>
+	
+</div>
+	
+
 <div id="div_buscar" class="div_padrao" style="display:<?php echo (isset($busca) && $busca==true)?"block":"none"?>">
+<center><h2>Buscar Protuário</h2></center>
   <form id="formBuscar"  action="index.php" method="POST">
     <table id="tab_buscar" border="0" align="center">
       <tr>
-        <td rowspan="3"><h2>Buscar</h2></td>
+        <td rowspan="3"></td>
         <td class="td_esq" >Nº de Controle: </td>
         <td class="td_dir" ><input id="buscar_ncontrole" name="buscar_ncontrole" type="text" value="<?php echo (isset($_POST["buscar_ncontrole"])&&$_POST["buscar_ncontrole"]==true)?$_POST["buscar_ncontrole"]:""?>" /></td>
       </tr>
@@ -128,6 +204,7 @@ $(document).ready( function() {
         ?>
     </div>
 </div>
+
 
 
 <div id="div_formularios" style="display:<?php echo (isset($busca) && $busca==true)?"none":"block"?>">

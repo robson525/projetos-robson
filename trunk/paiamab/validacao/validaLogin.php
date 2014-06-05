@@ -10,14 +10,29 @@
 	extract($_POST);
 	
 	$usuario = new Usuario();
-	$existe = $usuario->validaUsuario($login, $senha);
 	
-	if($existe){
-		$_SESSION['id_usuario'] = $usuario->get_id();
-		echo false;	
+	if($_POST["tipo"] == "login"){
+		$existe = $usuario->validaUsuario($login, $senha);
+		
+		if($existe){
+			$_SESSION['id_usuario'] = $usuario->get_id();
+			echo false;	
+		}
+		else{
+			echo "Login Inválido";	
+		}
 	}
-	else{
-		echo "Login Inválido";	
+	elseif($_POST["tipo"] == "cadastro"){
+		$existe = $usuario->verificaLogin($_POST["login"]);
+		
+		if($existe)
+			echo "Login já está cadastrado. Escolha outro.";
+		else{
+			if(!$usuario->cadastraUsuario($_POST["nome"], $_POST["login"], $_POST["senha"]))
+				echo "Erro ao Cadastrar Usuário. <br>Tente Novamente.";
+			else
+				echo false;
+		}
 	}
 	
 	
