@@ -88,11 +88,13 @@ $(document).ready( function() {
 		display = document.getElementById('div_buscar').style.display;
 		if(display == "" || display == "none"){
 			$('#div_buscar').show('slow');
+			$('#a_busca').css("color", "#9E2D2D");
 			if(busca == true)
 				$('#div_formularios').hide('fast');
 		}
 		else{
 			$('#div_buscar').hide('slow');
+			$('#a_busca').css("color", "#eb2323");
 			if(busca == true)
 				$('#div_formularios').show('fast');
 			
@@ -107,9 +109,11 @@ $(document).ready( function() {
 		display = document.getElementById('div_cadastro_usuario').style.display;
 		if(display == "" || display == "none"){
 			$('#div_cadastro_usuario').show('slow');
+			$('#a_usuario').css("color", "#9E2D2D");
 		}
 		else{
 			$('#div_cadastro_usuario').hide('slow');
+			$('#a_usuario').css("color", "#eb2323");
 		}
 	}
 	
