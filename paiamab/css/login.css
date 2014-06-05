@@ -85,64 +85,56 @@ select {
 	margin-bottom: 15px;	
 }
 
+#div_usuario{
+	height:110px;	
+}
+
 #div_tab_usuario{
 	position:absolute;
 	margin-left: 50px;
 }
+
 #tab_usuario td{
 	padding: 0px 5px;
 }
 
+#div_tab_botoes{
+	position:absolute;
+	margin: 5px 0px 0px 65%;
+}
+
+#tab_botoes{
+	/*margin: 5px 0px 0px 65%; */
+	width: 500px;
+}
+
+#tab_botoes td{
+	padding: 15px 10px;
+}
+
 #div_contador{
-	position:absolute;
-	margin:20px 0px 0px 62%;
-	width: 300px;
-	height:20px;
 	font-weight:bold;
-	
 }
 
-#div_bt_sair{
-	position:relative;
-	margin:20px 0px 10px 90%;
-	width: 70px;
-	height:25px;
-	cursor:pointer;
-}
-#div_bt_sair a{
+#tab_botoes a{
 	text-decoration:none;
 	font-weight:bold;
 	color:#eb2323;
-	
-}
-
-#div_bt_novo {
-	position:absolute;
-	margin:10px 0px 0px 70%;
-	width: 150px;
-	height:25px;
 	cursor:pointer;
 }
-#div_bt_novo a{
-	text-decoration:none;
+
+
+#tab_castro_usuario .td_esq {
 	font-weight:bold;
-	color:#eb2323;
-	
+	padding-right:10px;
 }
 
-#div_bt_buscar {
-	position:relative;
-	margin:20px 0px 10px 87%;
-	width: 150px;
-	height:25px;
-	cursor:pointer;
+#tab_castro_usuario td {
+	padding:10px;
 }
-#div_bt_buscar a{
-	text-decoration:none;
-	font-weight:bold;
-	color:#eb2323;
-	
-}
+
+
+
 #div_buscar{
 	display:none;	
 }
@@ -151,6 +143,7 @@ select {
 }
 #tab_buscar .td_esq {
 	font-weight:bold;
+	padding-right:10px;
 }
 #tab_buscar h2 {
 	padding: 0px 50px;

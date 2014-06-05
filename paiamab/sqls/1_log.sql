@@ -26,4 +26,4 @@ CREATE TABLE IF NOT EXISTS `1_log` (
 -- Limitadores para a tabela `1_log`
 --
 ALTER TABLE `1_log`
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `1_form_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `1_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;

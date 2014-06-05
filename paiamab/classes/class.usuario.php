@@ -22,7 +22,7 @@ class Usuario{
 	}
 	
 	
-	//--------------------------VERIFICA SE USUARIO ESTA CADASTRADO----------------------------------//
+	//-------------------------- VALIDAÇÃO DE USUARIO E SENHA ----------------------------------//
 		
 	public function validaUsuario($log, $sen){
 		
@@ -40,6 +40,38 @@ class Usuario{
 		else
 			return false; 
 		
+	}
+	
+	/* 	VERIFICA SE NOME DE USUARIO JA ESTA CADASTRADO 
+		RETORNA TRUE SE LOGIN EXISTE */
+	public function verificaLogin($login){
+			
+		$sql = "SELECT * FROM $this->tabela WHERE login COLLATE utf8_bin = '$login';";
+		
+		$query = mysql_query($sql);
+				
+		//Verifica Registros
+       $reg = mysql_fetch_assoc($query); 
+		
+		if(mysql_num_rows($query) > 0 || mysql_error())
+			return true;
+		else
+			return false; 	
+		
+	}
+	
+	
+	/* CADASTRA NOVO USUARIO */
+	public function cadastraUsuario($nome, $login, $senha){
+		
+		$sql = "INSERT INTO $this->tabela (login, senha, nome) VALUES ('".$login."', '".md5($senha)."', '".$nome."');";
+		$query = mysql_query($sql);
+		
+		if(mysql_error()){
+			return false;	
+		}
+		
+		return true;	
 	}
 	
 	/* SETA AS INFORMAÇÕES DE USUÁRIO EM SUAS RESPECTIVAS VARIAVEIS */
