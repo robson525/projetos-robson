@@ -1,3 +1,16 @@
+
+<script type="text/javascript">
+$(document).ready( function() {
+	$('.a_busca').click(function(evt) {
+		
+		var id = $(this).attr('id'); 
+		
+		$('#form_'+id).submit();
+						
+	});
+	
+});
+</script>
 <?php 
 		//Verifica se os Dados de busca Estão Preenchidos
 		if(!isset($_SESSION['id_usuario'])){
@@ -33,7 +46,11 @@
 						<tr>
 							<td><?php echo $array['n_controle'] ?></td>
 							<td><?php echo $array['nome'] ?></td>
-							<td><a href="index.php?buscar=<?php echo $id; ?>">Selecionar</a> </td>
+							<td>
+                            <form method="post" class="form_selecionar" id="form_<?php echo $id; ?>" action="index.php?buscar=true">
+                            	<input type="text" name="id_ficha" value="<?php echo $id; ?>" hidden/>
+                            	<a href="#" class="a_busca" id="<?php echo $id; ?>">Selecionar</a> </td>
+                            </form>
 						</tr>
 			<?php 	}
 				}

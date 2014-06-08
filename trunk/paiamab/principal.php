@@ -10,6 +10,19 @@
 	
 	$usuario->set_usuario( $_SESSION['id_usuario'] );
 	
+	if(isset($_GET['novo']) && $_GET['novo']){
+		unset($_SESSION['fichaCadas']);
+		unset($_SESSION['id_ficha']);
+	}
+	
+	if(isset($_GET['buscar']) && $_GET['buscar'] && isset($_POST['id_ficha']) && $_POST['id_ficha']){
+		$selecionar = true;	
+		unset($_SESSION['fichaCadas']);
+		$_SESSION['id_ficha'] = $_POST['id_ficha'];
+	}else{
+		$selecionar = false;
+	}
+	
 	if((isset($_POST["buscar_ncontrole"]) && $_POST["buscar_ncontrole"]) || (isset($_POST["buscar_nome"]) && $_POST["buscar_nome"])){
 		$busca = true;
 	}
@@ -20,18 +33,35 @@
 		$form = 0;
 	}
 	
-	if(isset($_GET['buscar']) && $_GET['buscar']){
-		$buscar = $_GET['buscar'];	
-		$_SESSION['id_ficha'] = $buscar;
+	
+	
+	
+	
+	
+	
+	
+	/*  
+	*	Verifica qual formulario foi submetido para fazer sua validação
+	*/
+		if(isset($_POST['submit']) && $_POST['submit'] && isset($_POST['formulario_tipo']) && $_POST['formulario_tipo']){
+			$submetido = true;
+			include "validacao/valida".$_POST['formulario_tipo'].".php";
+		}else{
+			$submetido = false;
+			$mensagem_tipo = false;		
+		}
+	
+	
+	
+	
+	
+	
+	if(isset($_SESSION['id_ficha']) && $_SESSION['id_ficha']){
+		$id_ficha = $_SESSION['id_ficha'];
 	}else{
-		$buscar = false;
+		$id_ficha = false;	
 	}
 	
-	if(isset($_GET['novo']) && $_GET['novo']){
-		unset($_SESSION['fichaCadas']);
-	}
-	
-
 ?>
 <link href="css/formularios.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
@@ -50,14 +80,21 @@ $(document).ready( function() {
 		default: clickBotao('fichaCadastral');break;	
 	}
 	
+	
 	$('.td_menu').click(function(evt) {
 		
 		var id = $(this).attr('id'); // id tem que ser o mesmo nome do arquivo da pasta formulario
 		var href = "formulario/"+ id +".php";
-		location.href = "index.php?form="+id.charAt(id.length-1);
-				
+		var id_ficha = <?php echo $id_ficha?$id_ficha:"false";?>;
+		
+		if(id == "fichaCadastral" || id_ficha != false)
+			location.href = "index.php?form="+id.charAt(id.length-1);
+		else
+			alert('Você deve primeiramente preencher uma Ficha Cadastral.');				
 	});
 	
+	
+	//DIV da mensagem ao cadastrar novo usuario
 	$('#cadastro_usuario').submit(function() {
 
 		$('#div_mensagem').html('');
@@ -80,6 +117,14 @@ $(document).ready( function() {
 	});
 	
 	
+//****************************************************************************************************	
+
+	//DIV mensagem ao cadastar formulario
+	var div_erro_validacao = <?php echo $mensagem_tipo?$mensagem_tipo:"false"?>;
+	if(div_erro_validacao == 1)
+		$('#div_erro_validacao').css( "color","green");
+		
+//****************************************************************************************************
 	
 	
 });  
