@@ -24,7 +24,7 @@ $(document).ready( function() {
 		$nome = $_POST["buscar_nome"];
 		$n_controle = $_POST["buscar_ncontrole"];
 		
-		$prontuario = new Prontuario('ficha');
+		$prontuario = new Prontuario('1_ficha');
 		
 		$query = $prontuario->buscarFicha($nome, $n_controle);
 		

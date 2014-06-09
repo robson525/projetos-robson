@@ -1,18 +1,24 @@
 ﻿<?php 
 	require_once('classes/class.prontuario.php');
 	
-	if($selecionar)
-		$prontuario = new Prontuario('ficha');
+	if($_SESSION['selecionar'])
+		$prontuario = new Prontuario('1_ficha');
 	
-	if($mensagem_tipo != 0 && ($selecionar || $submetido)){
+	if(($_SESSION['selecionar'] || $submetido)){
 		$_SESSION['fichaCadas'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
 	}
 	
 	if(isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas'])
 		$ficha = true;
 	else
-		$ficha = false;				
-	
+		$ficha = false;		
+		
+		
+	if(isset($_SESSION['fichaCadas']['n_controle']) && $_SESSION['fichaCadas']['n_controle'])
+		$n_controle = $_SESSION['fichaCadas']['n_controle'];
+	else
+		$n_controle = false;
+		
 ?>
 
 <script type="text/javascript">
@@ -45,7 +51,9 @@ $(document).ready( function() {
 	$('#n_controle').change(function() {
 			$.post('validacao/valida_ajax.php',{n_controle: $(this).val(), ajax_controle: 1 }, 
 			function(resposta){
-				if(resposta.length > 1){
+				var n_controle_php = '<?php echo $n_controle?$n_controle:"false";?>';
+				var imput_n_controle = document.getElementById('n_controle').value;
+				if(resposta.length > 1 && (n_controle_php == false || n_controle_php != imput_n_controle)){
 					document.getElementById('span_n_controle').hidden = false;
 					n_controle = false;
 				}
@@ -53,7 +61,6 @@ $(document).ready( function() {
 					document.getElementById('span_n_controle').hidden = true;
 					n_controle = true;
 				}
-				
 			});
 	
 	});
@@ -92,7 +99,6 @@ $(document).ready( function() {
 	
 	
 });
-$(document).ready(function(){ $("#cpf").mask("000.000.000-00"); $("#data").mask("00/00/0000");  $("#telefone").mask("(00) 0000-0000");});
 
 
 </script>
@@ -116,14 +122,14 @@ $(document).ready(function(){ $("#cpf").mask("000.000.000-00"); $("#data").mask(
     <table id="tab_ficha" border="0" align="center" width="80%">
     	<tr>
         	<td class="td_esq" width="30%">Nº de Controle: </td>
-            <td class="td_dir" width="50%"> <input id="n_controle" name="n_controle" type="text" maxlength="10" value="<?php echo $ficha?$_SESSION['fichaCadas']['n_controle']:""; ?>"> 
+            <td class="td_dir" width="50%"> <input id="n_controle" name="n_controle" type="text" maxlength="10" value="<?php echo $ficha?$_SESSION['fichaCadas']['n_controle']:""; ?>" required> 
             <span id="span_n_controle" style="color:#FD0004; margin-left:10px;" hidden>Número de Controle já está Cadastradado</span>
             </td>
         
         </tr>
         <tr>
         	<td class="td_esq">Nome: </td>
-            <td class="td_dir"> <input id="nome" name="nome" type="text" maxlength="100" style="width:100%" value="<?php echo $ficha?$_SESSION['fichaCadas']['nome']:""; ?>" > </td>
+            <td class="td_dir"> <input id="nome" name="nome" type="text" maxlength="100" style="width:100%" value="<?php echo $ficha?$_SESSION['fichaCadas']['nome']:""; ?>" required> </td>
         
         </tr>
         <tr>

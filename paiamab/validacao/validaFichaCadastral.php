@@ -16,7 +16,7 @@
 	}
 	else{
 		require_once('classes/class.prontuario.php');
-		$prontuario = new Prontuario('ficha');
+		$prontuario = new Prontuario('1_ficha');
 		
 		$prontuario->addFicha($_POST, $_SESSION['id_usuario']);
 		
@@ -25,6 +25,7 @@
 		if($_POST['submit'] == "Atualizar")
 			$ficha = $prontuario->atualizaFicha($_SESSION['id_ficha']);
 		
+		$prontuario->setIdFicha($_POST['n_controle']);
 		
 		if(is_bool($ficha)){
 			$_SESSION['fichaCadas'] = $prontuario->getFormulario();

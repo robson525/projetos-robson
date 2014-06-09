@@ -25,6 +25,10 @@ select {
 	padding: 10px;
 }
 
+#tab_anexo1 td{
+	padding: 5px;
+	vertical-align:middle;
+}
 
 
 

@@ -16,11 +16,12 @@
 	}
 	
 	if(isset($_GET['buscar']) && $_GET['buscar'] && isset($_POST['id_ficha']) && $_POST['id_ficha']){
-		$selecionar = true;	
+		$_SESSION['selecionar'] = true;
 		unset($_SESSION['fichaCadas']);
 		$_SESSION['id_ficha'] = $_POST['id_ficha'];
 	}else{
-		$selecionar = false;
+		if(!isset($_SESSION['selecionar']))
+			$_SESSION['selecionar'] = false;
 	}
 	
 	if((isset($_POST["buscar_ncontrole"]) && $_POST["buscar_ncontrole"]) || (isset($_POST["buscar_nome"]) && $_POST["buscar_nome"])){
@@ -90,7 +91,7 @@ $(document).ready( function() {
 		if(id == "fichaCadastral" || id_ficha != false)
 			location.href = "index.php?form="+id.charAt(id.length-1);
 		else
-			alert('Você deve primeiramente preencher uma Ficha Cadastral.');				
+			alert('Você deve primeiramente Salvar uma Ficha Cadastral.');				
 	});
 	
 	
@@ -162,6 +163,7 @@ $(document).ready( function() {
 		}
 	}
 	
+	$(document).ready(function(){ $("#cpf").mask("000.000.000-00"); $("#data").mask("00/00/0000");  $("#telefone").mask("(00) 0000-0000");});
 </script>
 
 

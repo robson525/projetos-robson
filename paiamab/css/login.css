@@ -67,6 +67,9 @@ select {
 .td_dir{
 	text-align:left;
 }
+.td_just{
+	text-align:justify;	
+}
 
 .div_padrao{
 	margin:auto;
@@ -218,3 +221,16 @@ select {
 	
 }
 
+.table_radio th, td{
+	text-align:center;
+	vertical-align:central;
+}
+
+.table_radio th{
+	text-shadow: 0 3px 0 rgba(253,8,12,0.3);
+}
+
+.text_explicativo{
+	text-align:justify; 
+	font-style:italic;
+}
