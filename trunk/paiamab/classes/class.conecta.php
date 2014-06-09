@@ -55,9 +55,10 @@ class Conecta{
 	function backup_db(){
 		/* Store All Table name in an Array */
 		$allTables = array();
-		$allTables[0] = "1_form_usuario";
+		$allTables[0] = "1_usuario";
 		$allTables[1] = "1_backup";
 		$allTables[2] = "1_ficha";
+		$allTables[3] = "1_anexo1";
 		
 		$return ="";
 		

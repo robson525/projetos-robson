@@ -12,9 +12,7 @@ class Prontuario {
 	public function __construct($prontuario) {
 		$this->conecta = new Conecta();
 		
-		if($prontuario == 'ficha'){
-			$this->tabela = "1_ficha";
-		}
+		$this->tabela = $prontuario;
 					
 	}
 
@@ -76,7 +74,6 @@ class Prontuario {
 		if(!$query)
 			return mysql_error()."<br>".$sql;
 		else{
-			$this->setIdFicha($this->formulario['n_controle']);
 			$this->conecta->testa_backup();
 			return true;
 		}	
@@ -169,7 +166,7 @@ class Prontuario {
 /* --------------------------------------------------------------------------------------- */
 
 
-	private function setIdFicha($n_controle){
+	public function setIdFicha($n_controle){
 		$sql = "SELECT id_ficha FROM $this->tabela WHERE n_controle = '$n_controle';";
 		$query = mysql_query($sql) or die("Erro ao pegar o id da ficha.<br>".$sql);
 		if(mysql_num_rows($query) == 1)
