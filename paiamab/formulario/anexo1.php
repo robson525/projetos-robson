@@ -51,12 +51,12 @@
 
 <form id="form_ficha" name="form_ficha" method="post" action="index.php?form=1" >
 
-	<table id="tab_anexo1" border="0" align="center" width="80%">
+	<table id="tab_anexo" border="0" align="center" width="80%">
     	<tr>
         	<td></td>
-        	<td class="td_esq" width="30%">Nº de Controle: </td>
-            <td class="td_dir" width="50%"> <input id="n_controle" name="n_controle" type="text" maxlength="10" value="<?php echo $n_controle?$_SESSION['fichaCadas']['n_controle']:""; ?>" disabled> 
-            <span id="span_n_controle" style="color:#FD0004; margin-left:10px;" hidden>Número de Controle já está Cadastradado</span>
+        	<td class="td_esq" width="40%">Nº de Controle: </td>
+            <td class="td_dir" width="40%"> <input id="n_controle" name="n_controle" type="text" maxlength="10" value="<?php echo $n_controle?$_SESSION['fichaCadas']['n_controle']:""; ?>" disabled> 
+            <input name="n_controle" type="text" value="<?php echo $n_controle?$_SESSION['fichaCadas']['n_controle']:""; ?>" hidden> 
             </td>
         
         </tr>
@@ -77,7 +77,7 @@ Por favor tenha em mente os seus valores, esperanças, prazeres e preocupações
         </tr>
         
         <tr>
-        	<td class="td_dir">1.1</td>
+        	<td class="td_dir" style="vertical-align:bottom; padding-bottom:15px;">1.1</td>
         	<td class="td_just" style="vertical-align:bottom; padding-bottom:15px;"> O quanto você se preocupa com o que o seu futuro poderá trazer?</td>
             <td class="td_dir"> 
                 <table width="100%" class="table_radio" border="0">
@@ -705,7 +705,7 @@ paladar,  olfato,  tato),  afetam  a  sua  vida diária?</td>
         <tr>
         	<td></td>
         	<td class="td_esq">Entrevistador/Coletor: </td>
-            <td class="td_dir"> <input id="entrevistador" name="entrevistador" type="text" maxlength="100" style="width:100%" value="<?php echo $ficha?$_SESSION['anexo1']['entrevistador']:""; ?>"> </td>
+            <td class="td_dir"> <input id="entrevistador" name="entrevistador" type="text" maxlength="100" style="width:98%" value="<?php echo $ficha?$_SESSION['anexo1']['entrevistador']:""; ?>"> </td>
             <td class="td_esq">Data: </td>
             <td class="td_dir"> <input id="data" name="data" type="text" maxlength="10" value="<?php echo $ficha?$_SESSION['anexo1']['data']:""; ?>"> </td>
         

@@ -7,6 +7,7 @@
 	}
 	
 	require_once ('../classes/class.usuario.php');
+	require_once ('../classes/class.log.php');
 	extract($_POST);
 	
 	$usuario = new Usuario();
@@ -16,7 +17,7 @@
 		
 		if($existe){
 			$_SESSION['id_usuario'] = $usuario->get_id();
-			echo false;	
+			echo "sucesso";	
 		}
 		else{
 			echo "Login Inválido";	
@@ -30,8 +31,11 @@
 		else{
 			if(!$usuario->cadastraUsuario($_POST["nome"], $_POST["login"], $_POST["senha"]))
 				echo "Erro ao Cadastrar Usuário. <br>Tente Novamente.";
-			else
-				echo false;
+			else{
+				$log = new Log();
+				$log->UsuarioCadastra($_SESSION['id_usuario'], $_POST['usuario'], $_POST['nome']);
+				echo "sucesso";
+			}
 		}
 	}
 	

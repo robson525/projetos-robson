@@ -1,6 +1,7 @@
 <?php 
 
 require_once('class.conecta.php');
+require_once('class.log.php');
 
 class Usuario{
 	
@@ -11,13 +12,15 @@ class Usuario{
     private $nome;
 	private $ultima_sessao;
 	private $admin;
-    
+	 
     //variaveis internas
     private $conecta; //conexão com o banco
+	private $LOG;   
     private $tabela; //nome da tabela
 	
 	public function __construct() {
 		$this->conecta = new Conecta();
+		$this->LOG   = new Log();
 		$this->tabela = "1_usuario";				
 	}
 	
@@ -35,6 +38,7 @@ class Usuario{
 		
 		if(mysql_num_rows($query) == 1){
 			$this->ID	 = $reg["id_usuario"];
+			$this->LOG->UsuarioLogin($this->ID, $reg["nome"]);
 			return true;
 		}
 		else

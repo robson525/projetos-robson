@@ -16,9 +16,11 @@
 	}
 	else{
 		require_once('classes/class.prontuario.php');
+		require_once('classes/class.log.php');
 		$prontuario = new Prontuario('1_ficha');
 		
 		$prontuario->addFicha($_POST, $_SESSION['id_usuario']);
+		$_POST['entrevistador'] = htmlspecialchars($_POST['entrevistador']);
 		
 		if($_POST['submit'] == "Salvar")
 			$ficha = $prontuario->insertFicha();
@@ -32,6 +34,13 @@
 			$_SESSION['id_ficha']	= $prontuario->getIdFicha();
 			$mensagem_tipo = 1;
 			$mensagem_texto = "Formulário Salvo Com Sucesso";
+			
+			$log = new Log();
+			if($_POST['submit'] == "Salvar")
+				$log->ProntuarioCriacao($_SESSION['id_usuario'], $usuario->get_nome(), $_POST['n_controle'], "a Ficha Cadastral", $_SESSION['id_ficha']);
+			if($_POST['submit'] == "Atualizar")
+				$log->ProntuarioEdicao($_SESSION['id_usuario'], $usuario->get_nome(), $_POST['n_controle'], "a Ficha Cadastral", $_SESSION['id_ficha']);
+				
 		}
 		else{
 			$mensagem_tipo = 0;

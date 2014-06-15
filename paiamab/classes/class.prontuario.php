@@ -153,7 +153,8 @@ class Prontuario {
 		$sql = "SELECT * FROM $this->tabela WHERE id_ficha = $id_ficha;";
 		$query = mysql_query($sql);
 		if ( mysql_num_rows($query)  < 1)
-			die("Erro ao Buscar Ficha Pelo ID<br>".$sql);
+			return false;//die("Erro ao Buscar Ficha Pelo ID<br>".$sql);
+			
 		$this->idFicha = $id_ficha;
 		
 		$this->formulario = mysql_fetch_assoc($query);

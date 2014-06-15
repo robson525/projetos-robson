@@ -36,18 +36,18 @@ class Conecta{
 	
 	function testa_backup(){
 		$query = mysql_query("SELECT * FROM 1_backup ORDER BY id DESC LIMIT 1"); // pega o ultimo ID
+		$data = date("Y-m-d H:i:s");
 		if (mysql_num_rows($query) < 1)
-			mysql_query("INSERT INTO 1_backup (contador) VALUES (1);");
+			mysql_query("INSERT INTO 1_backup (contador, data) VALUES (1, '".$data."');");
 		else{
 			$backup = mysql_fetch_object($query);
-			$data = date("Y-m-d H:i:s");
 			if($backup->contador < 10){
 				mysql_query("UPDATE 1_backup SET contador = ".$backup->contador." + 1, data = '". $data."' WHERE id =".$backup->id) or die(mysql_error()." " .$data);
 			}
 			else{
 				$arquivo = $this->backup_db();
 				mysql_query("UPDATE 1_backup SET arquivo = '".$arquivo."', data = '". $data."' WHERE id =".$backup->id);
-				mysql_query("INSERT INTO 1_backup (contador) VALUES (0);");
+				mysql_query("INSERT INTO 1_backup (contador, data) VALUES (0, '".$data."');");
 			}
 		}
 	}

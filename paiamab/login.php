@@ -12,7 +12,7 @@ $(function($) {
 		// Enviando informações do formulário via AJAX
 		$(this).ajaxSubmit(function(resposta) {
 			// Se não retornado nenhum erro
-			if (resposta.length <= 1){
+			if (resposta = "sucesso"){
 				// Redirecionando
 				window.location = 'index.php';				
 			}else{
