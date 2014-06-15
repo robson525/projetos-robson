@@ -13,6 +13,9 @@
 	if(isset($_GET['novo']) && $_GET['novo']){
 		unset($_SESSION['fichaCadas']);
 		unset($_SESSION['id_ficha']);
+		unset($_SESSION['selecionar']);
+		unset($_SESSION['anexo1'], $_SESSION['anexo2'], $_SESSION['anexo3'],$_SESSION['anexo4'],$_SESSION['anexo5']);
+		unset($_SESSION['anexo6'], $_SESSION['anexo7'], $_SESSION['anexo8'],$_SESSION['anexo9'],$_SESSION['anexo10']);
 	}
 	
 	if(isset($_GET['buscar']) && $_GET['buscar'] && isset($_POST['id_ficha']) && $_POST['id_ficha']){
@@ -91,7 +94,7 @@ $(document).ready( function() {
 		if(id == "fichaCadastral" || id_ficha != false)
 			location.href = "index.php?form="+id.charAt(id.length-1);
 		else
-			alert('Você deve primeiramente Salvar uma Ficha Cadastral.');				
+			alert('Você deve primeiramente Criar uma Ficha Cadastral.\nOu Selecionar um Prontuario já Existente.');				
 	});
 	
 	
@@ -100,7 +103,7 @@ $(document).ready( function() {
 
 		$('#div_mensagem').html('');
 		$(this).ajaxSubmit(function(resposta) {
-			if(resposta == false){
+			if(resposta.length < 10){
 				$('#div_mensagem').html("Usuário Cadastrado com Sucesso.");
 				$('#div_mensagem').css( "color","green");
 				$('#cad_nome').val("");
@@ -218,7 +221,8 @@ $(document).ready( function() {
           	</tr>
             <tr>
                 <td class="td_esq">Senha:</td>
-                <td class="td_dir"><input id="cad_senha" name="senha" type="password" maxlength="30" required></td>
+                <td class="td_dir"><input id="cad_senha" name="senha" type="password" maxlength="30" required>
+                				   <input name="usuario" type="text" value="<?php echo $usuario->get_nome()?>;" hidden></td>
           	</tr>
             <tr><td><input type="text" name="tipo" value="cadastro" hidden></td></tr>
             
