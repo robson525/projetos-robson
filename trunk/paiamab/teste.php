@@ -1,5 +1,5 @@
 ﻿<?php 
-include "classes/class.conecta.php";
+include "classes/class.conecta.php"; 
 
 new Conecta();
 
