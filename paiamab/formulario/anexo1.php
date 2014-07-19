@@ -1,4 +1,3 @@
-﻿
 <?php 
 	require_once('classes/class.prontuario.php');
 	
@@ -33,7 +32,7 @@
 
 
 
-<div id="div_erro_validacao">
+<div id="div_erro_validacao"><br>
     <center>
     <?php 
         if(isset($_POST['submit']) && $_POST['submit'])
