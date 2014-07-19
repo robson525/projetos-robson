@@ -1,10 +1,22 @@
 @charset "utf-8";
 /* CSS Document */
 
-input {
+input[type="text"] {
 	border-radius: 2px;
 	box-shadow: 0 2px 5px #eb2323;
 }
+@-moz-document url-prefix(){
+input[type="radio"] {
+    border-radius: 2px;
+    box-shadow : 0 2px 5px #eb2323;
+}
+
+input[type="checkbox"] {
+    border-radius: 2px;
+    box-shadow : 0 2px 5px #eb2323;
+}
+}
+
 select {
 	border:solid 1px #999;
 	box-shadow: 0 2px 5px #eb2323;
