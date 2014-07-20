@@ -5,8 +5,8 @@ if ($_SESSION['selecionar'])
     $prontuario = new Prontuario('1_anexo3');
 
 if (($_SESSION['selecionar'] || $submetido)) {
-    //$_SESSION['anexo3'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
-    //var_dump($_SESSION['anexo1']);
+    $_SESSION['anexo3'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
+    //var_dump($_SESSION['anexo3']);
 }
 
 if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
