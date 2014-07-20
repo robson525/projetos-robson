@@ -272,10 +272,37 @@ if (isset($_SESSION['anexo6']) && $_SESSION['anexo6']) {
                         <option value="1">Afta</option>
                         <option value="2">Sangramento</option>
                         <option value="3">Protese</option>
-                        <option value="4">Nada</option>
+                        <option value="4">Mestigação</option>
+                        <option value="5">Nada</option>
+                        <option value="6">Outros</option>
                     </select>
         	</td>
-       </tr>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Outros:</td >
+                <td class="td_dir"><input type="text" name="tab4_p1_o" maxlength="100" style="width:98%" value="" /> </td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td class="td_esq">Esôfago:</td>
+                <td class="td_dir">
+                    <select id="tab4_p2" name="tab4_p1">
+                        <option value=""></option>
+                        <option value="1">Pirose</option>
+                        <option value="2">Sangramento</option>
+                        <option value="3">Protese</option>
+                        <option value="4">Mestigação</option>
+                        <option value="5">Nada</option>
+                        <option value="6">Outros</option>
+                    </select>
+        	</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Outros:</td >
+                <td class="td_dir"><input type="text" name="tab4_p3" maxlength="100" style="width:98%" value="" /> </td>
             </tr>
           
               
