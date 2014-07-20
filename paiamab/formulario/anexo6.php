@@ -1,194 +1,324 @@
-﻿<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<link href="css/formularios.css" rel="stylesheet" type="text/css"/>
-<title>Documento sem título</title>
-</head>
+<?php
+require_once('classes/class.prontuario.php');
+
+if ($_SESSION['selecionar'])
+    $prontuario = new Prontuario('1_anexo3');
+
+if (($_SESSION['selecionar'] || $submetido)) {
+    //$_SESSION['anexo3'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
+    //var_dump($_SESSION['anexo1']);
+}
+
+if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
+    $n_controle = $_SESSION['fichaCadas']['n_controle'];
+} else {
+    $n_controle = false;
+}
+
+
+if (isset($_SESSION['anexo6']) && $_SESSION['anexo6']) {
+    $ficha = true;
+} else {
+    $ficha = false;
+}
+?>
+
+
+<div id="div_erro_validacao"><br>
+    <center>
+        <?php
+        if (isset($_POST['submit']) && $_POST['submit'])
+            echo $mensagem_texto;
+        ?>
+        <br>
+    </center>
+</div>
 <center>
-<h1>Anexo 4: Avaliação Nutricional</h1>
+<h1>Anexo 6: Avaliação Nutricional</h1>
 </center>
-<body>
-
-<div id="div_anexos">
 
 
+<div id="div_ficha">
 
-<form id="anexo6">
-	   
- <table id="tab1" border="1"  cellspacing="0" width="100%" >  
- 
- 
-        <tr>
-        	<td><h2>1 - Avaliação Antropométrica:</h2>             
-                        
-                 <span > Peso (kg):</span>               <input id="tab1_p1" name="tab1_p1" type="text" maxlength="10" >&ensp;&ensp; 
-        	     <span > Altura (m):</span>              <input id="tab1_p2" name="tab1_p2" type="text" maxlength="10">&ensp;&ensp;
-                 <span > IMC (KG/m2):</span>             <input id="tab1_p3" name="tab1_p3" type="text" maxlength="10">&ensp;&ensp;<br/ ><br/ >
-                 
-                 <span > Diagnóstico Nutricional:</span> <input id="tab1_p4" name="tab1_p4" type="text" maxlength="20">&ensp;&ensp;
-                 <span > CC (cm):</span>                 <input id="tab1_p5" name="tab1_p5" type="text" maxlength="10">&ensp;&ensp;
-                 <span > Classificação:</span>           <input id="tab1_p6" name="tab1_p6" type="text" maxlength="20">&ensp;&ensp;<br/ ><br/ >
-                 
-                 
-                 <span > % Gordura:</span>               <input id="tab1_p7" name="tab1_p7" type="text" maxlength="10">&ensp;&ensp;
-                 <span > Classificação:</span>           <input id="tab1_p8" name="tab1_p8" type="text" maxlength="20"> &ensp;&ensp;                
-                  <br/ >&ensp;                
-            </td>
+    <form id="form_ficha" name="form_ficha" method="post" action="index.php?form=3" >
+
+        <table id="tab_anexo" border="0" align="center" width="80%">
+            <tr>
+                <td width="20%"></td>
+                <td class="td_esq">Nº de Controle: </td>
+                <td class="td_dir" width="40%"> <input id="n_controle" name="n_controle" type="text" maxlength="10" value="<?php echo $n_controle ? $_SESSION['fichaCadas']['n_controle'] : ""; ?>" disabled> 
+                    <input name="n_controle" type="text" value="<?php echo $n_controle ? $_SESSION['fichaCadas']['n_controle'] : ""; ?>" hidden> 
+                </td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Nome: </td>
+                <td class="td_dir"> <input id="nome" name="nome" type="text" maxlength="100" style="width:100%" value="<?php echo $n_controle ? $_SESSION['fichaCadas']['nome'] : ""; ?>" disabled> 
+
+                </td>
+
+            </tr>
+
+            <tr><td><br><br></td></tr>
+            
+            <tr>
+                <th colspan="5"><h3>1 - Avaliação Antropométrica.</h3></th>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td class="td_esq"> Peso (kg):</td>               
+                <td class="td_dir"><input id="tab1_p1" name="tab1_p1" type="text" maxlength="10" ></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq"> Altura (m):</td>              
+                <td class="td_dir"><input id="tab1_p2" name="tab1_p2" type="text" maxlength="10"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">IMC (KG/m2):</td>             
+                <td class="td_dir"><input id="tab1_p3" name="tab1_p3" type="text" maxlength="10"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq"> Diagnóstico Nutricional:</td> 
+                <td class="td_dir"><input id="tab1_p4" name="tab1_p4" type="text" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq"> CC (cm):</td>                 
+                <td class="td_dir"><input id="tab1_p5" name="tab1_p5" type="text" maxlength="10"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq"> Classificação:</td>           
+                <td class="td_dir"><input id="tab1_p6" name="tab1_p6" type="text" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq"> % Gordura:</td>               
+                <td class="td_dir"><input id="tab1_p7" name="tab1_p7" type="text" maxlength="10"></td>
+            </tr>
+             <tr>
+                <td></td>
+                <td class="td_esq"> Classificação:</td>           
+                <td class="td_dir"><input id="tab1_p8" name="tab1_p8" type="text" maxlength="20"></td>
+            </tr>
+            
+            
+            <tr><td><br></td></tr>
+            
+            <tr>
+                <th colspan="5"><h3>2 - Dados Clínicos.</h3></th>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_esq">História/ QP/ Diagnóstico Clínico:</td >
+                <td class="td_dir"><input type="text" name="tab2_p1" maxlength="100" style="width:98%" value="" /> </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_esq">O que interfere na sua alimentação? (causas para o problema)</td >
+                <td class="td_dir"><input type="text" name="tab2_p2" maxlength="100" style="width:98%" value="" /> </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td_esq">Apetite/ Consumo Alimentar:</td >
+                <td class="td_dir"> <select name="tab2_p3"> 
+                                        <option value="1" >Abaixo do Normal</option>
+                                        <option value="2" >Normal</option>
+                                        <option value="3" >Acima do Normal</option>
+                                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Porque?</td >
+                <td class="td_dir"><input type="text" name="tab2_p4" maxlength="100" style="width:50%" value="" /> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Medicamentos?</td >
+                <td class="td_dir"> <select name="tab2_p5">
+                                        <option value=""></option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                    </select>
+                    </span> 
+                </td>
+            </tr>
+            <tr>
+                <td></td> 
+                <td class="td_esq"> 
+                            Frequência de uso? <br><br>
+                            Qual?
+                </td >
+                <td class="td_dir">
+                    <input type="text" name="tab2_p6" maxlength="100" style="width:50%" value="" /> <br><br>
+                    <input type="text" name="tab2_p7" maxlength="100" style="width:50%" value="" />
+                </td>
+            </tr>
+              
+            <tr>
+                <th colspan="5"><h3>3 - Histórico Familiar</h3></th>
+            </tr>
+            
+            <tr>
+                <td colspan="5">
+                    <table id="tab2"  border="1" align="center" cellspacing="0"  width="80%">
+                        <tr>
+                            <td>PATOLOGIAS</td>
+                            <td width="15%">MÃE</td>
+                            <td width="15%">PAI</td>
+                            <td width="15%">AVÓS MARTENOS</td>
+                            <td width="15%">AVÓS PARTENOS</td>
+                        </tr>
+                        <tr>
+                            <td>1 - Hipertensão Arterial Sistêmica</td>
+                            <td><INPUT id="tab3_p1_1" TYPE="checkbox" NAME="tab3_p1_1" VALUE="1"> </td>
+                            <td><INPUT id="tab3_p1_2" TYPE="checkbox" NAME="tab3_p1_2" VALUE="1"> </td>
+                            <td><INPUT id="tab3_p1_3" TYPE="checkbox" NAME="tab3_p1_3" VALUE="1"> </td>
+                            <td><INPUT id="tab3_p1_4" TYPE="checkbox" NAME="tab3_p1_4" VALUE="1"> </td>
+                        </tr>
+                        <tr>
+                            <td>2 - Diabetes Melliturs(1/2)</td>
+                            <td><INPUT id="tab3_p2_1" TYPE="checkbox" NAME="tab3_p2_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p2_2" TYPE="checkbox" NAME="tab3_p2_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p2_3" TYPE="checkbox" NAME="tab3_p2_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p2_4" TYPE="checkbox" NAME="tab3_p2_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>3 - Infarto Agudo do Miocárdio</td>
+                            <td><INPUT id="tab3_p3_1" TYPE="checkbox" NAME="tab3_p3_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p3_2" TYPE="checkbox" NAME="tab3_p3_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p3_3" TYPE="checkbox" NAME="tab3_p3_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p3_4" TYPE="checkbox" NAME="tab3_p3_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>4 - AVC</td>
+                            <td><INPUT id="tab3_p4_1" TYPE="checkbox" NAME="tab3_p4_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p4_2" TYPE="checkbox" NAME="tab3_p4_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p4_3" TYPE="checkbox" NAME="tab3_p4_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p4_4" TYPE="checkbox" NAME="tab3_p4_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>5 - Trombose</td>
+                            <td><INPUT id="tab3_p5_1" TYPE="checkbox" NAME="tab3_p5_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p5_2" TYPE="checkbox" NAME="tab3_p5_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p5_3" TYPE="checkbox" NAME="tab3_p5_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p5_4" TYPE="checkbox" NAME="tab3_p5_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>6 - Dislipidemias</td>
+                            <td><INPUT id="tab3_p6_1" TYPE="checkbox" NAME="tab3_p6_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p6_2" TYPE="checkbox" NAME="tab3_p6_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p6_3" TYPE="checkbox" NAME="tab3_p6_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p6_4" TYPE="checkbox" NAME="tab3_p6_4" VALUE="1"></td>
+
+                        </tr>
+                        <tr>
+                            <td>7 - Dislipidemias</td>
+                            <td><INPUT id="tab3_p7_1" TYPE="checkbox" NAME="tab3_p7_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p7_2" TYPE="checkbox" NAME="tab3_p7_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p7_2" TYPE="checkbox" NAME="tab3_p7_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p7_4" TYPE="checkbox" NAME="tab3_p7_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>8 - Intolerância ou Alergia Alimentar</td>
+                            <td><INPUT id="tab3_p8_1" TYPE="checkbox" NAME="tab3_p8_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p8_2" TYPE="checkbox" NAME="tab3_p8_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p8_3" TYPE="checkbox" NAME="tab3_p8_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p8_4" TYPE="checkbox" NAME="tab3_p8_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>9 - Câncer</td>
+                            <td><INPUT id="tab3_p9_1" TYPE="checkbox" NAME="tab3_p9_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p9_2" TYPE="checkbox" NAME="tab3_p9_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p9_3" TYPE="checkbox" NAME="tab3_p9_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p9_4" TYPE="checkbox" NAME="tab3_p9_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>10 - Obesidade</td>
+                            <td><INPUT id="tab3_p10_1" TYPE="checkbox" NAME="tab3_p10_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p10_2" TYPE="checkbox" NAME="tab3_p10_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p10_3" TYPE="checkbox" NAME="tab3_p10_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p10_4" TYPE="checkbox" NAME="tab3_p10_4" VALUE="1"></td>
+                        </tr>
+                        <tr>
+                            <td>11 - Outras</td>
+                            <td><INPUT id="tab3_p11_1" TYPE="checkbox" NAME="tab3_p11_1" VALUE="1"></td>
+                            <td><INPUT id="tab3_p11_2" TYPE="checkbox" NAME="tab3_p11_2" VALUE="1"></td>
+                            <td><INPUT id="tab3_p11_3" TYPE="checkbox" NAME="tab3_p11_3" VALUE="1"></td>
+                            <td><INPUT id="tab3_p11_4" TYPE="checkbox" NAME="tab3_p11_4" VALUE="1"></td>         
+                        </tr>
+                   </table>
+                </td>
+            </tr>
+            
+            <tr>
+                <th colspan="5"><h3>3 - Revisão de Sistemas.</h3></th>
+            </tr> 
+              
+            <tr>
+                <td></td>
+                <td style="font-size:17px; font-weight: bold">Sistema Digestório</td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td class="td_esq">Boca:</td>
+                <td class="td_dir">
+                    <select id="tab4_p1" name="tab4_p1">
+                        <option value=""></option>
+                        <option value="1">Afta</option>
+                        <option value="2">Sangramento</option>
+                        <option value="3">Protese</option>
+                        <option value="4">Nada</option>
+                    </select>
+        	</td>
        </tr>
-       
-       <tr>
-          <td><h2>2 - Dados Clínicos:</h2>
+            </tr>
           
-               <span >História/ QP/ Diagnóstico Clínico:</span ><br/ >
-               <span >O que interfere na sua alimentação? (causas para o problema)</span > <br/ >
-              <TEXTAREA  id="tab1_p2.01" NAME="tab1_p2.01" ROWS=5 COLS=60> </TEXTAREA><br/ >
               
               
               
-              <span >Quando decide emagrecer, que atitude toma?(O que deixa de comer?) </span > <br/ >              
-              <TEXTAREA  id="tab1_p2.02" NAME="tab1_p2.02" ROWS=5 COLS=60> </TEXTAREA><br/ >
-              
-              
-              
-              <span>Mudanças na consistência da alimentação:</span> <select id="tab1_p2.03" name="tab1_p2.03">
-                                                         <option value=""></option>
-                                                         <option value="Sim">Sim</option>
-                                                         <option value="Não">Não</option>
-                                                          </select><br/ >
-              
-              
-              
-                <span>Apetite/ Consumo Alimentar:</span> <select id="tab1_p2.04" name="tab1_p2.04">
-                                                         <option value=""></option>
-                                                         <option value="Abaixo do Normal">Abaixo do Normal</option>
-                                                         <option value="Normal ">Normal</option>
-                                                         <option value="Acima do Normal ">Acima do Normal </option>                                                         </select><br/ >
-                                                         
-                                           <span >Porque?</span > <br/ >
-              <TEXTAREA  id="tab1_p2.05" NAME="tab1_p2.05" ROWS=5 COLS=60> </TEXTAREA><br/ >   
-              
-              
-              <span>Medicamentos:</span> <select id="tab1_p2.06" name="tab1_p2.06">
-                                                         <option value=""></option>
-                                                         <option value="Sim">Sim</option>
-                                                         <option value="Não">Não</option>
-                                                         </select>&ensp;&ensp;
-                                                         
-                    <span >Qual?</span> <input id="tab1_p2.07" name="tab1_p2.07" type="text" maxlength="20"> &ensp;&ensp; 
-                    <span >Frequência de uso:</span>           <input id="tab1_p2.08" name="tab1_p2.08" type="text" maxlength="20">            
-                   <br/ >&ensp; 
-                                        
-         </td>
-       </tr>
-       
-       <tr>
-          <td><h2>2.1 - Histórico Familiar:</h2>
-                    
- <table id="tab2"  border="1" align="center" cellspacing="0"  width="80%">
-     <tr>
-         <td>PATOLOGIAS</td>
-         <td>MÃE</td>
-         <td>PAI</td>
-         <td>AVÓS MARTENOS</td>
-         <td>AVÓS PARTENOS</td>
-     </tr>
-     <tr>
-         <td>1 - Hipertensão Arterial Sistêmica</td>
-         <td><INPUT id="tab2_p1.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"> </td>
-         <td><INPUT id="tab2_p1.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"> </td>
-         <td><INPUT id="tab2_p1.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"> </td>
-         <td><INPUT id="tab2_p1.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"> </td>
-     </tr>
-     <tr>
-         <td>2 - Diabetes Melliturs(1/2)</td>
-         <td><INPUT id="tab2_p2.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p2.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p2.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p2.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>3 - Infarto Agudo do Miocárdio</td>
-         <td><INPUT id="tab2_p3.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p3.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p3.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p3.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>4 - AVC</td>
-         <td><INPUT id="tab2_p4.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p4.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p4.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p4.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         
-         
-     </tr>
-     <tr>
-         <td>5 - Trombose</td>
-         <td><INPUT id="tab2_p5.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p5.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p5.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p5.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>6 - Dislipidemias</td>
-         <td><INPUT id="tab2_p6.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p6.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p6.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p6.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         
-     </tr>
-     <tr>
-         <td>7 - Dislipidemias</td>
-         <td><INPUT id="tab2_p7.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p7.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p7.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p7.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>8 - Intolerância ou Alergia Alimentar</td>
-         <td><INPUT id="tab2_p8.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p8.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p8.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p8.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>9 - Câncer</td>
-         <td><INPUT id="tab2_p9.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p9.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p9.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p9.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>10 - Obesidade</td>
-         <td><INPUT id="tab2_p10.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p10.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p10.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p10.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-     </tr>
-     <tr>
-         <td>11 - Outras</td>
-         <td><INPUT id="tab2_p11.1" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p11.2" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p11.3" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>
-         <td><INPUT id="tab2_p11.4" TYPE="checkbox" NAME="OPCAO" VALUE="Sim"></td>         
-     </tr>
-     
-</table>
+             
+            <tr><td><br><br><br></td></tr>
+            <tr>
+                <td></td>
+                <td class="td_esq">Entrevistador/Coletor: </td>
+                <td class="td_dir"> <input id="entrevistador" name="entrevistador" type="text" maxlength="100" style="width:98%" value="<?php echo $ficha ? $_SESSION['anexo6']['entrevistador'] : ""; ?>"> </td>
+                <td class="td_esq">Data: </td>
+                <td class="td_dir"> <input id="data" name="data" type="text" maxlength="10" value="<?php echo $ficha ? $_SESSION['anexo6']['data'] : ""; ?>"> </td>
+            </tr>
+            <tr>
+                <td><input id="formulario_tipo" name="formulario_tipo" type="text" value="Anexo6" hidden> </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="padding-top:10px;">
+                    <?php if (!$ficha) { ?>
+                        <input id="submit" name="submit" class="bot_submit" type="submit" value="Salvar" onMouseOver="MouseOver('submit');" onMouseOut="MouseOut('submit');" > 
+                    <?php } else { ?>
+                        <input id="submit" name="submit" class="bot_submit" type="submit" value="Atualizar" onMouseOver="MouseOver('submit');" onMouseOut="MouseOut('submit');">
+                    <?php } ?>
+                </td>
+            </tr>
+
+        </table>
+        
+    </form>
+    
+</div>
 
 
+<?php die();?>
 
-</td>
-       <br/ >&ensp;&ensp;   
-         
-   </td> 
-</tr>
+      
+    
   
-  <tr>
-      <td>
-         <h2>3 - Revisão de Sistemas:</h2>
-      </td>
-  </tr>                
+                 
           
         
      
@@ -388,6 +518,3 @@
 
 
 </div>
-
-</body>
-</html>
