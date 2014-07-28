@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: localhost
--- Data de Criação: 27-Jul-2014 às 20:51
+-- Data de Criação: 27-Jul-2014 às 21:20
 -- Versão do servidor: 5.6.12-log
 -- versão do PHP: 5.4.12
 
@@ -187,10 +187,12 @@ CREATE TABLE IF NOT EXISTS `1_anexo5` (
   `p2` int(11) DEFAULT NULL,
   `p3` int(11) DEFAULT NULL,
   `p4` int(11) DEFAULT NULL,
+  `p5` int(11) DEFAULT NULL,
   `p6` varchar(2) DEFAULT NULL,
   `p6_2` varchar(100) DEFAULT NULL,
   `p7` varchar(2) DEFAULT NULL,
   `p7_2` int(11) DEFAULT NULL,
+  `p8` int(11) DEFAULT NULL,
   `p9` int(11) DEFAULT NULL,
   `p10` varchar(2) DEFAULT NULL,
   `p10_2` int(11) DEFAULT NULL,
