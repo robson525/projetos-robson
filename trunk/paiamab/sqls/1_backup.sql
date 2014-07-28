@@ -1,5 +1,17 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
 --
--- Banco de Dados: `araruna_paiamab`
+-- Máquina: localhost
+-- Data de Criação: 27-Jul-2014 às 20:49
+-- Versão do servidor: 5.6.12-log
+-- versão do PHP: 5.4.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de Dados: `araruna_paiamab`
 --
 
 -- --------------------------------------------------------
@@ -15,4 +27,4 @@ CREATE TABLE IF NOT EXISTS `1_backup` (
   `arquivo` varchar(35) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

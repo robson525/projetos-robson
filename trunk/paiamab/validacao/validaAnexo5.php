@@ -6,7 +6,7 @@
 	
 	require_once('classes/class.prontuario.php');
 	require_once('classes/class.log.php');
-	$prontuario = new Prontuario('1_anexo4');
+	$prontuario = new Prontuario('1_anexo5');
 	
 	$temp = ["id_ficha" => $_SESSION['id_ficha']];
 	
@@ -26,17 +26,17 @@
 	if(is_bool($ficha)){
 		$_SESSION['anexo4'] = $prontuario->getFormulario();
 		$mensagem_tipo = 1;
-		$mensagem_texto = "Anexo 4 Salvo Com Sucesso";
+		$mensagem_texto = "Anexo 5 Salvo Com Sucesso";
 		
 		$log = new Log();
 			if($_POST['submit'] == "Salvar")
-				$log->ProntuarioCriacao($_SESSION['id_usuario'], $usuario->get_nome(), $pos_n_controle, "o Anexo 4", $_SESSION['id_ficha']);
+				$log->ProntuarioCriacao($_SESSION['id_usuario'], $usuario->get_nome(), $pos_n_controle, "o Anexo 5", $_SESSION['id_ficha']);
 			if($_POST['submit'] == "Atualizar")
-				$log->ProntuarioEdicao($_SESSION['id_usuario'], $usuario->get_nome(), $pos_n_controle, "o Anexo 4", $_SESSION['id_ficha']);
+				$log->ProntuarioEdicao($_SESSION['id_usuario'], $usuario->get_nome(), $pos_n_controle, "o Anexo 5", $_SESSION['id_ficha']);
 	}
 	else{
 		$mensagem_tipo = 0;
-		$mensagem_texto = "Erro ao Salvar o Anexo 4.<br>Tente Novamente mais tarde.<br>".$ficha;
+		$mensagem_texto = "Erro ao Salvar o Anexo 5.<br>Tente Novamente mais tarde.<br>".$ficha;
 	}
 		
 

@@ -11,17 +11,13 @@
 	$usuario->set_usuario( $_SESSION['id_usuario'] );
 	
 	if(isset($_GET['novo']) && $_GET['novo']){
-		unset($_SESSION['fichaCadas']);
-		unset($_SESSION['id_ficha']);
-		unset($_SESSION['selecionar']);
-		unset($_SESSION['anexo1'], $_SESSION['anexo2'], $_SESSION['anexo3'],$_SESSION['anexo4'],$_SESSION['anexo5']);
-		unset($_SESSION['anexo6'], $_SESSION['anexo7'], $_SESSION['anexo8'],$_SESSION['anexo9'],$_SESSION['anexo10']);
+            unsetFichas();
 	}
 	
 	if(isset($_GET['buscar']) && $_GET['buscar'] && isset($_POST['id_ficha']) && $_POST['id_ficha']){
-		$_SESSION['selecionar'] = true;
-		unset($_SESSION['fichaCadas']);
-		$_SESSION['id_ficha'] = $_POST['id_ficha'];
+            unsetFichas();
+            $_SESSION['selecionar'] = true;
+            $_SESSION['id_ficha'] = $_POST['id_ficha'];
 	}else{
 		if(!isset($_SESSION['selecionar']))
 			$_SESSION['selecionar'] = false;
@@ -166,7 +162,12 @@ $(document).ready( function() {
 		}
 	}
 	
-	$(document).ready(function(){ $("#cpf").mask("000.000.000-00"); $("#data").mask("00/00/0000");  $("#telefone").mask("(00) 0000-0000");});
+	$(document).ready(function(){ 
+            $("#cpf").mask("000.000.000-00"); 
+            $("#data").mask("00/00/0000");  
+            $("#telefone").mask("(00) 0000-0000");
+            $(".numero").mask("00");
+        });
 </script>
 
 
@@ -300,3 +301,17 @@ $(document).ready( function() {
     </div>
    
 </div>
+
+
+
+
+<?php
+
+function unsetFichas() {
+    unset($_SESSION['fichaCadas']);
+    unset($_SESSION['id_ficha']);
+    unset($_SESSION['selecionar']);
+    unset($_SESSION['anexo1'], $_SESSION['anexo2'], $_SESSION['anexo3'], $_SESSION['anexo4'], $_SESSION['anexo5']);
+    unset($_SESSION['anexo6'], $_SESSION['anexo7'], $_SESSION['anexo8'], $_SESSION['anexo9'], $_SESSION['anexo10']);
+}
+?>

@@ -1,12 +1,14 @@
 <?php
 require_once('classes/class.prontuario.php');
 
-if ($_SESSION['selecionar'])
+if(isset($_SESSION['anexo4']) && $_SESSION['anexo4']){
+    $ficha = true;
+}elseif (($_SESSION['selecionar'] || $submetido)) {
     $prontuario = new Prontuario('1_anexo4');
-
-if (($_SESSION['selecionar'] || $submetido)) {
     $_SESSION['anexo4'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
-    //var_dump($_SESSION['anexo4']);
+    $ficha = $_SESSION['anexo4']?true:false;
+}else{
+    $ficha = false;
 }
 
 if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
@@ -15,12 +17,6 @@ if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
     $n_controle = false;
 }
 
-
-if (isset($_SESSION['anexo4']) && $_SESSION['anexo4']) {
-    $ficha = true;
-} else {
-    $ficha = false;
-}
 ?>
 
 
@@ -42,7 +38,7 @@ if (isset($_SESSION['anexo4']) && $_SESSION['anexo4']) {
 
     <form id="form_ficha" name="form_ficha" method="post" action="index.php?form=4" >
 
-        <table id="tab_anexo" border="0" align="center" width="80%">
+        <table id="tab_ficha" border="0" align="center" width="80%">
             <tr>
                 <td width="20%"></td>
                 <td class="td_esq">Nº de Controle: </td>

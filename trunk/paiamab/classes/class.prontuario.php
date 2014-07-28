@@ -101,7 +101,7 @@ class Prontuario {
 				$sql .=" WHERE id_ficha = ".$id_ficha.";";
 			}	
 		}
-		$query = mysql_query($sql);
+		$query = mysql_query($sql);die($sql);
 		//return $sql;
 		if(!$query)
 			return mysql_error()."<br>".$sql;
