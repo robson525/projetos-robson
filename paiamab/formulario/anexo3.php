@@ -1,25 +1,20 @@
 <?php
 require_once('classes/class.prontuario.php');
 
-if ($_SESSION['selecionar'])
+if (isset($_SESSION['anexo3']) && $_SESSION['anexo3']) {
+    $ficha = true;
+} elseif (($_SESSION['selecionar'] || $submetido)) {
     $prontuario = new Prontuario('1_anexo3');
-
-if (($_SESSION['selecionar'] || $submetido)) {
     $_SESSION['anexo3'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
-    //var_dump($_SESSION['anexo3']);
+    $ficha = $_SESSION['anexo3']?true:false;
+} else {
+    $ficha = false;
 }
 
 if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
     $n_controle = $_SESSION['fichaCadas']['n_controle'];
 } else {
     $n_controle = false;
-}
-
-
-if (isset($_SESSION['anexo3']) && $_SESSION['anexo3']) {
-    $ficha = true;
-} else {
-    $ficha = false;
 }
 ?>
 

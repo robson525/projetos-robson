@@ -1,29 +1,21 @@
-<?php 
-	require_once('classes/class.prontuario.php');
-	
-	if($_SESSION['selecionar'])
-		$prontuario = new Prontuario('1_anexo1');
-	
-	if(($_SESSION['selecionar'] || $submetido)){
-		$_SESSION['anexo1'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
-		//var_dump($_SESSION['anexo1']);
-	}
-	
-	if(isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']){
-		//$ficha = true;
-		$n_controle = $_SESSION['fichaCadas']['n_controle'];
-	}else{
-		//$ficha = false;		
-		$n_controle = false;
-	}
-	
-	
-	if(isset($_SESSION['anexo1']) && $_SESSION['anexo1']){
-		$ficha = true;
-	}else{
-		$ficha = false;		
-	}
-		
+<?php
+require_once('classes/class.prontuario.php');
+
+if (isset($_SESSION['anexo1']) && $_SESSION['anexo1']) {
+    $ficha = true;
+} elseif (($_SESSION['selecionar'] || $submetido)) {
+     $prontuario = new Prontuario('1_anexo1');
+    $_SESSION['anexo1'] = $prontuario->buscarFichaId($_SESSION['id_ficha']);
+    $ficha = $_SESSION['anexo1']?true:false;
+} else {
+    $ficha = false;
+}
+
+if (isset($_SESSION['fichaCadas']) && $_SESSION['fichaCadas']) {
+    $n_controle = $_SESSION['fichaCadas']['n_controle'];
+} else {
+    $n_controle = false;
+}
 ?>
 
 <script type="text/javascript">

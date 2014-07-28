@@ -1,61 +1,69 @@
 -- phpMyAdmin SQL Dump
--- version 2.10.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
--- 
--- Servidor: localhost
--- Tempo de Geração: Fev 01, 2014 as 12:03 PM
--- Versão do Servidor: 5.0.45
--- Versão do PHP: 5.2.5
+--
+-- Máquina: localhost
+-- Data de Criação: 27-Jul-2014 às 20:48
+-- Versão do servidor: 5.6.12-log
+-- versão do PHP: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
--- 
--- Banco de Dados: `araruna_paiamab`
--- 
+--
+-- Base de Dados: `araruna_paiamab`
+--
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Estrutura da tabela `1_anexo2`
--- 
+--
 
-CREATE TABLE `1_anexo2` (
-  `id` int(11) NOT NULL auto_increment,
-  `id_usuario` int(11) default NULL,
-  `id_paciente` int(11) NOT NULL,
-  `tab1_p1` int(11) default NULL,
-  `tab1_p2` int(11) default NULL,
-  `tab1_p3` int(11) default NULL,
-  `tab1_p4` int(11) default NULL,
-  `tab1_p5` int(11) default NULL,
-  `tab1_p6` int(11) default NULL,
-  `tab1_p7` int(11) default NULL,
-  `tab1_p8` int(11) default NULL,
-  `tab1_p9` int(11) default NULL,
-  `tab1_p10` int(11) default NULL,
-  `tab1_p11` int(11) default NULL,
-  `tab1_p12` int(11) default NULL,
-  `tab1_p13` int(11) default NULL,
-  `tab1_p14` int(11) default NULL,
-  `tab2_p1` int(11) default NULL,
-  `tab2_p2` int(11) default NULL,
-  `tab2_p3` int(11) default NULL,
-  `tab2_p4` int(11) default NULL,
-  `tab2_p5` int(11) default NULL,
-  `tab2_p6` int(11) default NULL,
-  `tab2_p7` int(11) default NULL,
-  `tab2_p8` int(11) default NULL,
-  `tab2_p9` int(11) default NULL,
-  `tab2_p10` int(11) default NULL,
-  `tab2_p11` int(11) default NULL,
-  `tab2_p12` int(11) default NULL,
-  `tab2_p13` int(11) default NULL,
-  `tab2_p14` int(11) default NULL,
-  UNIQUE KEY `id` (`id`),
-  KEY `id_paciente` (`id_paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE IF NOT EXISTS `1_anexo2` (
+  `id_ficha` int(11) NOT NULL,
+  `tab1_p1` int(11) DEFAULT NULL,
+  `tab1_p2` int(11) DEFAULT NULL,
+  `tab1_p3` int(11) DEFAULT NULL,
+  `tab1_p4` int(11) DEFAULT NULL,
+  `tab1_p5` int(11) DEFAULT NULL,
+  `tab1_p6` int(11) DEFAULT NULL,
+  `tab1_p7` int(11) DEFAULT NULL,
+  `tab1_p8` int(11) DEFAULT NULL,
+  `tab1_p9` int(11) DEFAULT NULL,
+  `tab1_p10` int(11) DEFAULT NULL,
+  `tab1_p11` int(11) DEFAULT NULL,
+  `tab1_p12` int(11) DEFAULT NULL,
+  `tab1_p13` int(11) DEFAULT NULL,
+  `tab1_p14` int(11) DEFAULT NULL,
+  `tab2_p1` int(11) DEFAULT NULL,
+  `tab2_p2` int(11) DEFAULT NULL,
+  `tab2_p3` int(11) DEFAULT NULL,
+  `tab2_p4` int(11) DEFAULT NULL,
+  `tab2_p5` int(11) DEFAULT NULL,
+  `tab2_p6` int(11) DEFAULT NULL,
+  `tab2_p7` int(11) DEFAULT NULL,
+  `tab2_p8` int(11) DEFAULT NULL,
+  `tab2_p9` int(11) DEFAULT NULL,
+  `tab2_p10` int(11) DEFAULT NULL,
+  `tab2_p11` int(11) DEFAULT NULL,
+  `tab2_p12` int(11) DEFAULT NULL,
+  `tab2_p13` int(11) DEFAULT NULL,
+  `tab2_p14` int(11) DEFAULT NULL,
+  `entrevistador` varchar(100) DEFAULT NULL,
+  `data` varchar(10) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  KEY `id_ficha` (`id_ficha`,`id_usuario`),
+  KEY `id_usuario` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 
--- Extraindo dados da tabela `1_anexo2`
--- 
+--
+-- Constraints for dumped tables
+--
 
+--
+-- Limitadores para a tabela `1_anexo2`
+--
+ALTER TABLE `1_anexo2`
+  ADD CONSTRAINT `pk2_id_ficha` FOREIGN KEY (`id_ficha`) REFERENCES `1_ficha` (`id_ficha`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pk2_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `1_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
