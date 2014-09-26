@@ -3,11 +3,11 @@
 
 <html><head>
 <title>Inscrição da Convenção</title>
-<link href="css/formulario.css" rel="stylesheet" type="text/css"/>
-<script src="js/formulario.js" type="text/javascript"></script>
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/jquery.mask.js" type="text/javascript"></script>
-<script src="js/jquery.blockUI.js" type="text/javascript"></script>
+<link href="formulario/css/formulario.css" rel="stylesheet" type="text/css"/>
+<script src="formulario/js/formulario.js" type="text/javascript"></script>
+<script src="formulario/js/jquery.js" type="text/javascript"></script>
+<script src="formulario/js/jquery.mask.js" type="text/javascript"></script>
+<script src="formulario/js/jquery.blockUI.js" type="text/javascript"></script>
 
 <!--Mascaras-->
 
