@@ -1,18 +1,8 @@
-﻿<!doctype html>
 
-<html>
 
-<head>
+<?php 
 
-<meta charset="utf-8">
-<title>Formulario LIONS</title>
+include "formulario.php"
 
-</head>
+?>
 
-<body>
-
-<?php include "formulario.php"?>
-
-</body>
-
-</html>
