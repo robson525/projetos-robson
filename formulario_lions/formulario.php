@@ -1,6 +1,3 @@
-<?php header('Content-Type: text/html; charset=utf-8'); ?>
-
-<title>Inscrição da Convenção</title>
 <link href="formulario/css/formulario.css" rel="stylesheet" type="text/css"/>
 <script src="formulario/js/formulario.js" type="text/javascript"></script>
 <script src="formulario/js/jquery.js" type="text/javascript"></script>
@@ -88,27 +85,14 @@
 
 
 </script>
-<meta charset="utf-8">
-
-
 
 
 <?php
 $usuario = false;
-if (isset($_POST['id']) && $_POST['id']) {
 
-    include_once("auxi/conn.php");
-    new Conecta();
 
-    $id = preg_replace("/[^0-9\s]/", "", $_POST['id']);
-    $sql = "SELECT * FROM xv_convencao WHERE id = $id";
-    $query = mysql_query($sql) or die("Error in query: $sql. " . mysql_error());
 
-    if (mysql_num_rows($query) > 0) {
-        $campo = mysql_fetch_array($query);
-        $usuario = true;
-    }
-}
+
 ?>
 
 <div id="div_oculta" style="display:none">
@@ -118,7 +102,7 @@ if (isset($_POST['id']) && $_POST['id']) {
 </div>
 
 <div id="div_formulario">
-    <form id="formulario" name="formulario" action="auxi/salvar.php" method="POST" onSubmit="return validaForm();">
+    <form id="formulario" name="formulario" action="cadastro.html?cadastrar=2" method="POST" onSubmit="return validaForm();">
         <table id="tabela" align="center" border="0" width="100%" >
             <tr>
                 <td width="30%" class="col-1">Nome Completo <span class="span_obg">*</span></td>
@@ -137,8 +121,8 @@ if (isset($_POST['id']) && $_POST['id']) {
             </tr>
             <tr>
                 <td class="col-1">CPF <span class="span_obg">*</span></td>
-                <td><input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" value="<?php if ($usuario) echo $campo['cpf']; ?>" required/>
-                    <?php if ($usuario) { ?><script> document.getElementById('cpf').disabled = true;</script> <?php } ?>
+                <td>
+                    <input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" value="<?php if ($usuario) echo $campo['cpf']; ?>" required <?php echo $usuario?'disabled="true"':'' ?>/>
                 </td>
             </tr>
             <tr>

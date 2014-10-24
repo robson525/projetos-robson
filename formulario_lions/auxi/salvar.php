@@ -1,4 +1,27 @@
-﻿<?php 
+<?php 
+
+$user = new JUser();
+$user->name = "teste2";
+$user->username = "teste2";
+$user->password = "teste2";
+$user->email = "teste2@teste2.com.br";
+$user->password = md5("teste2");
+$user->block = '0';
+$user->sendEmail = '0';
+$user->groups = array('2'=>'2');
+
+var_dump($user);
+
+//$user->save();
+var_dump($user);
+
+?>
+
+<?php 
+die();
+?>
+
+<?php 
 	if(!$_POST){
 		echo "Acesso Negado";
 		exit();
