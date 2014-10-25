@@ -1,8 +1,1 @@
 
-
-<?php 
-
-include "formulario.php"
-
-?>
-

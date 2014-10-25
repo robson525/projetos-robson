@@ -131,11 +131,11 @@ $usuario = false;
             </tr>
             <tr>
                 <td class="col-1">Senha <span class="span_obg">*</span></td>
-                <td><input id="senha1" type="password" value="" maxlength="50" style="width:25%;" required/></td>
+                <td><input id="senha1" name="senha1" type="password" value="" maxlength="50" style="width:25%;" required/></td>
             </tr>
             <tr>
                 <td class="col-1">Repita a Senha <span class="span_obg">*</span></td>
-                <td><input id="senha2" type="password" value="" maxlength="50" style="width:25%;" required/></td>
+                <td><input id="senha2" name="senha2" type="password" value="" maxlength="50" style="width:25%;" required/></td>
             </tr>
             <tr>
                 <td class="col-1">Data de Nascimento &nbsp;</td>
