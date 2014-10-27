@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL ^ E_DEPRECATED ^ E_STRICT);
 include_once("../../configuration.php");
-include_once("../auxi/conn.php");
+include_once("../classe/Conecta.php");
 
 if (isset($_POST['matricula']) && $_POST['matricula'] && isset($_POST['cpf']) && $_POST['cpf']) {
     $matricula = preg_replace('/[^[:digit:]_]/', '', $_POST['matricula']);

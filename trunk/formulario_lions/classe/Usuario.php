@@ -8,10 +8,7 @@ require_once 'Persistencia.php';
 class Usuario {
     private $id;
     private $user_id;
-    private $nome;
     private $matricula;
-    private $cpf;
-    private $email;
     private $nascimento;
     private $endereco;
     private $complemento;
@@ -26,6 +23,7 @@ class Usuario {
     private $cl_mj;
     private $prefixo;
     private $camisa;
+    private $error;
     
     public function getId() {
         return $this->id;
@@ -35,20 +33,8 @@ class Usuario {
         return $this->user_id;
     }
 
-    public function getNome() {
-        return $this->nome;
-    }
-
     public function getMatricula() {
         return $this->matricula;
-    }
-
-    public function getCpf() {
-        return $this->cpf;
-    }
-
-    public function getEmail() {
-        return $this->email;
     }
 
     public function getNascimento() {
@@ -115,20 +101,8 @@ class Usuario {
         $this->user_id = $user_id;
     }
 
-    public function setNome($nome) {
-        $this->nome = $nome;
-    }
-
     public function setMatricula($matricula) {
         $this->matricula = $matricula;
-    }
-
-    public function setCpf($cpf) {
-        $this->cpf = $cpf;
-    }
-
-    public function setEmail($email) {
-        $this->email = $email;
     }
 
     public function setNascimento($nascimento) {
@@ -187,6 +161,11 @@ class Usuario {
         $this->camisa = $camisa;
     }
     
+    
+    public function getError(){
+        return $this->error;
+    }
+    
     public function save(){
         if($this->getId()){
             $this->update();
@@ -197,13 +176,10 @@ class Usuario {
     
     private function insert(){
         $sql  = "INSERT INTO jom0__usuario ";
-        $sql .= "(user_id, nome, matricula, cpf, email, nascimento, endereco ,complemento ,estado ,cidade ,clube ,delegado ,cargo_clube ,qual_cc ,cargo_distrito ,qual_cd ,cl_mj ,prefixo ,camisa ) ";
+        $sql .= "(user_id, matricula, nascimento, endereco ,complemento ,estado ,cidade ,clube ,delegado ,cargo_clube ,qual_cc ,cargo_distrito ,qual_cd ,cl_mj ,prefixo ,camisa ) ";
         $sql .= "VALUES ( ";
         $sql .= Persistencia::prepare($this->getUser_id(), Persistencia::FK) . ", ";
-        $sql .= Persistencia::prepare($this->getNome(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getMatricula(), Persistencia::STRING) . ", ";
-        $sql .= Persistencia::prepare($this->getCpf(), Persistencia::STRING) . ", ";
-        $sql .= Persistencia::prepare($this->getEmail(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getNascimento(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getEndereco(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getComplemento(), Persistencia::STRING) . ", ";
@@ -217,16 +193,29 @@ class Usuario {
         $sql .= Persistencia::prepare($this->getQual_cd(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getCl_mj(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getPrefixo(), Persistencia::STRING) . ", ";
-        $sql .= Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . " )";
-        echo $sql;
+        $sql .= Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . " ) ";
+        $sql .= ";";
+        $query = mysql_query($sql);
+        
+        if(mysql_error()){
+            $this->error = "Ocorreu um erro ao Cadastrar. Tente novamente mais tarde.<br>".mysql_error() ."<br>".$sql;
+            $this->deleteUser();
+        }else{
+            $this->error = false;
+            $this->id = mysql_insert_id();
+        }
     }
     
     private function update(){
         
     }
     
-    private function persistencia($variavel = '', $tipo ){
-        
+    private function deleteUser(){
+        $sqlD   = "DELETE u, ug "
+                . "FROM jom0__users AS u "
+                . "INNER JOIN jom0__user_usergroup_map AS ug ON ug.user_id = u.id "
+                . "WHERE u.id = " . $this->user_id . ";"; 
+        mysql_query($sqlD);
     }
-
+    
 }

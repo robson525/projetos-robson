@@ -53,47 +53,42 @@ function Delegado(){
 
 function validaForm(){
 	//Valida CPF
-	retorno = true;
-	mensagem = "";
 	if(!validaCPF()){
 		document.getElementById('cpf').focus();
 		document.getElementById('cpf').style.boxShadow = "0.1px 0.1px 3px red";
 		alert("Favor fornecer um CPF válido.");
-		retorno = false;	
+		return false;	
 	}
+        //Valida Data
 	else
-	//Valida Data
 	if(!validaData()){
 		alert("Favor preencher a Data de Nasciemento Corretamente.");
-		retorno = false;
+		return false;
 	}
 	else
 	if(matTeste == true){
 		document.getElementById('matricula').focus();
 		document.getElementById('matricula').style.boxShadow = "0.1px 0.1px 3px red";
 		alert("Matricula Já está Cadastrada.");
-		retorno = false;		
+		return false;		
 	}
 	else
 	if(cpfTeste == true){
 		document.getElementById('cpf').focus();
 		document.getElementById('cpf').style.boxShadow = "0.1px 0.1px 3px red";
 		alert("CPF Já está Cadastrado.");
-		retorno = false;	
+		return false;	
 	}
 	
 	if(document.getElementById('botao').value == "Atualizar"){
 		certeza = confirm('Tem Certeza que deseja modifiar seus dados?');
 		if (certeza == false){
-			retorno = false;
+			return false;
 		}
 		document.getElementById('cpf').disabled = false;
 	}
 	
-	if (retorno == false)
-		return false;
-	else
-		return true;
+	return true;
 }
 
 //*****************************
