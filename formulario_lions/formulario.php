@@ -18,13 +18,11 @@
             $.post('../../../formulario/auxi/cidades.php', {estado: $('#estado').val()},
             function(resposta) {
                 $('#cidade').html(resposta);
-                //	$(document).ready(function() {  });
             });
-
+            
             $.post('../../../formulario/auxi/clubes.php', {estado: $('#estado').val()},
             function(resposta) {
                 $('#clube').html(resposta);
-                //	$(document).ready(function() {  });
             });
         });
 
@@ -40,19 +38,18 @@
 
     jQuery(document).ready(function($) {
 
-
         //********************** VERIFICA SE MATRICULA JÁ EXISTE ************************************
         $('#matricula').change(function() {
             $.post('../../../formulario/auxi/verificar.php', {matricula: $(this).val()},
             function(resposta) {
                 if (resposta != false) {
                     matTeste = true;
-                    document.getElementById('id').value = resposta;
+                    $('#span_matricula').show();
                 }
                 else {
+                    $('#span_matricula').hide();
                     matTeste = false;
                 }
-                testeMatCpf();
             });
 
         });
@@ -64,19 +61,14 @@
             function(resposta) {
                 if (resposta != false) {
                     cpfTeste = true;
-                    document.getElementById('id').value = resposta;
+                    $('#span_cpf').show();
                 }
                 else {
+                    $('#span_cpf').hide();
                     cpfTeste = false;
                 }
-                testeMatCpf();
             });
             //	}
-        });
-
-        //**********************************************************
-        $('#atualizar').click(function() {
-            document.getElementById('form_oculta').submit();
         });
 
 
@@ -88,10 +80,9 @@
 
 
 <?php
-$usuario = false;
-
-
-
+if(!isset($usuario)){
+    $usuario = false;
+}
 
 ?>
 
@@ -102,27 +93,26 @@ $usuario = false;
 </div>
 
 <div id="div_formulario">
-    <form id="formulario" name="formulario" action="cadastro.html?cadastrar=2" method="POST" onSubmit="return validaForm();">
+    <form id="formulario" name="formulario" action="cadastro.html" method="POST" onSubmit="return validaForm();">
         <table id="tabela" align="center" border="0" width="100%" >
             <tr>
                 <td width="30%" class="col-1">Nome Completo <span class="span_obg">*</span></td>
                 <td width="70%"><input id="nome" name="nome" type="text" maxlength="100" style="width:98%" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" value="<?php if ($usuario) echo $campo['nome']; ?>" required /></td>
             </tr>
-            <tr id="cadastrado">
-                <td></td><td>
-                    Usário já está Cadastrado. Clique <a href="#" id="atualizar">AQUI</a> caso queira atualizar seu cadastro. 
-                </td>
-            </tr>
             <tr>
                 <td class="col-1">Número de Matricula <span class="span_obg">*</span></td>
-                <td><input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" value="<?php if ($usuario) echo $campo['matricula']; ?>"  required />
+                <td>
+                    <input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" value="<?php if ($usuario) echo $campo['matricula']; ?>"  required />
+                    <span id="span_matricula" style="color:red; font-weight:bold; display:none;">&ensp;Numero de Matricula já está cadastrada.</span>
                     <br>
-                    <span class="span_pequeno">Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span></td>
+                    <span class="span_pequeno">Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span>
+                </td>
             </tr>
             <tr>
                 <td class="col-1">CPF <span class="span_obg">*</span></td>
                 <td>
                     <input id="cpf" name="cpf" type="text" style="width:25%;" onKeyPress="tirarShadow('cpf')" value="<?php if ($usuario) echo $campo['cpf']; ?>" required <?php echo $usuario?'disabled="true"':'' ?>/>
+                    <span id="span_cpf" style="color:red; font-weight:bold; display:none;">&ensp;CPF já está cadastrado.</span>
                 </td>
             </tr>
             <tr>
@@ -283,7 +273,9 @@ $usuario = false;
                 <td colspan="2" >Campos marcados com <span class="span_obg">*</span> são Obrigatórios.</td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: center"><button id="botao" class="button" type="submit" name="botao" ><?php echo $usuario ? "Atualizar" : "Cadastrar"; ?></button></td>
+                <td colspan="2" style="text-align: center">
+                    <button id="botao" class="button" type="submit" name="cadastro" value="<?php echo $usuario?'2':'1';?>"><?php echo $usuario ? "Atualizar" : "Cadastrar"; ?></button>
+                </td>
             </tr>
         </table>
     </form>

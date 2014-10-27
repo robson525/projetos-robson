@@ -25,22 +25,22 @@ class Persistencia {
         
         if($tipo == self::STRING){
             $var = self::remove($var);
-            return empty($var) ? "'NULL'" : "'".$var."'";
+            return empty($var) ? 'NULL' : "'".$var."'";
         }
         elseif($tipo == self::INT){
-            return is_int($var) ? $var : ($var === '0' ? '0' : "'NULL'");
+            return is_int($var) ? $var : ($var === '0' ? '0' : 'NULL');
         }
         elseif($tipo == self::PK){
             return (is_int($var) && $var > 0) ? $var : '';
         }
         elseif($tipo == self::FK){
-            return (is_int($var) && $var > 0) ? $var : "'NULL'";
+            return (is_int($var) && $var > 0) ? $var : 'NULL';
         }
         elseif($tipo == self::BOOLEAN){
-            return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : "'NULL'" );
+            return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : 'NULL' );
         }
         elseif($tipo == self::BIT){
-            return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : "'NULL'" );
+            return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : 'NULL' );
         }
     }
     
