@@ -1,14 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.0.4
--- http://www.phpmyadmin.net
---
--- Máquina: localhost
--- Data de Criação: 05-Mar-2014 às 02:56
--- Versão do servidor: 5.6.12-log
--- versão do PHP: 5.4.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 --
 -- Base de Dados: `lionsdla6`
@@ -19,17 +8,14 @@ USE `lionsdla6`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `xv_convencao`
+-- Estrutura da tabela `jom0__usuario`
 --
 
-DROP TABLE IF EXISTS `xv_convencao`;
-CREATE TABLE IF NOT EXISTS `xv_convencao` (
+CREATE TABLE IF NOT EXISTS `jom0__usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `matricula` varchar(11) NOT NULL,
-  `cpf` varchar(20) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `nascimento` date NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `matricula` varchar(11) DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `complemento` varchar(100) DEFAULT NULL,
   `estado` varchar(10) NOT NULL,
@@ -44,12 +30,39 @@ CREATE TABLE IF NOT EXISTS `xv_convencao` (
   `prefixo` varchar(10) NOT NULL,
   `camisa` varchar(5) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  UNIQUE KEY `id` (`id`),
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 
 --
--- Extraindo dados da tabela `xv_convencao`
+-- Estrutura da tabela `__convencao`
 --
 
-INSERT INTO `xv_convencao` (`id`, `nome`, `matricula`, `cpf`, `email`, `nascimento`, `endereco`, `complemento`, `estado`, `cidade`, `clube`, `delegado`, `cargo_clube`, `qual_cc`, `cargo_distrito`, `qual_cd`, `cl_mj`, `prefixo`, `camisa`) VALUES
-(2, 'ROBSON CLAUDIO VALENTE DA SILVA', '0000000000', '847.012.002-63', 'robson.cao@hotmail.com', '1990-05-06', 'TV 25 DE JUNHO', '525', 'PARÁ', 'BELÉM', 'LIONS CLUBE DE BELÉM BATISTA CAMPOS', 'SIM', 'OUTRO', 'OUTRO CARGO', 'OUTRO', 'OUTRO CARGO', 'SIM', 'Cal', 'P');
+CREATE TABLE IF NOT EXISTS `__convencao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(250) NOT NULL,
+  `aberta` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Estrutura da tabela `__inscrito_convencao`
+--
+
+CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `convencao_id` int(11) NOT NULL,
+  `pago` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`,`convencao_id`),
+  KEY `convencao_id` (`convencao_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Constraints for dumped tables
+--
+ALTER TABLE `__inscricao_convencao`
+  ADD CONSTRAINT `convercao_id_fk` FOREIGN KEY (`convencao_id`) REFERENCES `__convencao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_id_fk` FOREIGN KEY (`usuario_id`) REFERENCES `jom0__usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
