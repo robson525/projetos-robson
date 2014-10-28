@@ -218,4 +218,47 @@ class Usuario {
         mysql_query($sqlD);
     }
     
+    
+    
+    public static function getByUser($user_id = 0){
+        $sql = "SELECT * FROM jom0__usuario WHERE user_id = " . $user_id;
+        $query = mysql_query($sql);
+        if(mysql_num_rows($query)){
+            return self::load(mysql_fetch_object($query));
+        }else{
+            return new Usuario();
+        }
+    }
+    
+    private function load($usuario_){
+        
+        $usuario = new Usuario();
+        $usuario->setId($usuario_->id);
+        $usuario->setUser_id($usuario_->user_id);
+        $usuario->setMatricula($usuario_->matricula);
+        $usuario->setNascimento($usuario_->nascimento);
+        $usuario->setEndereco($usuario_->endereco);
+        $usuario->setComplemento($usuario_->complemento);
+        $usuario->setEstado($usuario_->estado);
+        $usuario->setCidade($usuario_->cidade);
+        $usuario->setClube($usuario_->clube);
+        $usuario->setDelegado($usuario_->delegado);
+        $usuario->setCargo_clube($usuario_->cargo_clube);
+        $usuario->setQual_cc($usuario_->qual_cc);
+        $usuario->setCargo_distrito($usuario_->cargo_distrito);
+        $usuario->setQual_cd($usuario_->qual_cd);
+        $usuario->setCl_mj($usuario_->cl_mj);
+        $usuario->setPrefixo($usuario_->prefixo);
+        $usuario->setCamisa($usuario_->camisa);
+        
+        return $usuario;
+    }
+    
+    public function getDataNascimento($delimitador = '-'){
+        if(!$this->nascimento)
+            return false;
+        $data = explode('-', $this->nascimento);
+        return $data[2] . $delimitador . $data[1] . $delimitador . $data[0];
+    }
+    
 }

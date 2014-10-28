@@ -34,7 +34,7 @@ class Persistencia {
             return (is_int($var) && $var > 0) ? $var : '';
         }
         elseif($tipo == self::FK){
-            return (is_int($var) && $var > 0) ? $var : 'NULL';
+            return (is_int($var) && $var > 0) ? $var : ( ($var === false || $var === null || $var < 0) ?  'NULL' : (int)$var);
         }
         elseif($tipo == self::BOOLEAN){
             return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : 'NULL' );

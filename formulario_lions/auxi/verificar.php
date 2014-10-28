@@ -24,9 +24,10 @@ if (isset($_POST['matricula']) && $_POST['matricula'] && isset($_POST['cpf']) &&
 //***************************************************************************	
 
 function verifica($campo, $valor) {
-
+    $tabela = $campo=='matricula' ? 'jom0__usuario' : 'jom0__users';
+    $campo = $campo=='matricula' ? 'matricula' : 'username';
     $con = new Conecta();
-    $sql = "SELECT * FROM xv_convencao WHERE $campo = '$valor';";
+    $sql = "SELECT * FROM $tabela WHERE $campo = '$valor';";
     $query = mysql_query($sql) or die("Error in query: $sql. " . mysql_error());
     if (mysql_num_rows($query) > 0) {
         $campo = mysql_fetch_array($query);
