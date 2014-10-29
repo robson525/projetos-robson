@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
   `usuario_id` int(11) NOT NULL,
   `convencao_id` int(11) NOT NULL,
   `pago` bit(1) NOT NULL DEFAULT b'0',
+  `comprovante` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`,`convencao_id`),
   KEY `convencao_id` (`convencao_id`)

@@ -1,28 +1,13 @@
 <script type="text/javascript">
-    function cadConvencao(id, titulo){
-        var confirmar =  confirm("Tem certeza que deseja se cadastrar na "+ titulo + " ?");
-        if(confirmar){
-            document.getElementById('cadast_convencao').value = id;
-            document.getElementById('form_cadastrar').submit();
-        }
-    }
-    function pagConvencao(id){
-        window.location='cadastro.html?pagamento=' + id;
+    function cadConvencao(id){
+        window.location='cadastro.html?convencao=' + id;
     }
 </script>
 
  <?php 
        
     if(isset($_POST['convencao']) && $_POST['convencao']){
-        $iscricao = new InscricaoConvencao();
-        $iscricao->setUsuario_id($usuario->getId());
-        $iscricao->setConvencao_id($_POST['convencao']);
-        $erro = !$iscricao->save();
-        if($erro){
-            $msg = "Falha ao cadastrar. Você já está cadastrado nessa Convenção.";
-        }else{
-            $msg = "Cadastro realizado com sucesso.";
-        }
+       
     }
     
     $convencoes = Convencao::getAbertas();
@@ -42,10 +27,6 @@
 <?php endif; ?>
 
 
-
-
-
-
 <div>
 
     <?php if(isset($convencoes) && count($convencoes)): ?>
@@ -62,7 +43,7 @@
                         <?php echo $convencao->getTitulo() ?>
                     </td>
                     <td style="text-align:center;"> 
-                        <?php echo criarBotao($convencao, $inscricoes) ?>
+                        <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="Cadastro na Convenção">Inscrição</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -130,37 +111,4 @@
 
 </div>
 
-<div style="display:none;">
-    <form id="form_cadastrar" action="" method="POST">
-        <input type="hidden" id="cadast_convencao" name="convencao" value="" />
-    </form>
-</div>
-<div style="display:none;">
-    <form id="form_pagar" action="" method="POST">
-        <input type="hidden" id="pagar_convencao" name="pagamento" value="" />
-    </form>
-</div>
 
-
-
-
-<?php 
-function criarBotao($convencao, $inscricoes = array()){
-    $botao = '<button class="button" ';
-    foreach ($inscricoes as $inscricao){
-        if($inscricao->getConvencao_id() == $convencao->getId()){
-            if($inscricao->getPago()){
-                $botao .= 'disabled="true" style="background-color: grey;" title="Você já está cadastrado nesta convenção.">' . 'Cadastrar</button>';
-            }else{
-                $botao .= 'onclick="pagConvencao(\''.$convencao->getId().'\')" title="Confirmar Pagamento">' . 'Pagamento</button>' ; 
-            }            
-        }else{
-             $botao .= 'onclick="cadConvencao(\'' . $convencao->getId() . '\', \'' . $convencao->getTitulo() . '\')" title="Cadatrar na Convenção"> ' . 'Cadastrar</button>' ;              
-        }
-    }
-    if(!count($inscricoes)){
-        $botao .= 'disabled="true" style="background-color: grey;" title="Você deve primeiro preencher as informações cadastrais.">' . 'Cadastrar</button>';
-    }
-    return $botao;
-}
-?>

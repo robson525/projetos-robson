@@ -40,6 +40,21 @@ class Convencao {
         return $array;
     }
     
+    public static function getById($id = 0){
+        $sql = "SELECT * FROM __convencao WHERE id = " . Persistencia::prepare($id, Persistencia::PK);
+        $query = mysql_query($sql);
+        if(mysql_num_rows($query)){
+            $conv = mysql_fetch_object($query);
+            $convencao = new Convencao();
+            $convencao->setId($conv->id);
+            $convencao->setTitulo($conv->titulo);
+            $convencao->setAberta($conv->aberta);
+            return $convencao;
+        }else{
+            return false;
+        }
+    }
+
     private function load($convencao_){
         $convencao = new Convencao();
         $convencao->setId($convencao_->id);
