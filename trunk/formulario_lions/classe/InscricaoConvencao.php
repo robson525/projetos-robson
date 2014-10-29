@@ -6,6 +6,7 @@ class InscricaoConvencao {
     private $usuario_id;
     private $convencao_id;
     private $pago;
+    private $comprovante;
     
     public function getId() {
         return $this->id;
@@ -21,6 +22,10 @@ class InscricaoConvencao {
 
     public function getPago() {
         return $this->pago;
+    }
+    
+    public function getComprovante() {
+        return $this->comprovante;
     }
 
     public function setId($id) {
@@ -39,6 +44,10 @@ class InscricaoConvencao {
         $this->pago = $pago;
     }
 
+    public function setComprovante($comprovante) {
+        $this->comprovante = $comprovante;
+    }
+
     public function save(){
         if(!$this->getId()){
             if(!$this->verificaCadastro()){
@@ -46,6 +55,8 @@ class InscricaoConvencao {
             }else{
                 return false;
             }
+        }else{
+            $this->update();
         } 
     }
     
@@ -60,6 +71,10 @@ class InscricaoConvencao {
         }else{
             return false;
         }
+    }
+    
+    private function update(){
+        
     }
     
     public static function getByUsuario($usuario_id = 0){
@@ -91,6 +106,7 @@ class InscricaoConvencao {
         $inscricao->setUsuario_id($inscricao_->usuario_id);
         $inscricao->setConvencao_id($inscricao_->convencao_id);
         $inscricao->setPago($inscricao_->pago);
+        $inscricao->setComprovante($inscricao_->comprovante);
         return $inscricao;
     }
     
