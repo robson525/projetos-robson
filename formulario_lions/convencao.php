@@ -18,10 +18,44 @@
         }
     endif;
     
+    if(isset($_FILES['comprovante'])):
+        $pastaAnexo = "formulario/conprovante/convencao-16/";
+        $extPermitidas = array("pdf", "jpg", "png", "jpeg");
+        $tamanhoMax = 4194304; //4M
+        $extensao = strtolower(end(explode('.', $_FILES['comprovante']['name'])));
+
+        if(in_array($extensao, $extPermitidas)){
+            if($_FILES['comprovante']['size'] <= $tamanhoMax){
+                
+                
+            }else{
+                $erro = true;
+                $msg = "Tamanho do arquivo é superior ao permitido.";
+            }
+        }else{
+            $erro = true;
+            $msg = "Extensão do arquivo não é permitida.";
+        }
+    endif;
+    
 ?>
 <script type="text/javascript">
+    var extPermitidas = ["pdf", "jpg", "png", "jpeg"];
+    var tamanhoMax = 4194304;
     function validaArquivo(){
-        
+        var doc = document.getElementById('comprovante');
+        var extensao = doc.value.split('.');
+        extensao = extensao[extensao.length - 1].toLowerCase() ;
+        if(extPermitidas.indexOf(extensao.toLowerCase()) < 0){
+            alert("Extensão do arquivo não é permitida.");
+            return false;
+        }else if(doc.files[0].size > tamanhoMax){
+            alert("Tamanho do arquivo é superior ao permitido.");
+            return false;
+        }else{
+            
+            return true;
+        }
     }
 </script>
 
@@ -72,19 +106,24 @@ if($convencao && $convencao->getAberta()):
                     </td>
 
                     <td style="width: 60%; vertical-align: top;">
-                        <table class="category" style="">
-                            <caption><h4>Comprovante de Pagamento</h4></caption>
-                            <tr>
-                                <td style="text-align:right;">Anexar comprovante:</td>
-                                <td><input type="file" name="comprovante" accept="image/jpg,image/jpeg,image/png,application/pdf" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center;">Extensões permitidas: .pdf , .jpj , .png , .jpeg </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="text-align:center;"> <button class="button" type="submit">Enviar</button> </td>
-                            </tr>
-                        </table>        
+                        <form method="POST" action="" enctype="multipart/form-data" onsubmit="return validaArquivo()">
+                            <table class="category" style="">
+                                <caption><h4>Comprovante de Pagamento</h4></caption>
+                                <tr>
+                                    <td style="text-align:right;">Anexar comprovante:</td>
+                                    <td><input type="file" name="comprovante" id="comprovante" accept="image/jpg,image/jpeg,image/png,application/pdf" required="true"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center;">Extensões permitidas: .pdf , .jpg , .png , .jpeg </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center;">Tamanho máximo do arquivo: 4M </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="text-align:center;"> <button class="button" type="submit">Enviar</button> </td>
+                                </tr>
+                            </table>    
+                        </form>
                     </td>
                 </tr>
             </table>
