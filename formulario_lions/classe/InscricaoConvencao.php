@@ -56,7 +56,7 @@ class InscricaoConvencao {
                 return false;
             }
         }else{
-            $this->update();
+            return $this->update();
         } 
     }
     
@@ -74,7 +74,11 @@ class InscricaoConvencao {
     }
     
     private function update(){
-        
+        $sql  = "UPDATE __inscricao_convencao SET ";
+        $sql .= "pago = " . Persistencia::prepare($this->getPago(), Persistencia::BIT) . ", ";
+        $sql .= "comprovante = " . Persistencia::prepare($this->getComprovante(), Persistencia::FK) . " ";
+        $sql .= "WHERE id = " . $this->getId();
+        return mysql_query($sql);
     }
     
     public static function getByUsuario($usuario_id = 0){
@@ -98,6 +102,22 @@ class InscricaoConvencao {
         }else{
             return false;
         }
+    }
+    
+    public function InsereComprovante(Comprovante $comprovante){
+        
+        if($this->getPago()){
+            Comprovante::deletaComprovante($this->getComprovante());
+        }
+        $comprovante->save();
+        if($comprovante->getId()){
+            $this->setComprovante($comprovante->getId());
+            $this->setPago('1');
+            return $this->save();
+        }else{
+            return false;
+        }
+        
     }
     
     private function load($inscricao_){
