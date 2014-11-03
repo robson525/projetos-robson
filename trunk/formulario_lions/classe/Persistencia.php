@@ -40,7 +40,7 @@ class Persistencia {
             return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : 'NULL' );
         }
         elseif($tipo == self::BIT){
-            return ($var === '0' || $var === 0 || $var === false ) ? "'0'" :  ( $var ? "'1'" : 'NULL' );
+            return ($var === '0' || $var === 0 || $var === false ) ? "b'0'" :  ( $var ? "b'1'" : 'NULL' );
         }
     }
     

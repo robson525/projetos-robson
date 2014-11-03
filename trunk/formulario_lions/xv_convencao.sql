@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
   `usuario_id` int(11) NOT NULL,
   `convencao_id` int(11) NOT NULL,
   `pago` bit(1) NOT NULL DEFAULT b'0',
-  `comprovante` varchar(250) DEFAULT NULL,
+  `comprovante` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`,`convencao_id`),
   KEY `convencao_id` (`convencao_id`)
@@ -67,3 +67,17 @@ CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
 ALTER TABLE `__inscricao_convencao`
   ADD CONSTRAINT `convercao_id_fk` FOREIGN KEY (`convencao_id`) REFERENCES `__convencao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_id_fk` FOREIGN KEY (`usuario_id`) REFERENCES `jom0__usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
+  
+  --
+-- Estrutura da tabela `__comprovante`
+--
+
+CREATE TABLE IF NOT EXISTS `__comprovante` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `md5` varchar(32) NOT NULL,
+  `local` varchar(250) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
