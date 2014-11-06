@@ -4,23 +4,31 @@ require_once 'formulario/classe/Usuario.php';
 
 if (isset($_POST['cadastro']) && $_POST['cadastro']):
     extract($_POST);
-
-    $cpf = preg_replace('/[^[:digit:]_]/', '', $cpf);
+    
+    $novo = isset($user) ? false : true;
+    
     $nascimento = "{$ano}-{$mes}-{$dia}";
     if ($dia == NULL && $mes == NULL && $ano == NULL) {
         $nascimento = '';
     }
-
-    $user = new JUser();
-    $user->name = $nome;
-    $user->username = $cpf;
-    $user->password = md5($senha1);
-    $user->email = $email;
-    $user->block = '0';
-    $user->sendEmail = '0';
-    $user->groups = array('2' => '2');
     
-    $usuario = new Usuario();
+    if($novo){
+        $user = new JUser();
+        $user->name = $nome;
+        $user->username = preg_replace('/[^[:digit:]_]/', '', $cpf);
+        $user->password = md5($senha1);
+        $user->email = $email;
+        $user->block = '0';
+        $user->sendEmail = '0';
+        $user->groups = array('2' => '2');
+    }else{
+        $user->name = $nome;
+        $user->email = $email;
+    }
+    
+    if($novo){
+        $usuario = new Usuario();
+    }
     $usuario->setMatricula($matricula);
     $usuario->setNascimento($nascimento);
     $usuario->setEndereco($endereco);
@@ -37,24 +45,32 @@ if (isset($_POST['cadastro']) && $_POST['cadastro']):
     $usuario->setPrefixo($prefixo);
     $usuario->setCamisa($camisa);
     
-    $user->save();
-    if(!$user->getError()):
+    if($user->save(!$novo)):
         
         $usuario->setUser_id($user->id);
-        $usuario->save();
         
-        if($usuario->getError()):
+        if($usuario->save()):
+            $erro = false;
+            if($novo){
+                $msg = "Usuário Cadastrado com Sucesso.";
+            }
+            else{
+                $msg = "Usuário Atualizado com Sucesso.";
+            }
+        else:
             $erro = true;
             $msg = $usuario->getError();
-        else:
-            $erro = false;
-            $msg = "Usuário Cadastrado com Sucesso.";
         endif;
         
     else:
         $erro = true;
         $msg = $user->getError();
-        $_GET['cadastrar'] = '1';
+        if($novo){
+            $_GET['cadastrar'] = '1';
+        }
+        else{
+            $_GET['atualizar'] = '1';
+        }
     endif;
 
 else:
@@ -64,7 +80,7 @@ endif;
 ?>
 
 
-
+<?php if(!isset($usuario) || $erro):?>
 <div id="system-message" style="text-align: center;">
     <dd class="<?php echo $erro ? 'error' : '' ?>">
         <ul>
@@ -74,11 +90,11 @@ endif;
         </ul>
     </dd>
 </div>
+<?php endif; ?>
 
 
 <?php 
-var_dump($user);
-var_dump($usuario)
+
 
 ?>
 

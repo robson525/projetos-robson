@@ -76,7 +76,7 @@ class Comprovante {
         $sql .= Persistencia::prepare($this->getLocal(), Persistencia::STRING) . ") ";
         mysql_query($sql);
         if(!mysql_error()){
-            $query = mysql_query("SELECT LAST_INSERT_ID() AS id;");
+            $query = mysql_query("SELECT LAST_INSERT_ID() AS id FROM __comprovante;");
             $this->setId(mysql_fetch_object($query)->id);
         }else{
             return false;

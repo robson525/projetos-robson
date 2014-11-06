@@ -41,7 +41,7 @@
         }
     endif;
     
-    if(isset($_FILES['comprovante'])): var_dump($_FILES['comprovante']);
+    if(isset($_FILES['comprovante'])): 
         $pastaAnexo = "formulario/conprovante/convencao-16/";
         $extPermitidas = array("pdf", "jpg", "png", "jpeg");
         $tamanhoMax = 4194304; //4M
