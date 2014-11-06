@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 extract ($_POST);
 
 if($estado == "PARÁ"){

@@ -168,9 +168,9 @@ class Usuario {
     
     public function save(){
         if($this->getId()){
-            $this->update();
+            return $this->update();
         }else{
-            $this->insert();
+            return $this->insert();
         }
     }
     
@@ -195,19 +195,45 @@ class Usuario {
         $sql .= Persistencia::prepare($this->getPrefixo(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . " ) ";
         $sql .= ";";
-        $query = mysql_query($sql);
+        mysql_query($sql);
         
         if(mysql_error()){
-            $this->error = "Ocorreu um erro ao Cadastrar. Tente novamente mais tarde.<br>".mysql_error() ."<br>".$sql;
+            $this->error = "Ocorreu um erro ao Cadastrar. Tente novamente mais tarde.";
             $this->deleteUser();
+            return false;
         }else{
-            $this->error = false;
-            $this->id = mysql_insert_id();
+            $this->id = mysql_fetch_object( mysql_query("SELECT LAST_INSERT_ID() AS id FROM jom0__usuario;"))->id;
+            return true;
         }
     }
     
     private function update(){
-        
+        $sql  = "UPDATE jom0__usuario SET ";
+        $sql .= "user_id = " . Persistencia::prepare($this->getUser_id(), Persistencia::FK) . ", ";
+        $sql .= "matricula = " . Persistencia::prepare($this->getMatricula(), Persistencia::STRING) . ", ";
+        $sql .= "nascimento = " . Persistencia::prepare($this->getNascimento(), Persistencia::STRING) . ", ";
+        $sql .= "endereco = " . Persistencia::prepare($this->getEndereco(), Persistencia::STRING) . ", ";
+        $sql .= "complemento = " . Persistencia::prepare($this->getComplemento(), Persistencia::STRING) . ", ";
+        $sql .= "estado = " . Persistencia::prepare($this->getEstado(), Persistencia::STRING) . ", ";
+        $sql .= "cidade = " . Persistencia::prepare($this->getCidade(), Persistencia::STRING) . ", ";
+        $sql .= "clube = " . Persistencia::prepare($this->getClube(), Persistencia::STRING) . ", ";
+        $sql .= "delegado = " . Persistencia::prepare($this->getDelegado(), Persistencia::STRING) . ", ";
+        $sql .= "cargo_clube = " . Persistencia::prepare($this->getCargo_clube(), Persistencia::STRING) . ", ";
+        $sql .= "qual_cc = " . Persistencia::prepare($this->getQual_cc(), Persistencia::STRING) . ", ";
+        $sql .= "cargo_distrito = " . Persistencia::prepare($this->getCargo_distrito(), Persistencia::STRING) . ", ";
+        $sql .= "qual_cd = " . Persistencia::prepare($this->getQual_cd(), Persistencia::STRING) . ", ";
+        $sql .= "cl_mj = " . Persistencia::prepare($this->getCl_mj(), Persistencia::STRING) . ", ";
+        $sql .= "prefixo = " . Persistencia::prepare($this->getPrefixo(), Persistencia::STRING) . ", ";
+        $sql .= "camisa = " . Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . "  ";
+        $sql .= "WHERE id = " . $this->getId();
+        mysql_query($sql);
+        if(mysql_error()){
+            $this->error = "Ocorreu um erro ao Atualizar. Tente novamente mais tarde.<br>".mysql_error() ."<br>".$sql;
+            //$this->deleteUser();
+            return false;
+        }else{
+            return true;
+        }
     }
     
     private function deleteUser(){

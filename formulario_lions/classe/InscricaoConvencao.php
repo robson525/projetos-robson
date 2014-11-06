@@ -66,7 +66,7 @@ class InscricaoConvencao {
         $sql .= Persistencia::prepare($this->getConvencao_id(), Persistencia::FK) . "); ";
         mysql_query($sql);
         if(!mysql_error()){
-           $this->id = mysql_insert_id();
+           $this->id = mysql_fetch_object( mysql_query("SELECT LAST_INSERT_ID() AS id FROM __inscricao_convencao;"))->id;
            return true;
         }else{
             return false;

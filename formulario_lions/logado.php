@@ -5,10 +5,13 @@
 </script>
 
  <?php 
-       
-    if(isset($_POST['convencao']) && $_POST['convencao']){
-       
-    }
+if(isset($_POST['cadastro']) && $_POST['cadastro']):
+    include 'formulario/salvar.php';
+endif; 
+
+if(isset($_GET['atualizar']) && $_GET['atualizar']):
+    require_once 'formulario/formulario.php';
+else:
     
     $convencoes = Convencao::getAbertas();
     $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId());
@@ -106,9 +109,13 @@
 
     </table>
     <center>
-        <button class="button">Atualizar Informações</button
+        <form action="" method="GET">
+            <input type="hidden" name="atualizar" value="1">
+            <button class="button" type="submit">Atualizar Informações</button>
+        </form>
     </center>
 
 </div>
 
 
+<?php endif; ?>
