@@ -81,3 +81,19 @@ CREATE TABLE IF NOT EXISTS `__comprovante` (
   `local` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+--
+-- Estrutura da tabela `jom0__user_reset_senha`
+--
+
+CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `code` varchar(32) NOT NULL,
+  `usado` bit(1) NOT NULL DEFAULT b'0',
+  `data_usado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

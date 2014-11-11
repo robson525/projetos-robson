@@ -72,6 +72,23 @@
             });
             //	}
         });
+        
+        //********************** VERIFICA SE EMAIl JÁ EXISTE ************************************
+        $('#email').change(function() {
+            //if(document.getElementById('matricula').value.length == 10){
+            $.post('../../../formulario/auxi/verificar.php', {email: $(this).val()},
+            function(resposta) {
+                if (resposta != false) {
+                    cpfTeste = true;
+                    $('#span_email').show();
+                }
+                else {
+                    $('#span_email').hide();
+                    cpfTeste = false;
+                }
+            });
+            //	}
+        });
 
 
     });
@@ -112,16 +129,19 @@ if(!isset($usuario)){
             </tr>
             <tr>
                 <td class="col-1">E-mail <span class="span_obg">*</span></td>
-                <td><input id="email" name="email" type="email" maxlength="50" style="width:50%;" onKeyUp="minuscula(this)" value="<?php if ($usuario) echo $user->email; ?>" required/></td>
+                <td>
+                    <input id="email" name="email" type="email" maxlength="50" style="width:50%;" onKeyUp="minuscula(this)" value="<?php if ($usuario) echo $user->email; ?>" required/>
+                    <span id="span_email" style="color:red; font-weight:bold; display:none;">&ensp;Email já está cadastrado.</span>
+                </td>
             </tr>
             <?php if(!$usuario): ?>
             <tr>
                 <td class="col-1">Senha <span class="span_obg">*</span></td>
-                <td><input id="senha1" name="senha1" type="password" value="" maxlength="50" style="width:25%;" required/></td>
+                <td><input id="senha1" name="senha1" type="password" value="" maxlength="20" style="width:25%;" required placeholder="Máximo 20 Caracteres" title="Máximo 20 Caracteres"/></td>
             </tr>
             <tr>
                 <td class="col-1">Repita a Senha <span class="span_obg">*</span></td>
-                <td><input id="senha2" name="senha2" type="password" value="" maxlength="50" style="width:25%;" required/></td>
+                <td><input id="senha2" name="senha2" type="password" value="" maxlength="20" style="width:25%;" required /></td>
             </tr>
             <?php endif; ?>
             <tr>
