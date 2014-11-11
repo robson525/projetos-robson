@@ -1,6 +1,7 @@
 <?php
 require_once 'formulario/classe/Conecta.php';
 require_once 'formulario/classe/Usuario.php';
+require_once 'formulario/classe/Email.php';
 
 if (isset($_POST['cadastro']) && $_POST['cadastro']):
     extract($_POST);
@@ -45,6 +46,9 @@ if (isset($_POST['cadastro']) && $_POST['cadastro']):
     $usuario->setPrefixo($prefixo);
     $usuario->setCamisa($camisa);
     
+    $email = new Email();
+    $email->setDestinatario($user->email, $user->name);
+    
     if($user->save(!$novo)):
         
         $usuario->setUser_id($user->id);
@@ -52,6 +56,8 @@ if (isset($_POST['cadastro']) && $_POST['cadastro']):
         if($usuario->save()):
             $erro = false;
             if($novo){
+                $email->inscricaoSite();
+                $email->enviar();
                 $msg = "Usuário Cadastrado com Sucesso.";
             }
             else{
