@@ -5,9 +5,6 @@
 </script>
 
  <?php 
-if(isset($_POST['cadastro']) && $_POST['cadastro']):
-    include 'formulario/salvar.php';
-endif; 
 
 if(isset($_GET['atualizar']) && $_GET['atualizar']):
     require_once 'formulario/formulario.php';

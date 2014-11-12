@@ -1,9 +1,22 @@
-
---
--- Base de Dados: `lionsdla6`
---
 CREATE DATABASE IF NOT EXISTS `lionsdla6` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `lionsdla6`;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `jom0__user_reset_senha`
+--
+
+CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `code` varchar(32) NOT NULL,
+  `usado` bit(1) NOT NULL DEFAULT b'0',
+  `data_usado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -31,45 +44,12 @@ CREATE TABLE IF NOT EXISTS `jom0__usuario` (
   `camisa` varchar(5) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-
-
---
--- Estrutura da tabela `__convencao`
---
-
-CREATE TABLE IF NOT EXISTS `__convencao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(250) NOT NULL,
-  `aberta` bit(1) NOT NULL DEFAULT b'0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- --------------------------------------------------------
 
 --
--- Estrutura da tabela `__inscrito_convencao`
---
-
-CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `convencao_id` int(11) NOT NULL,
-  `pago` bit(1) NOT NULL DEFAULT b'0',
-  `comprovante` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `usuario_id` (`usuario_id`,`convencao_id`),
-  KEY `convencao_id` (`convencao_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---
--- Constraints for dumped tables
---
-ALTER TABLE `__inscricao_convencao`
-  ADD CONSTRAINT `convercao_id_fk` FOREIGN KEY (`convencao_id`) REFERENCES `__convencao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuario_id_fk` FOREIGN KEY (`usuario_id`) REFERENCES `jom0__usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  
-  
-  --
 -- Estrutura da tabela `__comprovante`
 --
 
@@ -82,18 +62,44 @@ CREATE TABLE IF NOT EXISTS `__comprovante` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
--- Estrutura da tabela `jom0__user_reset_senha`
+-- Estrutura da tabela `__convencao`
 --
 
-CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
+CREATE TABLE IF NOT EXISTS `__convencao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `code` varchar(32) NOT NULL,
-  `usado` bit(1) NOT NULL DEFAULT b'0',
-  `data_usado` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  `titulo` varchar(250) NOT NULL,
+  `aberta` bit(1) NOT NULL DEFAULT b'0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+INSERT  INTO `__convencao`(`id`,`titulo`,`aberta`) VALUES (1,'XVI Convenção',b'1');
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `__inscricao_convencao`
+--
+
+CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_id` int(11) NOT NULL,
+  `convencao_id` int(11) NOT NULL,
+  `pago` bit(1) NOT NULL DEFAULT b'0',
+  `comprovante` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuario_id` (`usuario_id`,`convencao_id`),
+  KEY `convencao_id` (`convencao_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `__inscricao_convencao`
+--
+ALTER TABLE `__inscricao_convencao`
+  ADD CONSTRAINT `convercao_id_fk` FOREIGN KEY (`convencao_id`) REFERENCES `__convencao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_id_fk` FOREIGN KEY (`usuario_id`) REFERENCES `jom0__usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

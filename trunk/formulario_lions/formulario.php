@@ -35,8 +35,11 @@
     }
     
     var matricula = "<?php echo isset($usuario) ? $usuario->getMatricula() : "-1" ?>"
+    var email = "<?php echo isset($user) ? $user->email : "-1" ?>"
     var matTeste = false;
     var cpfTeste = false;
+    var emailTeste = false;
+    var senhaTeste = false;
     jQuery(document).ready(function($) {
 
         //********************** VERIFICA SE MATRICULA JÁ EXISTE ************************************
@@ -75,21 +78,31 @@
         
         //********************** VERIFICA SE EMAIl JÁ EXISTE ************************************
         $('#email').change(function() {
-            //if(document.getElementById('matricula').value.length == 10){
-            $.post('../../../formulario/auxi/verificar.php', {email: $(this).val()},
-            function(resposta) {
-                if (resposta != false) {
-                    cpfTeste = true;
-                    $('#span_email').show();
-                }
-                else {
-                    $('#span_email').hide();
-                    cpfTeste = false;
-                }
-            });
-            //	}
+            if($(this).val() != email){
+                $.post('../../../formulario/auxi/verificar.php', {email: $(this).val()},
+                function(resposta) {
+                    if (resposta != false) {
+                        emailTeste = true;
+                        $('#span_email').show();
+                    }
+                    else {
+                        $('#span_email').hide();
+                        emailTeste = false;
+                    }
+                });
+            }
         });
-
+        
+        //********************** VERIFICA SE SENHAS COINCIDEM ************************************
+        $('#senha2').change(function() {
+            if($(this).val() == $('#senha1').val()){
+                senhaTeste = false;
+                $('#span_senha').hide();
+            }else{
+                senhaTeste = true;
+                $('#span_senha').show();
+            }
+        });
 
     });
 
@@ -137,11 +150,14 @@ if(!isset($usuario)){
             <?php if(!$usuario): ?>
             <tr>
                 <td class="col-1">Senha <span class="span_obg">*</span></td>
-                <td><input id="senha1" name="senha1" type="password" value="" maxlength="20" style="width:25%;" required placeholder="Máximo 20 Caracteres" title="Máximo 20 Caracteres"/></td>
+                <td>
+                    <input id="senha1" name="senha1" type="password" value="" maxlength="20" style="width:37%;" required placeholder="Máximo 20 Caracteres" title="Máximo 20 Caracteres" />
+                    <span id="span_senha" style="color:red; font-weight:bold; display:none;">&ensp;As Senhas não Coincidem.</span>
+                </td>
             </tr>
             <tr>
                 <td class="col-1">Repita a Senha <span class="span_obg">*</span></td>
-                <td><input id="senha2" name="senha2" type="password" value="" maxlength="20" style="width:25%;" required /></td>
+                <td><input id="senha2" name="senha2" type="password" value="" maxlength="20" style="width:37%;" required size="20" /></td>
             </tr>
             <?php endif; ?>
             <tr>

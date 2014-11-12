@@ -59,13 +59,14 @@ function validaForm(){
 		alert("Favor fornecer um CPF válido.");
 		return false;	
 	}
-        //Valida Data
-	else
-	if(!validaData()){
-		alert("Favor preencher a Data de Nasciemento Corretamente.");
-		return false;
+        else
+	if(cpfTeste == true){
+		document.getElementById('cpf').focus();
+		document.getElementById('cpf').style.boxShadow = "0.1px 0.1px 3px red";
+		alert("CPF Já está Cadastrado.");
+		return false;	
 	}
-	else
+        else
 	if(matTeste == true){
 		document.getElementById('matricula').focus();
 		document.getElementById('matricula').style.boxShadow = "0.1px 0.1px 3px red";
@@ -73,13 +74,26 @@ function validaForm(){
 		return false;		
 	}
 	else
-	if(cpfTeste == true){
-		document.getElementById('cpf').focus();
-		document.getElementById('cpf').style.boxShadow = "0.1px 0.1px 3px red";
-		alert("CPF Já está Cadastrado.");
+	if(emailTeste == true){
+		document.getElementById('email').focus();
+		document.getElementById('email').style.boxShadow = "0.1px 0.1px 3px red";
+		alert("Email Já está Cadastrado.");
 		return false;	
 	}
-	
+        else
+	if(senhaTeste == true){
+		document.getElementById('senha1').focus();
+		document.getElementById('senha1').style.boxShadow = "0.1px 0.1px 3px red";
+                document.getElementById('senha2').style.boxShadow = "0.1px 0.1px 3px red";
+		alert("As Senhas não coincidem.");
+		return false;	
+	}
+        //Valida Data
+	else
+	if(!validaData()){
+		alert("Favor preencher a Data de Nasciemento Corretamente.");
+		return false;
+	}
 	if(document.getElementById('botao').value == "Atualizar"){
 		certeza = confirm('Tem Certeza que deseja modifiar seus dados?');
 		if (certeza == false){
