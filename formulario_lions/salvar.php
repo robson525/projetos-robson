@@ -86,7 +86,7 @@ endif;
 ?>
 
 
-<?php if(!isset($usuario) || $erro):?>
+<?php if($novo || $erro): ?>
 <div id="system-message" style="text-align: center;">
     <dd class="<?php echo $erro ? 'error' : '' ?>">
         <ul>
