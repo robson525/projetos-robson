@@ -319,6 +319,13 @@ if(!isset($usuario)){
     </form>
 </div>
 
+<?php if($usuario): ?>
+    <div style="text-align: right;">
+        <button class="button" onclick="window.location='cadastro.html'">Voltar</button>
+    </div>
+<?php endif;?>
+
+
 <?php
 
 function monta_dia($dia = 0) {
