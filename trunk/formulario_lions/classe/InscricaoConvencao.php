@@ -120,6 +120,23 @@ class InscricaoConvencao {
         
     }
     
+    public static function getInscricoesGerencia($convencaoId = 0){
+        $sql  = "SELECT u.*, us.*, ic.* ";
+        $sql  .= "FROM __inscricao_convencao ic ";
+        $sql .= "INNER JOIN jom0__usuario u ON u.id = ic.usuario_id ";
+        $sql .= "INNER JOIN jom0__users us ON us.id = u.user_id ";
+        $sql .= "INNER JOIN jom0__user_usergroup_map ugm ON ugm.user_id = us.id ";
+        $sql .= "WHERE ugm.group_id IN (8, 13) AND ic.convencao_id = ".Persistencia::prepare($convencaoId, Persistencia::FK);
+        $query = mysql_query($sql);
+        $inscricoes = array();
+        if(mysql_num_rows($query)){
+            while($inscricao = mysql_fetch_object($query)){
+                $inscricoes[] = $inscricao;
+            }
+        }
+        return $inscricoes;
+    }
+    
     private function load($inscricao_){
         $inscricao = new InscricaoConvencao();
         $inscricao->setId($inscricao_->id);

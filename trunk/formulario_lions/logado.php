@@ -2,6 +2,9 @@
     function cadConvencao(id){
         window.location='cadastro.html?convencao=' + id;
     }
+    function gerConvencao(id){
+        window.location='cadastro.html?gerenciar=' + id;
+    }
 </script>
 
  <?php 
@@ -12,7 +15,7 @@ else:
     
     $convencoes = Convencao::getAbertas();
     $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId());
-    
+    $gerenciaCconvencao = in_array(13, $user->groups);
 ?>
 <?php if(isset($msg)): ?>
     <div id="system-message" style="text-align: center;">
@@ -32,10 +35,10 @@ else:
     <?php if(isset($convencoes) && count($convencoes)): ?>
 
         <table class="category" title="Cadastro de Conveção" style="width: 80%; margin: auto; margin-top: 50px; ">
-            <caption><h4>Convenções Abertar</h4></caption>
+            <caption><h4>Convenções Abertas</h4></caption>
             <tr>
-                <th style="width:85%;text-align:center;">Título</th>
-                <th style="width:15%;text-align:center;">Ação</th>
+                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "75%" : "85%" ?>">Título</th>
+                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "25%" : "15%" ?>">Ação</th>
             </tr>
             <?php foreach ($convencoes as $convencao): ?>
                 <tr>
@@ -44,6 +47,9 @@ else:
                     </td>
                     <td style="text-align:center;"> 
                         <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="Cadastro na Convenção">Inscrição</button>
+                        <?php if($gerenciaCconvencao):?>
+                            <button class="button" onclick="gerConvencao('<?php echo $convencao->getId() ?>')" title="Gerenciar Cadastros">Gerenciar</button>
+                        <?php endif;?>
                     </td>
                 </tr>
             <?php endforeach; ?>
