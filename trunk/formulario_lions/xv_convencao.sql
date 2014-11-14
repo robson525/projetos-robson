@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
   `user_id` int(11) NOT NULL,
   `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `code` varchar(32) NOT NULL,
-  `usado` bit(1) NOT NULL DEFAULT b'0',
+  `usado`CHAR(1) NOT NULL DEFAULT '0',
   `data_usado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `__comprovante` (
 CREATE TABLE IF NOT EXISTS `__convencao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(250) NOT NULL,
-  `aberta` bit(1) NOT NULL DEFAULT b'0',
+  `aberta` CHAR(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
   `convencao_id` int(11) NOT NULL,
-  `pago` bit(1) NOT NULL DEFAULT b'0',
+  `pago` CHAR(1) NOT NULL DEFAULT '0',
   `comprovante` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuario_id` (`usuario_id`,`convencao_id`),
