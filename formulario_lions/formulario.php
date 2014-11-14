@@ -217,8 +217,8 @@ if(!isset($usuario)){
             </tr>
             <?php if ($usuario) { ?> <script>  Estado("<?php echo $usuario->getCidade() ?>", "<?php echo $usuario->getClube() ?>");</script> <?php } ?>
             <tr>
-                <td class="col-1">Delegado do Clube ? <span class="span_obg">*</span></td>
-                <td><select id="delegado" name="delegado" onChange="Delegado()" required>
+                <td class="col-1">Delegado do Clube ? </td>
+                <td><select id="delegado" name="delegado" onChange="Delegado()">
                         <option value=""></option>
                         <option value="SIM">SIM</option>
                         <option value="NÃO">NÃO</option>
