@@ -44,10 +44,11 @@
 
         //********************** VERIFICA SE MATRICULA JÁ EXISTE ************************************
         $('#matricula').change(function() {
-            if($(this).val() != matricula){
+            
+            if($(this).val() != matricula && $(this).val() != '0000000000'){
                 $.post('../../../formulario/auxi/verificar.php', {matricula: $(this).val()},
                 function(resposta) {
-                    if (resposta != false) {
+                    if (resposta != false ) {
                         matTeste = true;
                         $('#span_matricula').show();
                     }
@@ -56,6 +57,10 @@
                         matTeste = false;
                     }
                 });
+            }
+            else{
+                $('#span_matricula').hide();
+                matTeste = false;
             }
         });
 
@@ -77,6 +82,7 @@
         });
         
         //********************** VERIFICA SE EMAIl JÁ EXISTE ************************************
+        /*
         $('#email').change(function() {
             if($(this).val() != email){
                 $.post('../../../formulario/auxi/verificar.php', {email: $(this).val()},
@@ -92,7 +98,7 @@
                 });
             }
         });
-        
+        */
         //********************** VERIFICA SE SENHAS COINCIDEM ************************************
         $('#senha2').change(function() {
             if($(this).val() == $('#senha1').val()){
@@ -130,7 +136,11 @@ if(!isset($usuario)){
                     <input id="matricula" name="matricula" type="text" maxlength="10" style="width:25%" value="<?php if ($usuario) echo $usuario->getMatricula(); ?>"  required />
                     <span id="span_matricula" style="color:red; font-weight:bold; display:none;">&ensp;Numero de Matricula já está cadastrada.</span>
                     <br>
-                    <span class="span_pequeno">Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de	 Associados do Distrito</a></span>
+                    <span class="span_pequeno">
+                        Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de Associados do Distrito</a>
+                    </span><br/>
+                    <span class="span_pequeno">Caso você seja Convidado de um Clube LIONS coloque a seguinte matricula: 0000000000</span><br/>
+                    <span class="span_pequeno" style="font-weight:bold;">OBS: Convidados não participam dos sorteios realizados nas Convenções.</span>
                 </td>
             </tr>
             <tr>

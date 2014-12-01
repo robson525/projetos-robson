@@ -54,6 +54,7 @@ class Email {
         $texto = '  <strong>
                     <p style="font-size: 16px; padding:1px;">Caro(a) senhor(a) ' . $this->destinatario . '</p>'.
                     '<p style="font-size: 16px; padding:1px;">Seu cadastro foi realizado com sucesso no Site do LIONS - Distrito LA6.</p>'.
+                    '<p style="font-size: 16px; padding:1px;">Por favor faça login no mesmo para confirmar sua participação na Convenção.</p>'.
                     '<p style="font-size: 16px; padding:1px;">'.
                     'Para mais informa&ccedil;&otilde;es visite o site do <a title="Distrito LA6" href="http://www.lionsdla6.com.br" target="_blank">Distrito LA6</a>.</p>'.
                     '</strong>';
