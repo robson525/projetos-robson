@@ -58,7 +58,7 @@ if (isset($_POST['cadastro']) && $_POST['cadastro']):
             if($novo){
                 $email->inscricaoSite();
                 $email->enviar();
-                $msg = "Usuário Cadastrado com Sucesso.";
+                $msg = "Usuário Cadastrado com Sucesso. <br/> Por favor faça login para confirmar sua participação na convenção;";
             }
             else{
                 $msg = "Usuário Atualizado com Sucesso.";
