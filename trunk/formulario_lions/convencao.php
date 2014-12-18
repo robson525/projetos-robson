@@ -115,6 +115,37 @@ if($convencao && $convencao->getAberta()):
         <div style=" margin-top: 20px;">
             <center><h2><?php echo $convencao->getTitulo(); ?></h2></center>
             
+            <table class="category" style="width:80%; margin:auto; margin-top: 50px;">
+                <caption><h4>Conta para Doações e Inscrições:</h4></caption>
+                <tr>
+                    <td style="text-align: center; max-width: 100%">
+                        <p>BANCO DO BRASIL S.A - AGÊNCIA JÓQUEI CLUB PI </p>
+                        <p>
+                            Prefixo: 3178-X  <br>
+                            Nº Conta: 47.506-8<br/>
+                            Titular: Associação Internacional de Lions Clubes – Distrito LA 6 - XVI CONVENÇÃO <br>
+                            CNPJ: -  01.412.913/0001-88. 
+                        </p>
+                        <p style="font-weight:bold;"> ATÉ 31 DE MARÇO DE 2015 – INSCRIÇÃO COM DIREITO A KIT COMPLETO.</p>
+                            <table style="margin: auto;">
+                                <tr>
+                                    <td>Convencionais: </td>
+                                    <td>até 31/03/2015 – R$ 200,00  -  após R$ 230,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Convidados: </td>
+                                    <td>até 31/03/2015 – R$ 200,00 – após R$ 230,00</td>
+                                </tr>
+                                <tr>
+                                    <td>LEO: </td>
+                                    <td>até 31/03/2015 – R$ 90,00 – após 100,00</td>
+                                </tr>
+                            </table>
+                        
+                    </td>
+                </tr>
+            </table>
+            
             <table class="category" style="width:60%; margin:auto; margin-top: 50px;">
                 <caption><h4>Situação</h4></caption>
                 <tr>
@@ -128,15 +159,14 @@ if($convencao && $convencao->getAberta()):
                 </tr>
                 <?php endif;?>
             </table>
-
-
-
+            
+            
             <form method="POST" action="" enctype="multipart/form-data" onsubmit="return validaArquivo()">
                 <table class="category" style="width: 80%; margin:auto; margin-top: 50px;">
                     <caption><h4>Comprovante de Pagamento</h4></caption>
                     <tr>
                         <td style="text-align:right;"><?php echo $pago ? "Alterar" : "Anexar"; ?> comprovante:</td>
-                        <td style="max-width: 100%"><input type="file" name="comprovante" id="comprovante" accept="image/jpg,image/jpeg,image/png,application/pdf" required="true" style="max-width:100%"/></td>
+                        <td style="max-width: 100%"><input type="file" name="comprovante" id="comprovante" accept="image/jpg,image/jpeg,image/png,application/pdf" required style="max-width:100%"/></td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align:center;">Extensões permitidas: .pdf , .jpg , .png , .jpeg </td>
