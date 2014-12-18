@@ -6,7 +6,7 @@ USE `lionsdla6`;
 --
 -- Estrutura da tabela `jom0__user_reset_senha`
 --
-
+DROP TABLE IF EXISTS jom0__user_reset_senha;
 CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `jom0__user_reset_senha` (
 --
 -- Estrutura da tabela `jom0__usuario`
 --
-
+DROP TABLE IF EXISTS jom0__usuario;
 CREATE TABLE IF NOT EXISTS `jom0__usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `jom0__usuario` (
   `estado` varchar(10) NOT NULL,
   `cidade` varchar(20) NOT NULL,
   `clube` varchar(100) NOT NULL,
-  `delegado` varchar(10) NOT NULL,
+  `delegado` varchar(10) DEFAULT NULL,
   `cargo_clube` varchar(20) DEFAULT NULL,
   `qual_cc` varchar(30) DEFAULT NULL,
   `cargo_distrito` varchar(20) DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `jom0__usuario` (
 --
 -- Estrutura da tabela `__comprovante`
 --
-
+DROP TABLE IF EXISTS __comprovante;
 CREATE TABLE IF NOT EXISTS `__comprovante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -65,23 +65,9 @@ CREATE TABLE IF NOT EXISTS `__comprovante` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `__convencao`
---
-
-CREATE TABLE IF NOT EXISTS `__convencao` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(250) NOT NULL,
-  `aberta` CHAR(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-INSERT  INTO `__convencao`(`id`,`titulo`,`aberta`) VALUES (1,'XVI Convenção',b'1');
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `__inscricao_convencao`
 --
-
+DROP TABLE IF EXISTS __inscricao_convencao;
 CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
@@ -92,6 +78,22 @@ CREATE TABLE IF NOT EXISTS `__inscricao_convencao` (
   KEY `usuario_id` (`usuario_id`,`convencao_id`),
   KEY `convencao_id` (`convencao_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `__convencao`
+--
+DROP TABLE IF EXISTS __convencao;
+CREATE TABLE IF NOT EXISTS `__convencao` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(250) NOT NULL,
+  `aberta` CHAR(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+INSERT  INTO `__convencao`(`id`,`titulo`,`aberta`) VALUES (1,'XVI Convenção','1');
+
 
 --
 -- Constraints for dumped tables
