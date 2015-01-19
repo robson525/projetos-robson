@@ -139,8 +139,8 @@ if(!isset($usuario)){
                     <span class="span_pequeno">
                         Vide: <a href="http://www.lionsdla6.com.br/index.php/distrito/lista-de-associados.html" target="_blank">Lista de Associados do Distrito</a>
                     </span><br/>
-                    <span class="span_pequeno">Caso você seja Convidado de um Clube LIONS coloque a seguinte matricula: 0000000000</span><br/>
-                    <span class="span_pequeno" style="font-weight:bold;">OBS: Convidados não participam dos sorteios realizados nas Convenções.</span>
+                    <span class="span_pequeno">Caso você seja uma Domadora e não tenha um numero de matricula ou um Convidado de um Clube LIONS coloque a seguinte matricula: 0000000000</span><br/>
+                    <span class="span_pequeno" style="font-weight:bold;">OBS: Convidados não podem Votar ou ser Votados nas eleições.</span>
                 </td>
             </tr>
             <tr>
@@ -201,6 +201,11 @@ if(!isset($usuario)){
                 <td></td>
                 <td id="compl"><input id="complemento" name="complemento" maxlength="100" onChange="maiuscula(this)" onKeyUp="maiuscula(this)" style="width:98%;" value="<?php if ($usuario) echo $usuario->getComplemento() ?>"/>
                     <span class="span_pequeno">Complemento</span></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span class="span_pequeno">OBS1: Caso você seja um Convidado selecione o Lions Clube que o convidou.<br>
+                                                OBS2: Caso você seja um Convidado e não pertença aos Estados e Cidades listados abaixo, coloque seu Estado e Cidade no campo "Complemento" do Endereço.
+                    </span><br/></td>
             </tr>
             <tr>
                 <td class="col-1">Estado <span class="span_obg">*</span></td>
