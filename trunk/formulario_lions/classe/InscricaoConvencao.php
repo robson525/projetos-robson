@@ -48,9 +48,18 @@ class InscricaoConvencao {
         $this->comprovante = $comprovante;
     }
 
+    public function getNinscricao() {
+        if(strlen($this->id) == 1){
+            return '00' . $this->id;
+        }else if(strlen($this->id) == 2){
+            return '0' . $this->id;
+        }
+        return $this->id;
+    }
+
     public function save(){
         if(!$this->getId()){
-            if(!$this->verificaCadastro()){
+            if(!$this->verificaCadastroÇÇÇ()){//consertar essa parte
                  return $this->insert();
             }else{
                 return false;
@@ -81,11 +90,24 @@ class InscricaoConvencao {
         return mysql_query($sql);
     }
     
+    public static function getById($inscricao_id = 0){
+        if(!$inscricao_id){
+            $inscricao_id = '0';
+        }
+        $sql = "SELECT * FROM __inscricao_convencao WHERE id = " . Persistencia::prepare($inscricao_id, Persistencia::INT);
+        $query = mysql_query($sql);
+        $array = array();
+        while ($result = mysql_fetch_object($query)){
+            $array[] = self::load($result);
+        }
+        return $array;
+    }
+    
     public static function getByUsuario($usuario_id = 0){
         if(!$usuario_id){
             $usuario_id = '0';
         }
-        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . $usuario_id;
+        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . Persistencia::prepare($usuario_id, Persistencia::INT);
         $query = mysql_query($sql);
         $array = array();
         while ($result = mysql_fetch_object($query)){

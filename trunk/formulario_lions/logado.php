@@ -1,6 +1,7 @@
 <script type="text/javascript">
-    function cadConvencao(id){
-        window.location='cadastro.html?convencao=' + id;
+    function cadConvencao(convId, inscId){
+        inscId =  inscId ? '&inscricao=' + inscId : '';
+        window.location='cadastro.html?convencao=' + convId + inscId;
     }
     function gerConvencao(id){
         window.location='cadastro.html?gerenciar=' + id;
@@ -37,8 +38,11 @@ else:
         <table class="category" title="Cadastro de Conveção" style="width: 80%; margin: auto; margin-top: 50px; ">
             <caption><h4>Convenções Abertas</h4></caption>
             <tr>
-                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "75%" : "85%" ?>">Título</th>
-                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "25%" : "15%" ?>">Ação</th>
+                <th style="text-align:center;" >Título</th>
+                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "15%" : "25%" ?>">Inscrições</th>
+                 <?php if($gerenciaCconvencao):?>      
+                    <th style="text-align:center;" width="15%">Gerenciar</th>        
+                <?php endif;?>
             </tr>
             <?php foreach ($convencoes as $convencao): ?>
                 <tr>
@@ -46,12 +50,20 @@ else:
                         <?php echo $convencao->getTitulo() ?>
                     </td>
                     <td style="text-align:center;"> 
-                        <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="Cadastro na Convenção">Inscrição</button>
-                        <?php if($gerenciaCconvencao):?>
-                            <button class="button" onclick="gerConvencao('<?php echo $convencao->getId() ?>')" title="Gerenciar Cadastros">Gerenciar</button>
-                        <?php endif;?>
+                        <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="Inscrever-se na Convenção">Inscrever-se</button>
+                        <?php $aux = 1;?>
+                        <?php foreach ($inscricoes as $inscricao): ?>
+                            <?php if($inscricao->getConvencao_id() == $convencao->getId()): ?>
+                                <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>','<?php echo $inscricao->getId() ?>')" title="Gerenciar Inscrição <?php echo $aux ?>">Inscrição <?php echo $aux++ ?></button>
+                            <?php endif;?>
+                        <?php endforeach; ?>
                     </td>
-                </tr>
+                    <?php if($gerenciaCconvencao):?>      
+                        <td style="text-align:center;">
+                            <button class="button" onclick="gerConvencao('<?php echo $convencao->getId() ?>')" title="Gerenciar Cadastros">Gerenciar</button>
+                        </td>          
+                    <?php endif;?>
+                </tr>                
             <?php endforeach; ?>
         </table>
 

@@ -1,4 +1,5 @@
 <?php
+    $inscricao_id = isset($_GET['inscricao']) ? (int) $_GET['inscricao'] : false;
     $convencao_id = (int) $_GET['convencao'];
     $convencao = Convencao::getById($convencao_id);
     if(!$convencao || !$convencao->getAberta()):
@@ -6,18 +7,21 @@
         $msg = "Você não tem permissão para acessar esta área.";
         
     else:
-        
+       
         $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId());
+        
         $inscricao = false;
-        $inscrito = false;
+        $Ninscricoes = 0;
         $pago = false;
         foreach ($inscricoes as $inscri){
             if($inscri->getConvencao_id() == $convencao_id){
-                $inscrito = true;
-                $inscricao = $inscri;
-                if($inscri->getPago()){
-                    $pago = true;
-                    $comprovante = Comprovante::getById($inscricao->getComprovante());
+                $Ninscricoes++;
+                if($inscri->getId() == $inscricao_id){
+                    $inscricao = $inscri;
+                    if($inscri->getPago()){
+                        $pago = true;
+                        $comprovante = Comprovante::getById($inscricao->getComprovante());
+                    }
                 }
             }
         }
@@ -105,12 +109,12 @@
         </dd>
     </div>
 <?php endif; ?>
-
+<br>
 <?php
 if($convencao && $convencao->getAberta()):  
 ?>
     
-    <?php if($inscrito):?>
+    <?php if($inscricao): ?>
 
         <div style=" margin-top: 20px;">
             <center><h2><?php echo $convencao->getTitulo(); ?></h2></center>
@@ -145,6 +149,15 @@ if($convencao && $convencao->getAberta()):
                     </td>
                 </tr>
             </table>
+            
+            <table class="category" style="width:50%; margin:auto; margin-top: 50px;">
+                <tr>
+                    <td style="text-align: center; max-width: 100%; padding-top: 20px;">
+                        <h4>Número de Inscrição : <?php echo $inscricao->getNinscricao(); ?></h4>
+                    </td>
+                </tr>
+            </table>
+          
             
             <table class="category" style="width:60%; margin:auto; margin-top: 50px;">
                 <caption><h4>Situação</h4></caption>
@@ -185,7 +198,7 @@ if($convencao && $convencao->getAberta()):
     <?php else: ?>
 
         <div style="text-align: center;  margin-top: 50px;">
-            <h2>Confirmar Inscrição na <?php echo $convencao->getTitulo() ?> :</h2>
+            <h2>Confirmar <?php echo $Ninscricoes ? ++$Ninscricoes.'&ordf;' : '' ?> Inscrição na <?php echo $convencao->getTitulo() ?> :</h2>
             <form method="POST" action="">
                 <input type="hidden" name="convencao" value="<?php echo $convencao->getId() ?>" />
                 <input type="hidden" name="inscrever" value="1" />
