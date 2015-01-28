@@ -31,7 +31,7 @@ class Persistencia {
             return is_numeric($var) ? $var : ($var === '0' ? '0' : 'NULL');
         }
         elseif($tipo == self::PK){
-            return (is_numeric($var) && $var > 0) ? $var : '';
+            return (is_numeric($var) && $var > 0) ? $var : 0;
         }
         elseif($tipo == self::FK){
             return (is_numeric($var) && $var > 0) ? $var : ( ($var === false || $var === null || $var < 0) ?  'NULL' : (int)$var);

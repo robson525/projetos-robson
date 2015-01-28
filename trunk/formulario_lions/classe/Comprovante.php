@@ -56,6 +56,14 @@ class Comprovante {
     public function setTempName($tempName) {
         $this->tempName = $tempName;
     }
+    
+    public function setConnection($db){
+        $this->db = $db;
+    }
+    
+    public function __construct($db = null) {
+        $this->db = $db;
+    }
 
     public function save(){
         if($this->getId()){
@@ -74,13 +82,16 @@ class Comprovante {
         $sql .= Persistencia::prepare($this->getTipo(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getMd5(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getLocal(), Persistencia::STRING) . ") ";
-        mysql_query($sql);
-        if(!mysql_error()){
-            $query = mysql_query("SELECT LAST_INSERT_ID() AS id FROM __comprovante;");
-            $this->setId(mysql_fetch_object($query)->id);
-        }else{
+         
+        $this->db->setQuery($sql);
+        $this->db->execute();
+       
+        if($this->db->getErrorNum()){
             return false;
         }
+        $this->id = $this->db->insertid();
+        return true;
+        
     }
     
     private function update(){
@@ -108,7 +119,7 @@ class Comprovante {
         return $comprovante;
     }
 
-        private function uploadComprovante(){
+    private function uploadComprovante(){
         if(move_uploaded_file($this->getTempName(), $this->getLocal() . $this->getMd5() . $this->getTipo())){
             return true;
         }else{

@@ -31,7 +31,7 @@ class Convencao {
     }
 
     public static function getAbertas(){
-        $sql = "SELECT * FROM __convencao WHERE aberta = '1'";
+        $sql = "SELECT * FROM __convencao WHERE aberta = '1' ORDER BY id;";
         $query = mysql_query($sql);
         $array = array();
         while ($result = mysql_fetch_object($query)){

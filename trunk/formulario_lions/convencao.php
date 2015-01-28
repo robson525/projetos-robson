@@ -1,5 +1,5 @@
 <?php
-    $inscricao_id = isset($_GET['inscricao']) ? (int) $_GET['inscricao'] : false;
+    $inscricao_n = isset($_GET['inscricao']) ? (int) $_GET['inscricao'] : false;
     $convencao_id = (int) $_GET['convencao'];
     $convencao = Convencao::getById($convencao_id);
     if(!$convencao || !$convencao->getAberta()):
@@ -16,8 +16,9 @@
         foreach ($inscricoes as $inscri){
             if($inscri->getConvencao_id() == $convencao_id){
                 $Ninscricoes++;
-                if($inscri->getId() == $inscricao_id){
+                if($inscri->getId() == $inscricao_n){
                     $inscricao = $inscri;
+                    $inscricao->setConnection($db);
                     if($inscri->getPago()){
                         $pago = true;
                         $comprovante = Comprovante::getById($inscricao->getComprovante());
@@ -29,15 +30,14 @@
     endif;
     
     if(isset($_POST['inscrever']) && isset($_POST['convencao'])):
-        $iscricao = new InscricaoConvencao();
-        $iscricao->setUsuario_id($usuario->getId());
-        $iscricao->setConvencao_id($_POST['convencao']);
-        $erro = !$iscricao->save();
+        $inscricao = new InscricaoConvencao($db);
+        $inscricao->setUsuario_id($usuario->getId());
+        $inscricao->setConvencao_id($_POST['convencao']);
+        $erro = !$inscricao->save();
         if($erro){
-            $msg = "Falha ao cadastrar. Você já está cadastrado nessa Convenção.";
+            $msg = "Falha ao cadastrar.";
         }else{
             $msg = "Cadastro realizado com sucesso.";
-            $inscrito = true;
             $email = new Email();
             $email->setDestinatario($user->email, $user->name);
             $email->inscricaoConvencao();
@@ -53,7 +53,7 @@
        
         if(in_array($extensao, $extPermitidas)){
             if($_FILES['comprovante']['size'] <= $tamanhoMax){
-                $comprovante = new Comprovante();
+                $comprovante = new Comprovante($db);
                 $comprovante->setNome($_FILES['comprovante']['name']);
                 $comprovante->setTipo(".".$extensao);
                 $comprovante->setMd5(md5($_FILES['comprovante']['name'] . date("Y-m-d H-i-s")));
@@ -174,7 +174,7 @@ if($convencao && $convencao->getAberta()):
             </table>
             
             
-            <form method="POST" action="" enctype="multipart/form-data" onsubmit="return validaArquivo()">
+            <form method="POST" action="cadastro.html?convencao=<?php echo $convencao->getId() ?>&inscricao=<?php echo $inscricao->getId(); ?>" enctype="multipart/form-data" onsubmit="return validaArquivo()">
                 <table class="category" style="width: 80%; margin:auto; margin-top: 50px;">
                     <caption><h4>Comprovante de Pagamento</h4></caption>
                     <tr>

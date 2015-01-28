@@ -7,6 +7,7 @@ class InscricaoConvencao {
     private $convencao_id;
     private $pago;
     private $comprovante;
+    private $db;
     
     public function getId() {
         return $this->id;
@@ -47,6 +48,10 @@ class InscricaoConvencao {
     public function setComprovante($comprovante) {
         $this->comprovante = $comprovante;
     }
+    
+    public function setConnection($db){
+        $this->db = $db;
+    }
 
     public function getNinscricao() {
         if(strlen($this->id) == 1){
@@ -59,11 +64,7 @@ class InscricaoConvencao {
 
     public function save(){
         if(!$this->getId()){
-            if(!$this->verificaCadastroÇÇÇ()){//consertar essa parte
-                 return $this->insert();
-            }else{
-                return false;
-            }
+            return $this->insert();
         }else{
             return $this->update();
         } 
@@ -73,13 +74,15 @@ class InscricaoConvencao {
         $sql  = "INSERT INTO __inscricao_convencao (usuario_id, convencao_id) VALUES ( ";
         $sql .= Persistencia::prepare($this->getUsuario_id(), Persistencia::FK) . ", ";
         $sql .= Persistencia::prepare($this->getConvencao_id(), Persistencia::FK) . "); ";
-        mysql_query($sql);
-        if(!mysql_error()){
-           $this->id = mysql_fetch_object( mysql_query("SELECT LAST_INSERT_ID() AS id FROM __inscricao_convencao;"))->id;
-           return true;
-        }else{
+      
+        $this->db->setQuery($sql);
+        $this->db->execute();
+       
+        if($this->db->getErrorNum()){
             return false;
         }
+        $this->id = $this->db->insertid();
+        return true;
     }
     
     private function update(){
@@ -87,14 +90,19 @@ class InscricaoConvencao {
         $sql .= "pago = " . Persistencia::prepare($this->getPago(), Persistencia::BIT) . ", ";
         $sql .= "comprovante = " . Persistencia::prepare($this->getComprovante(), Persistencia::FK) . " ";
         $sql .= "WHERE id = " . $this->getId();
-        return mysql_query($sql);
+        $this->db->setQuery($sql);
+        $this->db->execute();
+        if($this->db->getErrorNum()){
+            return false;
+        }
+        return true;
     }
     
     public static function getById($inscricao_id = 0){
         if(!$inscricao_id){
             $inscricao_id = '0';
         }
-        $sql = "SELECT * FROM __inscricao_convencao WHERE id = " . Persistencia::prepare($inscricao_id, Persistencia::INT);
+        $sql = "SELECT * FROM __inscricao_convencao WHERE id = " . Persistencia::prepare($inscricao_id, Persistencia::INT) . " ORDER BY id;";
         $query = mysql_query($sql);
         $array = array();
         while ($result = mysql_fetch_object($query)){
@@ -107,7 +115,7 @@ class InscricaoConvencao {
         if(!$usuario_id){
             $usuario_id = '0';
         }
-        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . Persistencia::prepare($usuario_id, Persistencia::INT);
+        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . Persistencia::prepare($usuario_id, Persistencia::INT) . " ORDER BY id;";
         $query = mysql_query($sql);
         $array = array();
         while ($result = mysql_fetch_object($query)){
@@ -117,7 +125,7 @@ class InscricaoConvencao {
     }
     
     private function verificaCadastro(){
-        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . $this->getUsuario_id() . " AND convencao_id = " . $this->getConvencao_id() . ";";
+        $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . $this->getUsuario_id() . " AND convencao_id = " . $this->getConvencao_id() . " ORDER BY id;";
         $query = mysql_query($sql);
         if(mysql_num_rows($query)){
             return true;
@@ -190,6 +198,10 @@ class InscricaoConvencao {
         $inscricao->setPago($inscricao_->pago);
         $inscricao->setComprovante($inscricao_->comprovante);
         return $inscricao;
+    }
+    
+    public function __construct($connection = null) {
+        $this->db = $connection;
     }
     
 }
