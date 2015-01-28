@@ -161,6 +161,10 @@ class Usuario {
         $this->camisa = $camisa;
     }
     
+    public function setConnection($db){
+        $this->db = $db;
+    }
+    
     
     public function getError(){
         return $this->error;
@@ -195,16 +199,17 @@ class Usuario {
         $sql .= Persistencia::prepare($this->getPrefixo(), Persistencia::STRING) . ", ";
         $sql .= Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . " ) ";
         $sql .= ";";
-        mysql_query($sql);
-        
-        if(mysql_error()){
+        $this->db->setQuery($sql);
+        $this->db->execute();
+       
+        if($this->db->getErrorNum()){
             $this->error = "Ocorreu um erro ao Cadastrar. Tente novamente mais tarde.";
             $this->deleteUser();
             return false;
-        }else{
-            $this->id = mysql_fetch_object( mysql_query("SELECT LAST_INSERT_ID() AS id FROM jom0__usuario;"))->id;
-            return true;
         }
+        $this->id = $this->db->insertid();
+        return true;
+        
     }
     
     private function update(){
@@ -226,14 +231,17 @@ class Usuario {
         $sql .= "prefixo = " . Persistencia::prepare($this->getPrefixo(), Persistencia::STRING) . ", ";
         $sql .= "camisa = " . Persistencia::prepare($this->getCamisa(), Persistencia::STRING) . "  ";
         $sql .= "WHERE id = " . $this->getId();
-        mysql_query($sql);
-        if(mysql_error()){
-            $this->error = "Ocorreu um erro ao Atualizar. Tente novamente mais tarde.<br>".mysql_error() ."<br>".$sql;
-            //$this->deleteUser();
+        
+        $this->db->setQuery($sql);
+        $this->db->execute();
+       
+        if($this->db->getErrorNum()){
+            $this->error = "Ocorreu um erro ao Atualizar. Tente novamente mais tarde.";
             return false;
-        }else{
-            return true;
         }
+        
+        return true;
+        
     }
     
     private function deleteUser(){
@@ -241,7 +249,8 @@ class Usuario {
                 . "FROM jom0__users AS u "
                 . "INNER JOIN jom0__user_usergroup_map AS ug ON ug.user_id = u.id "
                 . "WHERE u.id = " . $this->user_id . ";"; 
-        mysql_query($sqlD);
+        $this->db->setQuery($sql);
+        $this->db->execute();
     }
     
     
