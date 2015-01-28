@@ -14,8 +14,8 @@ if(isset($_GET['atualizar']) && $_GET['atualizar']):
     require_once 'formulario/formulario.php';
 else:
     
-    $convencoes = Convencao::getAbertas();
-    $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId());
+    $convencoes = Convencao::getAbertas($db);
+    $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId(), $db);
     $gerenciaCconvencao = in_array(13, $user->groups);
 ?>
 <?php if(isset($msg)): ?>

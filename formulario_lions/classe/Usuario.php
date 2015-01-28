@@ -255,11 +255,21 @@ class Usuario {
     
     
     
-    public static function getByUser($user_id = 0){
+    public static function getByUser($user_id = 0, $db = null){
+        $usuario_ = false;
         $sql = "SELECT * FROM jom0__usuario WHERE user_id = " . $user_id;
-        $query = mysql_query($sql);
-        if(mysql_num_rows($query)){
-            return self::load(mysql_fetch_object($query));
+        
+        if($db){
+            $db->setQuery($sql);
+            $db->execute();
+            $usuario_ = $db->loadObject();
+        }else{
+            $query = mysql_query($sql);
+            $usuario_ = mysql_fetch_object($query);
+        }
+        
+        if($usuario_){
+            return self::load($usuario_);
         }else{
             return new Usuario();
         }

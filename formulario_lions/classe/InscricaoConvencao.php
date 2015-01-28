@@ -111,16 +111,28 @@ class InscricaoConvencao {
         return $array;
     }
     
-    public static function getByUsuario($usuario_id = 0){
+    public static function getByUsuario($usuario_id = 0 , $db = null){
         if(!$usuario_id){
             $usuario_id = '0';
         }
         $sql = "SELECT * FROM __inscricao_convencao WHERE usuario_id = " . Persistencia::prepare($usuario_id, Persistencia::INT) . " ORDER BY id;";
-        $query = mysql_query($sql);
         $array = array();
-        while ($result = mysql_fetch_object($query)){
-            $array[] = self::load($result);
+        
+        if($db){
+            $db->setQuery($sql);
+            $db->execute();
+            $inscricoes = $db->loadObjectList();
+            foreach ($inscricoes as $insc){
+                 $array[] = self::load($insc);
+            }
+            
+        }else{
+            $query = mysql_query($sql);
+            while ($result = mysql_fetch_object($query)){
+                $array[] = self::load($result);
+            }
         }
+        
         return $array;
     }
     
