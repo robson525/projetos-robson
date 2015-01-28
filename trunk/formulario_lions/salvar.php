@@ -30,6 +30,7 @@ if (isset($_POST['cadastro']) && $_POST['cadastro']):
     if($novo){
         $usuario = new Usuario();
     }
+    $usuario->setConnection($db);
     $usuario->setMatricula($matricula);
     $usuario->setNascimento($nascimento);
     $usuario->setEndereco($endereco);
