@@ -1,14 +1,14 @@
 <?php
     $inscricao_n = isset($_GET['inscricao']) ? (int) $_GET['inscricao'] : false;
     $convencao_id = (int) $_GET['convencao'];
-    $convencao = Convencao::getById($convencao_id);
+    $convencao = Convencao::getById($convencao_id, $db);
     if(!$convencao || !$convencao->getAberta()):
         $erro = true;
         $msg = "Você não tem permissão para acessar esta área.";
         
     else:
        
-        $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId());
+        $inscricoes = InscricaoConvencao::getByUsuario($usuario->getId(), $db);
         
         $inscricao = false;
         $Ninscricoes = 0;
@@ -21,7 +21,7 @@
                     $inscricao->setConnection($db);
                     if($inscri->getPago()){
                         $pago = true;
-                        $comprovante = Comprovante::getById($inscricao->getComprovante());
+                        $comprovante = Comprovante::getById($inscricao->getComprovante(), $db);
                     }
                 }
             }

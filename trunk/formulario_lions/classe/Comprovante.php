@@ -99,11 +99,24 @@ class Comprovante {
         
     }
     
-    public static function getById($id = 0){
+    public static function getById($id = 0, $db = null){
         $sql = "SELECT * FROM __comprovante WHERE id = " . $id;
-        $query = mysql_query($sql);
-        if(mysql_num_rows($query)){
-            return self::load(mysql_fetch_object($query));
+        
+        if($db){
+            $db->setQuery($sql);
+            $db->execute();
+            $comp = $db->loadObject();
+        }else{
+            $query = mysql_query($sql);
+            if(mysql_num_rows($query)){
+                $comp = mysql_fetch_object($query);
+            }else{
+                $comp = false;
+            }
+        }
+        
+        if($comp){
+            return self::load($comp);
         }else{
             return false;
         }
@@ -139,8 +152,9 @@ class Comprovante {
     public static function deletaComprovante($id = 0){
         $comprovante  = Comprovante::getById($id);
         if($comprovante && $comprovante->removeComprovante()){
-            $sql = "DELETE FROM __comprovante WHERE id = " . $id;
-            if(mysql_query($sql)){
+            $this->db->setQuery($sql);
+            $this->db->execute();
+            if(!$this->db->getErrorNum()){
                 return true;
             }
         }

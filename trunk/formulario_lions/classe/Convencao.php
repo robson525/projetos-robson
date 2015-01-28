@@ -30,21 +30,42 @@ class Convencao {
         $this->aberta = $aberta;
     }
 
-    public static function getAbertas(){
+    public static function getAbertas($db){
+       
         $sql = "SELECT * FROM __convencao WHERE aberta = '1' ORDER BY id;";
-        $query = mysql_query($sql);
         $array = array();
-        while ($result = mysql_fetch_object($query)){
-            $array[] = self::load($result);
+        
+        if($db){
+            $db->setQuery($sql);
+            $db->execute();
+            $convencoes = $db->loadObjectList();
+            foreach ($convencoes as $conv){
+                 $array[] = self::load($conv);
+            }
+            
+        }else{
+            $query = mysql_query($sql);
+            while ($result = mysql_fetch_object($query)){
+                $array[] = self::load($result);
+            }
         }
+        
         return $array;
     }
     
-    public static function getById($id = 0){
+    public static function getById($id = 0, $db = null){
         $sql = "SELECT * FROM __convencao WHERE id = " . Persistencia::prepare($id, Persistencia::PK);
-        $query = mysql_query($sql);
-        if(mysql_num_rows($query)){
+        
+        if($db){
+            $db->setQuery($sql);
+            $db->execute();
+            $conv = $db->loadObject();
+        }else{
+            $query = mysql_query($sql);
             $conv = mysql_fetch_object($query);
+        }
+        
+        if($conv){
             $convencao = new Convencao();
             $convencao->setId($conv->id);
             $convencao->setTitulo($conv->titulo);
