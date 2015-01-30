@@ -11,10 +11,13 @@
         
         else:
             
-            $inscricoes = InscricaoConvencao::getInscricoesGerencia($convencao_id);
-            //var_dump($inscricoes);
+            $inscritos = InscricaoConvencao::getInscricoesGerencia($convencao_id);
+            //var_dump($inscritos);
         endif;      
     endif;
+    
+    $Ninscricoes = 0;
+    
 ?>
 
 <div style="text-align: right;">
@@ -34,7 +37,7 @@
 <?php endif; ?>
 
 
-<?php if(isset($inscricoes)): ?>
+<?php if(isset($inscritos)): ?>
     <link href="formulario/css/fixedheadertable.css" rel="stylesheet" media="screen" />
     <style type="text/css">
         table tr, table td{
@@ -130,7 +133,7 @@
 
     <br> 
     
-    <div class="div_fancyTable" style="<?php echo count($inscricoes)>20 ? "height: 500px;" : "" ?>">
+    <div class="div_fancyTable" style="<?php echo count($inscritos)>20 ? "height: 500px;" : "" ?>">
         <table class="fancyTable" id="myTable05" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
@@ -140,7 +143,7 @@
                     <th >Estado</th>
                     <th >Cidade</th>
                     <th >Cluble</th>
-                    <th >Pago</th>
+                    <th >Inscrição | Pago &ensp;&ensp;</th>
                     <th >Nascimento</th>
                     <th >Delegado</th>
                     <th >Cargo no Clube</th>
@@ -149,20 +152,29 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($inscricoes as $i => $inscricao): ?>
+                <?php foreach ($inscritos as $i => $iscrito): ?>
                     <tr>
                         <td ><?php echo $i + 1 ?></td>
-                        <td ><?php echo $inscricao->prefixo ?></td>
-                        <td ><?php echo $inscricao->name ?></td>
-                        <td ><?php echo $inscricao->estado ?></td>
-                        <td ><?php echo $inscricao->cidade ?></td>
-                        <td ><?php echo $inscricao->clube ?></td>
-                        <td ><?php echo $inscricao->pago ? "SIM" : "NÃO" ?></td>
-                        <td ><?php echo $inscricao->nascimento ? DateTime::createFromFormat("Y-m-d", $inscricao->nascimento)->format('d-m-Y') : "" ?></td>
-                        <td ><?php echo $inscricao->delegado ?></td>
-                        <td ><?php echo $inscricao->cargo_clube != "OUTRO" ? $inscricao->cargo_clube : $inscricao->qual_cc ?></td>
-                        <td ><?php echo $inscricao->cargo_distrito != "OUTRO" ? $inscricao->cargo_distrito : $inscricao->qual_cd ?></td>
-                        <td ><?php echo $inscricao->cl_mj ?></td>
+                        <td ><?php echo $iscrito->prefixo ?></td>
+                        <td ><?php echo $iscrito->name ?></td>
+                        <td ><?php echo $iscrito->estado ?></td>
+                        <td ><?php echo $iscrito->cidade ?></td>
+                        <td ><?php echo $iscrito->clube ?></td>
+                        <td >
+                            <?php foreach ($iscrito->inscricoes as $inscricao): ?>
+                                <ul>
+                                    <li class="insc"><?php echo Ninscricao($inscricao->id) ?></li>
+                                    <li class="pago"><?php echo $inscricao->pago ? "SIM" : "NÃO" ?></li>
+                                </ul>
+                                <br>
+                                <?php $Ninscricoes++ ?>
+                            <?php endforeach;?>
+                        </td>
+                        <td ><?php echo $iscrito->nascimento ? DateTime::createFromFormat("Y-m-d", $iscrito->nascimento)->format('d-m-Y') : "" ?></td>
+                        <td ><?php echo $iscrito->delegado ?></td>
+                        <td ><?php echo $iscrito->cargo_clube != "OUTRO" ? $iscrito->cargo_clube : $iscrito->qual_cc ?></td>
+                        <td ><?php echo $iscrito->cargo_distrito != "OUTRO" ? $iscrito->cargo_distrito : $iscrito->qual_cd ?></td>
+                        <td ><?php echo $iscrito->cl_mj ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -174,7 +186,11 @@
     <table class="category" style="width: 30%;">
         <tr>
             <th>Total de Inscritos</th>
-            <td><?php echo count($inscricoes); ?></td>
+            <td><?php echo count($inscritos); ?></td>
+        </tr>
+        <tr>
+            <th>Total de Inscrições na Convenção</th>
+            <td><?php echo $Ninscricoes; ?></td>
         </tr>
         <tr>
             <th>Inscritos no ultimos 7 dias</th>
@@ -193,9 +209,15 @@
 
 <?php 
     
-    function aniversario($data){
-        
+    function Ninscricao($id) {
+        if(strlen($id) == 1){
+            return '00' . $id;
+        }else if(strlen($id) == 2){
+            return '0' . $id;
+        }
+        return $id;
     }
+    
 ?>
         
         
