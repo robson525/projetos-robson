@@ -163,8 +163,8 @@ class InscricaoConvencao {
     }
     
     public static function getInscricoesGerencia($convencaoId = 0){
-        $sql  = "SELECT u.*, us.*, ic.* ";
-        $sql  .= "FROM __inscricao_convencao ic ";
+        $sql  = "SELECT u.*, us.name, count(*) as inscricoes ";
+        $sql .= "FROM __inscricao_convencao ic ";
         $sql .= "INNER JOIN jom0__usuario u ON u.id = ic.usuario_id ";
         $sql .= "INNER JOIN jom0__users us ON us.id = u.user_id ";
         $sql .= "INNER JOIN jom0__user_usergroup_map ugm ON ugm.user_id = us.id ";
@@ -174,16 +174,39 @@ class InscricaoConvencao {
         $sql .= (isset($_POST['cidade']) && $_POST['cidade']) ? "AND u.cidade = " . Persistencia::prepare($_POST['cidade'], Persistencia::STRING) . " ": "";
         $sql .= (isset($_POST['clube'])  && $_POST['clube'] ) ? "AND u.clube  = " . Persistencia::prepare($_POST['clube'],  Persistencia::STRING) . " ": "";
         
-        $sql .= "ORDER BY us.id ";
+        $sql .= "GROUP BY us.name ";
+        $sql .= "ORDER BY ic.id ";
         
         $query = mysql_query($sql);
-        $inscricoes = array();
+        
+        $inscritos = array();
         if(mysql_num_rows($query)){
-            while($inscricao = mysql_fetch_object($query)){
+            while($inscrito = mysql_fetch_object($query)){
+                $inscrito->inscricoes = array();
+                $inscritos[] = $inscrito;
+            }
+        }
+        
+        $sql2 = "SELECT * FROM __inscricao_convencao WHERE convencao_id = " . Persistencia::prepare($convencaoId, Persistencia::FK) . " ORDER BY id;";
+        $query2 = mysql_query($sql2);
+        
+        $inscricoes = array();
+        if(mysql_num_rows($query2)){
+            while($inscricao = mysql_fetch_object($query2)){
                 $inscricoes[] = $inscricao;
             }
         }
-        return $inscricoes;
+        
+        
+        foreach($inscricoes as $inscricao){
+            foreach ($inscritos as $inscrito){
+                if($inscrito->id == $inscricao->usuario_id){
+                    $inscrito->inscricoes[] = $inscricao;
+                }
+            }
+        }
+        //var_dump($inscritos);die();
+        return $inscritos;
     }
     
     public static function fetInscritosSemana($convencaoId = 0){
