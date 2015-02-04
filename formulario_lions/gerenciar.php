@@ -18,6 +18,13 @@
     
     $Ninscricoes = 0;
     
+    if (isset($_POST['estado']) && $_POST['estado']) { 
+        $estado = $_POST['estado'];
+        $cidade = $_POST['cidade'];
+        $clube  = $_POST['clube'];
+    }else{
+        $estado = $cidade = $clube = '';
+    }
 ?>
 
 <div style="text-align: right;">
@@ -92,6 +99,10 @@
             });
         });
         
+        function imprimir(){
+            var url = '../../../formulario/imprimir.php?gerenciar=<?php echo $convencao_id ?>&estado=<?php echo $estado ?>&cidade=<?php echo $cidade ?>&clube=<?php echo $clube ?>';
+            var aba = window.open(url, "Impressão", "width="+ (screen.width / 2) +", height=" + (screen.height / 2) +",scrollbars=yes,toolbar=yes" );
+        }
     </script>
     
     <br>
@@ -180,23 +191,45 @@
             </tbody>
         </table>
     </div>
-    
+    <div style="text-align: center; margin-top: 25px;">
+        <input type="button" class="button" value="Imprimir" onclick="imprimir();"/>
+    </div>
     
     <br>
-    <table class="category" style="width: 30%;">
-        <tr>
-            <th>Total de Inscritos</th>
-            <td><?php echo count($inscritos); ?></td>
-        </tr>
-        <tr>
-            <th>Total de Inscrições na Convenção</th>
-            <td><?php echo $Ninscricoes; ?></td>
-        </tr>
-        <tr>
-            <th>Inscritos no ultimos 7 dias</th>
-            <td><?php echo InscricaoConvencao::fetInscritosSemana($convencao_id); ?></td>
-        </tr>
-    </table>
+    <div>
+        <table class="category" style="width: 30%; float: left; margin-left: 20px;" border="1">
+            <caption><h3>Resultado desta Listagem</h3></caption>
+            <tr>
+                <th>Total de Inscritos</th>
+                <td><?php echo count($inscritos); ?></td>
+            </tr>
+            <tr>
+                <th>Total de Inscrições na Convenção</th>
+                <td><?php echo $Ninscricoes; ?></td>
+            </tr>
+            <tr>
+                <th>Inscritos no ultimos 7 dias</th>
+                <td><?php echo InscricaoConvencao::fetInscritosSemana($convencao_id); ?></td>
+            </tr>
+        </table>
+
+        <table class="category" style="width: 30%; float: right; margin-right: 20px;" border='1'>
+            <caption><h3>Resultado Geral</h3></caption>
+            <?php $total = InscricaoConvencao::getTotalInscritos($convencao_id); ?>
+            <tr>
+                <th>Total de Inscritos</th>
+                <td><?php echo $total ? $total->total_inscritos : '' ?></td>
+            </tr>
+            <tr>
+                <th>Total de Inscrições na Convenção</th>
+                <td><?php echo $total ? $total->total_incricoes : ''; ?></td>
+            </tr>
+            <tr>
+                <th>Inscritos no ultimos 7 dias</th>
+                <td><?php echo InscricaoConvencao::fetInscritosSemana($convencao_id, true); ?></td>
+            </tr>
+        </table>
+    </div>
     
 <?php elseif(!$erro): ?>
     <br>
