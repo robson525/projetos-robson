@@ -209,7 +209,7 @@ class InscricaoConvencao {
         return $inscritos;
     }
     
-    public static function fetInscritosSemana($convencaoId = 0){
+    public static function fetInscritosSemana($convencaoId = 0, $geral = false){
         $sql  = "SELECT COUNT(us.id) AS quantidade ";
         $sql .= "FROM jom0__users us ";
         $sql .= "INNER JOIN jom0__usuario u ON u.user_id = us.id ";
@@ -217,12 +217,28 @@ class InscricaoConvencao {
         $sql .= "INNER JOIN jom0__user_usergroup_map ugm ON ugm.user_id = us.id ";
         $sql .= "WHERE registerDate > (NOW() - INTERVAL 7 DAY) AND ugm.group_id IN (2, 13) ";
         $sql .= "AND ic.convencao_id = " . Persistencia::prepare($convencaoId, Persistencia::FK) . " ";
-        $sql .= (isset($_POST['estado']) && $_POST['estado']) ? "AND u.estado = " . Persistencia::prepare($_POST['estado'], Persistencia::STRING) . " " : "";
-        $sql .= (isset($_POST['cidade']) && $_POST['cidade']) ? "AND u.cidade = " . Persistencia::prepare($_POST['cidade'], Persistencia::STRING) . " ": "";
-        $sql .= (isset($_POST['clube'])  && $_POST['clube'] ) ? "AND u.clube  = " . Persistencia::prepare($_POST['clube'],  Persistencia::STRING) . " ": "";
-        
+        if($geral ==  false){
+            $sql .= (isset($_POST['estado']) && $_POST['estado']) ? "AND u.estado = " . Persistencia::prepare($_POST['estado'], Persistencia::STRING) . " " : "";
+            $sql .= (isset($_POST['cidade']) && $_POST['cidade']) ? "AND u.cidade = " . Persistencia::prepare($_POST['cidade'], Persistencia::STRING) . " ": "";
+            $sql .= (isset($_POST['clube'])  && $_POST['clube'] ) ? "AND u.clube  = " . Persistencia::prepare($_POST['clube'],  Persistencia::STRING) . " ": "";
+        }
         $query = mysql_query($sql);
         return mysql_fetch_object($query)->quantidade;
+    }
+    
+    public static function getTotalInscritos($convencaoId = 0){
+        $sql  = "SELECT COUNT(distinct ic.usuario_id) AS total_inscritos, COUNT(*) AS total_incricoes ";
+        $sql .= "FROM jom0__users us ";
+        $sql .= "INNER JOIN jom0__usuario u ON u.user_id = us.id ";
+        $sql .= "INNER JOIN __inscricao_convencao ic ON ic.usuario_id = u.id ";
+        $sql .= "INNER JOIN jom0__user_usergroup_map ugm ON ugm.user_id = us.id ";
+        $sql .= "WHERE ic.convencao_id = " . Persistencia::prepare($convencaoId, Persistencia::FK) . " ";
+        
+        $query = mysql_query($sql);
+        if(mysql_num_rows($query))
+            return mysql_fetch_object($query);
+        else
+            return false;
     }
 
     private function load($inscricao_){
