@@ -1,4 +1,5 @@
 <?php
+    $ouro = isset($_POST['ouro']) ? (int) $_POST['ouro'] : false;
     $inscricao_n = isset($_GET['inscricao']) ? (int) $_GET['inscricao'] : false;
     $convencao_id = (int) $_GET['convencao'];
     $convencao = Convencao::getById($convencao_id, $db);
@@ -18,6 +19,7 @@
                 $Ninscricoes++;
                 if($inscri->getId() == $inscricao_n){
                     $inscricao = $inscri;
+                    $ouro = $Ninscricoes - 1;
                     $inscricao->setConnection($db);
                     if($inscri->getPago()){
                         $pago = true;
@@ -142,10 +144,15 @@ if($convencao && $convencao->getAberta()):
                                 </tr>
                                 <tr>
                                     <td>LEO: </td>
-                                    <td>até 31/03/2015 – R$ 90,00 – após 100,00</td>
+                                    <td>até 31/03/2015 – R$ 90,00 – após R$ 100,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Inscrição Ouro: </td>
+                                    <td>R$ 100,00</td>
                                 </tr>
                             </table>
-                        
+                        <br/>
+                        <p style="font-weight:bold;">A partir da 2ª Inscrição Ouro elas dão direito somente ao sorteio do carro, aumentando suas chances de ganhar.</p>
                     </td>
                 </tr>
             </table>
@@ -153,6 +160,7 @@ if($convencao && $convencao->getAberta()):
             <table class="category" style="width:50%; margin:auto; margin-top: 50px;">
                 <tr>
                     <td style="text-align: center; max-width: 100%; padding-top: 20px;">
+                        <h2>Inscrição <?php echo $ouro ? ("Ouro " .  $ouro) : "Principal" ?></h2>
                         <h4>Número de Inscrição : <?php echo $inscricao->getNinscricao(); ?></h4>
                     </td>
                 </tr>
@@ -198,10 +206,11 @@ if($convencao && $convencao->getAberta()):
     <?php else: ?>
 
         <div style="text-align: center;  margin-top: 50px;">
-            <h2>Confirmar <?php echo $Ninscricoes ? ++$Ninscricoes.'&ordf;' : '' ?> Inscrição na <?php echo $convencao->getTitulo() ?> :</h2>
-            <form method="POST" action="">
+            <h2>Confirmar <?php echo $Ninscricoes ? $Ninscricoes.'&ordf; Inscrição Ouro' : 'Inscrição' ?> na <?php echo $convencao->getTitulo() ?> :</h2>
+            <form method="POST" action="" >
                 <input type="hidden" name="convencao" value="<?php echo $convencao->getId() ?>" />
                 <input type="hidden" name="inscrever" value="1" />
+                <input type="hidden" name="ouro" value="<?php echo $Ninscricoes ?>" />
                 <button class="button" type="submit">Confirmar</button>
             </form>
         </div>  

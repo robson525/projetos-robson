@@ -39,7 +39,8 @@ else:
             <caption><h4>Convenções Abertas</h4></caption>
             <tr>
                 <th style="text-align:center;" >Título</th>
-                <th style="text-align:center;" width="<?php echo $gerenciaCconvencao ? "15%" : "25%" ?>">Inscrições</th>
+                <th style="text-align:center;" width="25%">Inscrever-se</th>
+                <th style="text-align:center;" width="25%">Inscrições</th>
                  <?php if($gerenciaCconvencao):?>      
                     <th style="text-align:center;" width="15%">Gerenciar</th>        
                 <?php endif;?>
@@ -50,11 +51,16 @@ else:
                         <?php echo $convencao->getTitulo() ?>
                     </td>
                     <td style="text-align:center;"> 
-                        <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="Inscrever-se na Convenção">Inscrever-se</button>
+                        <?php $title = count($inscricoes) ? "Nova Inscrição Ouro" : "Inscrever-se na Convenção" ; ?>
+                        <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>')" title="<?php echo $title ?>"><?php echo $title ?></button>
+                    </td>
+                    <td style="text-align:center;"> 
                         <?php $aux = 1;?>
                         <?php foreach ($inscricoes as $inscricao): ?>
                             <?php if($inscricao->getConvencao_id() == $convencao->getId()): ?>
-                                <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>','<?php echo $inscricao->getId() ?>')" title="Gerenciar Inscrição <?php echo $aux ?>">Inscrição <?php echo $aux++ ?></button>
+                                <?php $title = $aux==1 ?  "Inscrição Principal" : "Inscrição Ouro " . ($aux - 1) ; ?>                        
+                                <button class="button" onclick="cadConvencao('<?php echo $convencao->getId() ?>','<?php echo $inscricao->getId() ?>')" title="Gerenciar <?php echo $title ?>"><?php echo $title ?></button>
+                                <?php $aux++; ?>
                             <?php endif;?>
                         <?php endforeach; ?>
                     </td>
