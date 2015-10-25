@@ -1,5 +1,5 @@
 <?php
-require_once 'formulario/classe/Conecta.php';
+require_once 'formulario/classe/Conecta.php'; 
 require_once 'formulario/classe/Usuario.php';
 require_once 'formulario/classe/Email.php';
 
