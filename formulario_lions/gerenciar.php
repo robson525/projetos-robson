@@ -58,7 +58,7 @@
         function Estado(cidade, clube) {
             jQuery(document).ready(function($) {
 
-                $.post('../../../formulario/auxi/cidades.php', {estado: $('#estado').val()},
+                $.post('../../formulario/auxi/cidades.php', {estado: $('#estado').val()},
                 function(resposta) {
                     $('#cidade').html(resposta);
                     if (cidade) {
@@ -66,7 +66,7 @@
                     }
                 });
 
-                $.post('../../../formulario/auxi/clubes.php', {estado: $('#estado').val()},
+                $.post('../../formulario/auxi/clubes.php', {estado: $('#estado').val()},
                 function(resposta) {
                     $('#clube').html(resposta);
                     if (clube) {
@@ -100,7 +100,7 @@
         });
         
         function imprimir(){
-            var url = '../../../formulario/imprimir.php?gerenciar=<?php echo $convencao_id ?>&estado=<?php echo $estado ?>&cidade=<?php echo $cidade ?>&clube=<?php echo $clube ?>';
+            var url = '../../formulario/imprimir.php?gerenciar=<?php echo $convencao_id ?>&estado=<?php echo $estado ?>&cidade=<?php echo $cidade ?>&clube=<?php echo $clube ?>';
             var aba = window.open(url, "Impressão", "width="+ (screen.width / 2) +", height=" + (screen.height / 2) +",scrollbars=yes,toolbar=yes" );
         }
     </script>
@@ -243,12 +243,13 @@
 <?php 
     
     function Ninscricao($id) {
-        if(strlen($id) == 1){
-            return '00' . $id;
-        }else if(strlen($id) == 2){
-            return '0' . $id;
+        $inscricao = $id - 1000;
+        if(strlen($inscricao) == 1){
+            return '00' . $inscricao;
+        }else if(strlen($inscricao) == 2){
+            return '0' . $inscricao;
         }
-        return $id;
+        return $inscricao;
     }
     
 ?>

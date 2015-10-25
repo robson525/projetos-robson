@@ -7,7 +7,7 @@ class Comprovante {
     private $md5;
     private $local;
     private $tempName;
-
+    private $db;
 
     public function getId() {
         return $this->id;
@@ -152,9 +152,21 @@ class Comprovante {
     public static function deletaComprovante($id = 0){
         $comprovante  = Comprovante::getById($id);
         if($comprovante && $comprovante->removeComprovante()){
+            return $comprovante->delete();
+        }
+    }
+    
+    public function delete(){
+        $sql = "DELETE FROM __comprovante WHERE id = " . $this->id;
+        if($this->db){
             $this->db->setQuery($sql);
             $this->db->execute();
             if(!$this->db->getErrorNum()){
+            return true;
+        }
+        }else{
+            $query = mysql_query($sql);
+            if(!mysql_error()){
                 return true;
             }
         }

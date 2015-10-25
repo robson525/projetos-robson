@@ -54,12 +54,14 @@ class InscricaoConvencao {
     }
 
     public function getNinscricao() {
-        if(strlen($this->id) == 1){
-            return '00' . $this->id;
-        }else if(strlen($this->id) == 2){
-            return '0' . $this->id;
+        $inscricao = $this->id - 1000;
+        
+        if(strlen($inscricao) == 1){
+            return '00' . $inscricao;
+        }else if(strlen($inscricao) == 2){
+            return '0' . $inscricao;
         }
-        return $this->id;
+        return $inscricao;
     }
 
     public function save(){
@@ -149,7 +151,9 @@ class InscricaoConvencao {
     public function InsereComprovante(Comprovante $comprovante){
         
         if($this->getPago()){
-            Comprovante::deletaComprovante($this->getComprovante());
+            if(!Comprovante::deletaComprovante($this->getComprovante())){
+                return false;
+            }
         }
         $comprovante->save();
         if($comprovante->getId()){

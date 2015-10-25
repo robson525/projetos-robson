@@ -68,7 +68,7 @@ class Email {
                  "Por motivos de segurança a senha é arquivada de forma irrecuperável.<br>".
                  "O link abaixo permite que você possa efetuar a alteração de sua senha.<br><br>".
                  '<a title="Redefinir Senha - Distrito LA6" '.
-                 'href="http://www.lionsdla6.com.br/index.php/convencoes-distritais/xvi-convencao/cadastro.html?redefinirsenha=' . $code . '"' .
+                 'href="http://www.lionsdla6.com.br/index.php/convencoes-distritais/cadastro.html?redefinirsenha=' . $code . '"' .
                  'target="_blank">REDEFINIÇÃO DE SENHA - LIONS DISTRITO LA6</a>';
          $this->mail->Body = $texto;
     }

@@ -42,13 +42,13 @@
             $msg = "Cadastro realizado com sucesso.";
             $email = new Email();
             $email->setDestinatario($user->email, $user->name);
-            $email->inscricaoConvencao();
+            $email->inscricaoConvencao($convencao->getTitulo());
             $email->enviar();
         }
     endif;
     
     if(isset($_FILES['comprovante'])): 
-        $pastaAnexo = "formulario/conprovante/convencao-16/";
+        $pastaAnexo = "formulario/conprovante/convencao-17/";
         $extPermitidas = array("pdf", "jpg", "png", "jpeg");
         $tamanhoMax = 4194304; //4M
         $extensao = strtolower(end(explode('.', $_FILES['comprovante']['name'])));
@@ -119,41 +119,45 @@ if($convencao && $convencao->getAberta()):
     <?php if($inscricao): ?>
 
         <div style=" margin-top: 20px;">
-            <center><h2><?php echo $convencao->getTitulo(); ?></h2></center>
+            <center><h2><?php echo $convencao->getTitulo(); ?></h2></center>            
+            <center><h4>21 a 23 de abril de 2016</h4></center>
+
             
             <table class="category" style="width:80%; margin:auto; margin-top: 50px;">
                 <caption><h4>Conta para Doações e Inscrições:</h4></caption>
                 <tr>
-                    <td style="text-align: center; max-width: 100%">
-                        <p>BANCO DO BRASIL S.A - AGÊNCIA JÓQUEI CLUB PI </p>
-                        <p>
+                    <td style="text-align: center; max-width: 100%;">
+                        <p style="display:none;">BANCO DO BRASIL S.A - AGÊNCIA JÓQUEI CLUB PI </p>
+                        <p style="display:none;">
                             Prefixo: 3178-X  <br>
                             Nº Conta: 47.506-8<br/>
                             Titular: Associação Internacional de Lions Clubes – Distrito LA 6 - XVI CONVENÇÃO <br>
                             CNPJ: -  01.412.913/0001-88. 
                         </p>
-                        <p style="font-weight:bold;"> ATÉ 31 DE MARÇO DE 2015 – INSCRIÇÃO COM DIREITO A KIT COMPLETO.</p>
+                        <p style="font-weight:bold;"> As Informações Bancárias estarão disponíveis em breve.</p>
                             <table style="margin: auto;">
+                                <caption><h5>Valores das Incrições</h5></caption>
                                 <tr>
                                     <td>Convencionais: </td>
-                                    <td>até 31/03/2015 – R$ 200,00  -  após R$ 230,00</td>
+                                    <td>até 31/03/2016 – R$ 150,00  -  após R$ 180,00</td>
                                 </tr>
-                                <tr>
+                                <tr  style="display:none;">
                                     <td>Convidados: </td>
                                     <td>até 31/03/2015 – R$ 200,00 – após R$ 230,00</td>
                                 </tr>
-                                <tr>
+                                <tr  style="display:none;">
                                     <td>LEO: </td>
                                     <td>até 31/03/2015 – R$ 90,00 – após R$ 100,00</td>
                                 </tr>
-                                <tr>
+                                <tr  style="display:none;">
                                     <td>Inscrição Ouro: </td>
                                     <td>R$ 100,00</td>
                                 </tr>
                             </table>
                         <br/>
-                        <p style="font-weight:bold;">A partir da 2ª Inscrição Ouro elas dão direito somente ao sorteio do carro, aumentando suas chances de ganhar.</p>
+                        <p style="font-weight:bold; display:none;">A partir da 2ª Inscrição Ouro elas dão direito somente ao sorteio do carro, aumentando suas chances de ganhar.</p>
                     </td>
+                    
                 </tr>
             </table>
             
